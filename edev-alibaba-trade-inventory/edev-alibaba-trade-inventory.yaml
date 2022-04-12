@@ -1,0 +1,50 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  labels:
+    app: edev-alibaba-trade-inventory
+  name: edev-alibaba-trade-inventory
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: edev-alibaba-trade-inventory
+  template:
+    metadata:
+      name: edev-alibaba-trade-inventory
+      labels:
+        app: edev-alibaba-trade-inventory
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: "app"
+                    operator: In
+                    values:
+                      - edev-alibaba-trade-inventory
+              topologyKey: "kubernetes.io/hostname"
+      containers:
+      - name: edev-alibaba-trade-inventory
+        image: repository:5000/edev-alibaba-trade-inventory:<VERSION>
+        imagePullPolicy: Always
+        env:
+          - name: NACOS_ADDR
+            value: "nacos-cluster:8848"
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: edev-alibaba-trade-inventory
+  name: edev-alibaba-trade-inventory
+  namespace: default
+spec:
+  ports:
+  - port: 9004
+    targetPort: 9004
+  selector:
+    app: edev-alibaba-trade-inventory
