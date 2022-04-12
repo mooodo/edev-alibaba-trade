@@ -1,8 +1,0 @@
-com\edev\trade\inventory\service\InventoryService.class
-com\edev\trade\inventory\entity\Product.class
-com\edev\trade\inventory\entity\Inventory.class
-com\edev\trade\inventory\service\impl\InventoryServiceImpl.class
-com\edev\trade\inventory\exception\InventoryException.class
-com\edev\trade\inventory\InventoryApplication.class
-com\edev\trade\inventory\service\ProductService.class
-com\edev\trade\inventory\service\hystrix\ProductServiceImpl.class
