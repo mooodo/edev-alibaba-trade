@@ -9,7 +9,12 @@
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/edev-parent-alibaba/pom.xml" />
         <option value="$PROJECT_DIR$/edev-parent/pom.xml" />
+        <option value="$PROJECT_DIR$/edev-trade-customer-alibaba/pom.xml" />
+        <option value="$PROJECT_DIR$/edev-trade-inventory-alibaba/pom.xml" />
+        <option value="$PROJECT_DIR$/edev-trade-order-alibaba/pom.xml" />
+        <option value="$PROJECT_DIR$/edev-trade-product-alibaba/pom.xml" />
       </set>
     </option>
   </component>

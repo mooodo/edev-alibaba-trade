@@ -6,18 +6,27 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="edev-trade-customer-alibaba" />
-        <module name="edev-trade-product-alibaba" />
-        <module name="edev-trade-order-alibaba" />
-        <module name="edev-trade-inventory-alibaba" />
+        <module name="edev-alibaba-trade-order" />
+        <module name="edev-alibaba-trade-inventory" />
+        <module name="edev-alibaba-trade-customer" />
+        <module name="edev-alibaba-trade-product" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="edev-parent" target="1.8" />
+      <module name="edev-parent-alibaba" target="1.8" />
+      <module name="edev-trade-customer-alibaba" target="1.8" />
+      <module name="edev-trade-inventory-alibaba" target="1.8" />
+      <module name="edev-trade-order-alibaba" target="1.8" />
+      <module name="edev-trade-product-alibaba" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="edev-alibaba-trade-customer" options="-parameters" />
+      <module name="edev-alibaba-trade-inventory" options="-parameters" />
+      <module name="edev-alibaba-trade-order" options="-parameters" />
+      <module name="edev-alibaba-trade-product" options="-parameters" />
       <module name="edev-trade-customer-alibaba" options="-parameters" />
       <module name="edev-trade-inventory-alibaba" options="-parameters" />
       <module name="edev-trade-order-alibaba" options="-parameters" />

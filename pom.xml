@@ -8,10 +8,10 @@
     <packaging>pom</packaging>
     <version>1.0.0</version>
     <modules>
-        <module>edev-parent-alibaba</module>
-        <module>edev-trade-customer-alibaba</module>
-        <module>edev-trade-product-alibaba</module>
-        <module>edev-trade-inventory-alibaba</module>
-        <module>edev-trade-order-alibaba</module>
+        <module>edev-alibaba-parent</module>
+        <module>edev-alibaba-trade-customer</module>
+        <module>edev-alibaba-trade-inventory</module>
+        <module>edev-alibaba-trade-order</module>
+        <module>edev-alibaba-trade-product</module>
     </modules>
 </project>
