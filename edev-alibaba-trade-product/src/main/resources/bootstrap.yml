@@ -61,8 +61,11 @@ management:
 spring:
   profiles: docker
   cloud:
-    config:
-      uri: ${GIT_URL}
-      failFast: true
+    nacos:
+      discovery:
+        server-addr: ${NACOS_ADDR}
+      config:
+        server-addr: ${NACOS_ADDR}
+        file-extension: yaml
 server:
   port: ${SERVICE_PORT:9003}
