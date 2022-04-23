@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.edev.trade.customer.web.VipMvcTest
--------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.419 s - in com.edev.trade.customer.web.VipMvcTest
