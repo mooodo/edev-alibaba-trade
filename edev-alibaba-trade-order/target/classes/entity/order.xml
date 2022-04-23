@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dobjs>
+	<do class="com.edev.trade.order.entity.Order" tableName="t_order">
+		<property name="id" column="id" isPrimaryKey="true"/>
+		<property name="customerId" column="customer_id"/>
+		<property name="addressId" column="address_id"/>
+		<property name="amount" column="amount"/>
+		<property name="orderTime" column="order_time"/>
+		<property name="modifyTime" column="modify_time"/>
+		<property name="flag" column="flag"/>
+		<ref name="customer" refKey="customerId" refType="manyToOne"
+			  bean="com.edev.trade.order.service.CustomerService"
+			  method="load" listMethod="loadAll"/>
+  		<ref name="address" refKey="addressId" refType="manyToOne"
+			  bean="com.edev.trade.order.service.CustomerService"
+			  method="loadAddress" listMethod="loadAddresses"/>
+		<join name="orderItems" joinKey="orderId" joinType="oneToMany"
+			  isAggregation="true" class="com.edev.trade.order.entity.OrderItem"/>
+		</do>
+	<do class="com.edev.trade.order.entity.OrderItem" tableName="t_order_item">
+		<property name="id" column="id" isPrimaryKey="true"/>
+		<property name="orderId" column="order_id"/>
+		<property name="productId" column="product_id"/>
+		<property name="quantity" column="quantity"/>
+		<property name="price" column="price"/>
+		<property name="amount" column="amount"/>
+		<ref name="product" refKey="productId" refType="manyToOne"
+			 bean="com.edev.trade.order.service.ProductService"
+			 method="getProduct" listMethod="listProducts"
+		/>
+	</do>
+	<do class="com.edev.trade.order.entity.Customer">
+		<property name="id"/>
+		<property name="name"/>
+		<property name="gender"/>
+		<property name="birthdate"/>
+		<property name="identification"/>
+		<property name="phoneNumber"/>
+	</do>
+	<do class="com.edev.trade.order.entity.Address">
+		<property name="id"/>
+		<property name="customerId"/>
+		<property name="countryId"/>
+		<property name="provinceId"/>
+		<property name="cityId"/>
+		<property name="zoneId"/>
+		<property name="address"/>
+		<property name="phoneNumber"/>
+	</do>
+	<do class="com.edev.trade.order.entity.Product">
+		<property name="id"/>
+		<property name="name"/>
+		<property name="price"/>
+		<property name="unit"/>
+		<property name="supplierId"/>
+		<property name="image"/>
+		<property name="originalPrice"/>
+		<property name="tip"/>
+		<property name="classifyId"/>
+	</do>
+</dobjs>

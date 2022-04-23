@@ -1,0 +1,21 @@
+{
+  "id" : "bb531282-2bd7-4ae2-b92c-e3cfdb61d251",
+  "request" : {
+    "urlPath" : "/orm/product/getProduct",
+    "method" : "GET",
+    "queryParameters" : {
+      "id" : {
+        "equalTo" : "30001"
+      }
+    }
+  },
+  "response" : {
+    "status" : 200,
+    "body" : "{\"id\":30001,\"name\":\"Apple iPhone X 256GB 深空灰色 移动联通电信4G手机\",\"price\":4000,\"unit\":\"台\",\"supplierId\":20004,\"classifyId\":100100,\"image\":\"/static/img/product1.jpg\",\"originalPrice\":5600,\"tip\":\"自营\",\"classify\":{\"id\":100100,\"name\":\"智能手机\",\"parentId\":100000}}",
+    "headers" : {
+      "Content-Type" : "application/json"
+    },
+    "transformers" : [ "response-template" ]
+  },
+  "uuid" : "bb531282-2bd7-4ae2-b92c-e3cfdb61d251"
+}
