@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.edev.trade.inventory.web.InventoryMvcTest
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 13.313 s - in com.edev.trade.inventory.web.InventoryMvcTest
