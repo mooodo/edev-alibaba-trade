@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.edev.trade.product.web.ProductMvcTest
--------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.07 s - in com.edev.trade.product.web.ProductMvcTest

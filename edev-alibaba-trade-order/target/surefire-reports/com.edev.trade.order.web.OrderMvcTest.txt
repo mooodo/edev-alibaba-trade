@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.edev.trade.order.web.OrderMvcTest
--------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 21.316 s - in com.edev.trade.order.web.OrderMvcTest
