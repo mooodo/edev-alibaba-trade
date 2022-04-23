@@ -11,6 +11,9 @@
         <version>1.0.0</version>
         <relativePath/>
     </parent>
+    <properties>
+        <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -18,9 +21,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-    <properties>
-        <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
-    </properties>
     <build>
         <plugins>
             <plugin>

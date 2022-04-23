@@ -54,7 +54,8 @@ spring:
 server:
   port: 9005
 feign:
-  sentinel: true
+  sentinel:
+    enabled: true
 ribbon:
   connectTimeout: 10000
   readTimeout: 15000

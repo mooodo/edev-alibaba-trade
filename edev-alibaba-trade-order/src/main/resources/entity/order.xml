@@ -29,4 +29,33 @@
 			 method="getProduct" listMethod="listProducts"
 		/>
 	</do>
+	<do class="com.edev.trade.order.entity.Customer">
+		<property name="id"/>
+		<property name="name"/>
+		<property name="gender"/>
+		<property name="birthdate"/>
+		<property name="identification"/>
+		<property name="phoneNumber"/>
+	</do>
+	<do class="com.edev.trade.order.entity.Address">
+		<property name="id"/>
+		<property name="customerId"/>
+		<property name="countryId"/>
+		<property name="provinceId"/>
+		<property name="cityId"/>
+		<property name="zoneId"/>
+		<property name="address"/>
+		<property name="phoneNumber"/>
+	</do>
+	<do class="com.edev.trade.order.entity.Product">
+		<property name="id"/>
+		<property name="name"/>
+		<property name="price"/>
+		<property name="unit"/>
+		<property name="supplierId"/>
+		<property name="image"/>
+		<property name="originalPrice"/>
+		<property name="tip"/>
+		<property name="classifyId"/>
+	</do>
 </dobjs>
