@@ -1,0 +1,52 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  labels:
+    app: edev-alibaba-trade-gateway
+  name: edev-alibaba-trade-gateway 
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: edev-alibaba-trade-gateway
+  template:
+    metadata:
+      name: edev-alibaba-trade-gateway
+      labels:
+        app: edev-alibaba-trade-gateway
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: "app"
+                    operator: In
+                    values:
+                      - edev-alibaba-trade-gateway
+              topologyKey: "kubernetes.io/hostname"
+      containers:
+      - name: edev-alibaba-trade-gateway
+        image: repository:5000/edev-alibaba-trade-gateway:<VERSION>
+        imagePullPolicy: Always
+        env:
+          - name: NACOS_ADDR
+            value: "nacos-cluster:8848"
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: edev-alibaba-trade-gateway
+  name: edev-alibaba-trade-gateway
+  namespace: default
+spec:
+  type: NodePort
+  ports:
+  - port: 9009
+    targetPort: 9009
+    nodePort: 31009
+  selector:
+    app: edev-alibaba-trade-gateway

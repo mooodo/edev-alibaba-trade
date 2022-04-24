@@ -1,0 +1,72 @@
+spring:
+  application:
+    name: service-gateway
+  profiles:
+    active: dev
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+logging:
+  level:
+    com.edev.trade: INFO
+---
+spring:
+  profiles: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        username: nacos
+        password: nacos
+      config:
+        server-addr: localhost:8848
+        file-extension: yaml
+    sentinel:
+      transport:
+        dashboard: localhost:8858
+      eager: true
+    gateway:
+      routes:
+        - id: customer
+          uri: lb://service-customer
+          predicates:
+            - Path=/customer/**
+          filters:
+            - StripPrefix=1
+        - id: product
+          uri: lb://service-product
+          predicates:
+            - Path=/product/**
+          filters:
+            - StripPrefix=1
+        - id: order
+          uri: lb://service-order
+          predicates:
+            - Path=/order/**
+          filters:
+            - StripPrefix=1
+        - id: inventory
+          uri: lb://service-inventory
+          predicates:
+            - Path=/inventory/**
+          filters:
+            - StripPrefix=1
+server:
+  port: 9009
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+---
+spring:
+  profiles: docker
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_ADDR}
+      config:
+        server-addr: ${NACOS_ADDR}
+        file-extension: yaml
+server:
+  port: ${SERVICE_PORT:9009}
