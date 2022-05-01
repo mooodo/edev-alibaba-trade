@@ -5,15 +5,15 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>edev-alibaba-trade-customer</artifactId>
     <version>1.0.0-${maven.build.timestamp}</version>
+    <properties>
+        <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
+    </properties>
     <parent>
         <artifactId>edev-alibaba-parent</artifactId>
         <groupId>com.edev.trade</groupId>
         <version>1.0.0</version>
         <relativePath/>
     </parent>
-    <properties>
-        <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
-    </properties>
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>

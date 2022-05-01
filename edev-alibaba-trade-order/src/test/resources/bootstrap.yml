@@ -48,6 +48,8 @@ logging:
     com.edev.support: INFO
     com.edev.trade.query.dao: DEBUG
     com.edev.support.dao: DEBUG
+seata:
+  enabled: false
 stubrunner:
   idsToServiceIds:
     edev-alibaba-trade-product: service-product

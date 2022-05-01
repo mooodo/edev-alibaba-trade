@@ -6,7 +6,7 @@ Contract.make {
 	description("load a list of products by ids.")
 	request {
 	    method POST()
-	    url("/list/customer/loadAll")
+	    url("/customer/loadAll")
 		body([10001])
 		headers {
 			contentType(applicationJson())
