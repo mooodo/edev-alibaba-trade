@@ -2,7 +2,6 @@ package com.edev.trade.order.service;
 
 import com.edev.trade.order.entity.Address;
 import com.edev.trade.order.entity.Customer;
-import com.edev.trade.order.service.hystrix.CustomerServiceImpl;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Service
-@FeignClient(value = "service-customer", fallback = CustomerServiceImpl.class)
+@FeignClient(value = "service-customer")
 public interface CustomerService {
     @GetMapping("orm/customer/load")
     Customer load(@RequestParam Long customerId);

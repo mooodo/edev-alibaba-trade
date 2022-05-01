@@ -9,6 +9,6 @@
 		<property name="dao" ref="repositoryWithCache"/>
 	</bean>
 	<bean id="account" class="com.edev.trade.customer.service.impl.AccountServiceImpl">
-		<property name="dao" ref="repositoryWithCache"/>
+		<property name="dao" ref="repository"/>
 	</bean>
 </beans>

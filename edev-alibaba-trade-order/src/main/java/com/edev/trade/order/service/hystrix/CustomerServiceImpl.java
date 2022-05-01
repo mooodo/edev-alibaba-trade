@@ -2,6 +2,7 @@ package com.edev.trade.order.service.hystrix;
 
 import com.edev.trade.order.entity.Address;
 import com.edev.trade.order.entity.Customer;
+import com.edev.trade.order.exception.OrderException;
 import com.edev.trade.order.service.CustomerService;
 import org.springframework.stereotype.Component;
 
@@ -30,7 +31,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public List<Address> loadAddresses(List<Long> addressIds) {
         List<Address> list = new ArrayList<>();
-        addressIds.forEach(addressId->loadAddress(addressId));
+        addressIds.forEach(this::loadAddress);
         return list;
     }
 
@@ -41,6 +42,6 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Double payoff(Long id, Double amount) {
-        return null;
+        throw new OrderException("do payoff failure! [orderId:%s]", id);
     }
 }

@@ -64,6 +64,36 @@ management:
     web:
       exposure:
         include: '*'
+seata:
+  enabled: true
+  application-id: ${spring.application.name}
+  tx-service-group: service-trade-group
+  enable-auto-data-source-proxy: true
+  service:
+    vgroup-mapping:
+      service-trade-group: default
+    grouplist:
+      default: localhost:8091
+    enable-degrade: false
+    disable-global-transaction: false
+  registry:
+    type: nacos
+    nacos:
+      cluster: default
+      application: seata-server
+      server-addr: ${spring.cloud.nacos.discovery.server-addr}
+      group: SEATA_GROUP
+      namespace: ""
+      username: ${spring.cloud.nacos.discovery.username}
+      password: ${spring.cloud.nacos.discovery.password}
+  config:
+    type: nacos
+    nacos:
+      server-addr: ${spring.cloud.nacos.discovery.server-addr}
+      group: SEATA_GROUP
+      namespace: ""
+      username: ${spring.cloud.nacos.discovery.username}
+      password: ${spring.cloud.nacos.discovery.password}
 ---
 spring:
   profiles: docker

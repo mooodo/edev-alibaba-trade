@@ -4,6 +4,7 @@ import com.edev.support.dao.BasicDao;
 import com.edev.support.exception.ValidException;
 import com.edev.support.utils.DateUtils;
 import com.edev.trade.customer.entity.Account;
+import com.edev.trade.customer.exception.AccountException;
 import com.edev.trade.customer.service.AccountService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -61,6 +62,9 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Double payoff(Long id, Double amount) {
         Account account = getAccount(id);
+        if(account==null) throw new AccountException("The account no found: [accountId:%s]", id);
+        if(account.getBalance()==null||account.getBalance()<amount)
+            throw new AccountException("No enough money in the account[accountId:%s]", id);
         Double balance = account.getBalance() - amount;
         account.setBalance(balance);
         modifyAccount(account);

@@ -5,9 +5,11 @@ import com.edev.trade.order.service.CustomerService;
 import com.edev.trade.order.service.InventoryService;
 import com.edev.trade.order.service.OrderService;
 import com.edev.trade.order.service.TradeService;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 public class TradeServiceImpl implements TradeService {
     private final static Log log = LogFactory.getLog(TradeServiceImpl.class);
@@ -18,6 +20,8 @@ public class TradeServiceImpl implements TradeService {
     @Autowired
     private InventoryService inventoryService;
     @Override
+    @GlobalTransactional(name = "seata-group-trade", rollbackFor = Exception.class)
+    @Transactional(rollbackFor = Exception.class)
     public Long doTrade(Order order) {
         Long orderId = orderService.create(order);
         log.debug("create an order: [orderId: "+orderId+"]");
