@@ -2,10 +2,12 @@ package com.edev.trade.customer.web;
 
 import com.edev.support.web.OrmController;
 import com.edev.support.web.QueryController;
+import com.edev.trade.customer.entity.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -28,6 +30,26 @@ public class CustomerController {
     @GetMapping("load")
     public Object load(HttpServletRequest request) {
         return ormController.doGet("customer","load",request);
+    }
+    @PostMapping("saveAll")
+    public void saveAll(@RequestBody List<Object> list) {
+        ormController.doList("customer","saveAll", list);
+    }
+    @PostMapping("deleteAll")
+    public void deleteAll(@RequestBody List<Object> list) {
+        ormController.doList("customer","deleteAll",list);
+    }
+    @PostMapping("loadAll")
+    public Object loadAll(@RequestBody List<Object> list) {
+        return ormController.doList("customer", "loadAll",list);
+    }
+    @GetMapping("loadAddress")
+    public Object loadAddress(HttpServletRequest request) {
+        return ormController.doGet("customer","loadAddress",request);
+    }
+    @PostMapping("loadAddresses")
+    public Object loadAddresses(@RequestBody List<Object> list) {
+        return ormController.doList("customer","loadAddresses",list);
     }
     @Autowired
     private QueryController queryController;

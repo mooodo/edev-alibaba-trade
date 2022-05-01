@@ -14,8 +14,8 @@ import java.util.List;
 @Service
 @FeignClient(value = "service-product", fallback = ProductServiceImpl.class)
 public interface ProductService {
-    @GetMapping("orm/product/getProduct")
+    @GetMapping("product/get")
     Product getProduct(@RequestParam Long id);
-    @PostMapping("list/product/listProducts")
+    @PostMapping("product/getAll")
     List<Product> listProducts(@RequestBody List<Long> ids);
 }

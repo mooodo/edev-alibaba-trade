@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -28,6 +29,26 @@ public class VipController {
     @GetMapping("load")
     public Object load(HttpServletRequest request) {
         return ormController.doGet("vip", "load", request);
+    }
+    @PostMapping("saveAll")
+    public void saveAll(@RequestBody List<Object> list) {
+        ormController.doList("vip","saveAll",list);
+    }
+    @PostMapping("deleteAll")
+    public void deleteAll(@RequestBody List<Object> list) {
+        ormController.doList("vip","deleteAll",list);
+    }
+    @PostMapping("loadAll")
+    public Object loadAll(@RequestBody List<Object> list) {
+        return ormController.doList("vip","loadAll",list);
+    }
+    @GetMapping("loadByCustomer")
+    public Object loadByCustomer(HttpServletRequest request) {
+        return ormController.doGet("vip","loadByCustomer",request);
+    }
+    @GetMapping("discount")
+    public Object discount(HttpServletRequest request) {
+        return ormController.doGet("vip","discount",request);
     }
     @Autowired
     private QueryController queryController;

@@ -28,4 +28,12 @@ public class AccountController {
     public Object get(HttpServletRequest request) {
         return ormController.doGet("account", "getAccount", request);
     }
+    @GetMapping("topUp")
+    public Object topUp(HttpServletRequest request) {
+        return ormController.doGet("account","topUp",request);
+    }
+    @GetMapping("payoff")
+    public Object payoff(HttpServletRequest request) {
+        return ormController.doGet("account","payoff",request);
+    }
 }

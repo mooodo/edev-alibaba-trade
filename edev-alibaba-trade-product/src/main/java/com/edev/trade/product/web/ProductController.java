@@ -26,17 +26,17 @@ public class ProductController {
     public void delete(HttpServletRequest request) {
         ormController.doGet("product", "deleteProduct", request);
     }
-    @GetMapping("deleteAll")
-    public void deleteAll(HttpServletRequest request) {
-        ormController.doGet("product", "deleteProducts", request);
+    @PostMapping("deleteAll")
+    public void deleteAll(@RequestBody List<Object> list) {
+        ormController.doList("product", "deleteProducts", list);
     }
     @GetMapping("get")
     public Object get(HttpServletRequest request) {
         return ormController.doGet("product", "getProduct", request);
     }
-    @GetMapping("getAll")
-    public Object getAll(HttpServletRequest request) {
-        return ormController.doGet("product", "listProducts", request);
+    @PostMapping("getAll")
+    public Object getAll(@RequestBody List<Object> list) {
+        return ormController.doList("product", "listProducts", list);
     }
     @Autowired
     private QueryController queryController;

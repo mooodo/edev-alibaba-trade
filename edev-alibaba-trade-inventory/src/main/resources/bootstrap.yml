@@ -15,6 +15,7 @@ logging:
     com.edev.trade.query.dao: DEBUG
     com.edev.support.dao: DEBUG
     com.alibaba: WARN
+    io.seata: INFO
 ---
 spring:
   profiles: dev
