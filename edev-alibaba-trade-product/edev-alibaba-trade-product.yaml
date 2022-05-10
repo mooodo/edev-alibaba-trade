@@ -18,14 +18,16 @@ spec:
     spec:
       affinity:
         podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
-                matchExpressions:
-                  - key: "app"
-                    operator: In
-                    values:
-                      - edev-alibaba-trade-product
-              topologyKey: "kubernetes.io/hostname"
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 50
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: "app"
+                      operator: In
+                      values:
+                        - edev-alibaba-trade-product
+                topologyKey: "kubernetes.io/hostname"
       containers:
       - name: edev-alibaba-trade-product
         image: repository:5000/edev-alibaba-trade-product:<VERSION>
