@@ -1,0 +1,91 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  labels:
+    app: edev-alibaba-trade-gateway
+  name: edev-alibaba-trade-gateway 
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: edev-alibaba-trade-gateway
+  template:
+    metadata:
+      name: edev-alibaba-trade-gateway
+      labels:
+        app: edev-alibaba-trade-gateway
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 50
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: "app"
+                      operator: In
+                      values:
+                        - edev-alibaba-trade-gateway
+                topologyKey: "kubernetes.io/hostname"
+      containers:
+      - name: edev-alibaba-trade-gateway
+        image: repository:5000/edev-alibaba-trade-gateway
+        imagePullPolicy: Always
+        command: ["java", "-Djava.security.egd=file:/dev/./urandom", "-javaagent:/var/lib/skywalking/agent/skywalking-agent.jar", "-jar", "/app.jar","--spring.profiles.active=docker"]
+        env:
+          - name: NACOS_ADDR
+            value: "nacos-cluster:8848"
+          - name: SW_AGENT_NAME
+            value: "edev-alibaba-trade-gateway"
+          - name: SW_AGENT_COLLECTOR_BACKEND_SERVICES
+            value: "skywalking:11800"
+        volumeMounts:
+        - name: skywalking
+          mountPath: /var/lib/skywalking
+      initContainers:
+      - name: init
+        image: repository:5000/skywalking-java-agent
+        command: ['sh','-c','cp -r /agent /var/lib/skywalking']
+        volumeMounts:
+        - name: skywalking
+          mountPath: /var/lib/skywalking
+      volumes:
+      - name: skywalking
+        emptyDir: {}
+
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: edev-alibaba-trade-gateway
+  name: edev-alibaba-trade-gateway
+  namespace: default
+spec:
+  ports:
+  - port: 9009
+    targetPort: 9009
+  selector:
+    app: edev-alibaba-trade-gateway
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-edev-alibaba
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+    - host: trade
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: edev-alibaba-trade-gateway
+                port:
+                  number: 9009
