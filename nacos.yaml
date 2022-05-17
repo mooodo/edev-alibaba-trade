@@ -1,0 +1,55 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  labels:
+    app: nacos
+  name: nacos 
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nacos
+  template:
+    metadata:
+      name: nacos
+      labels:
+        app: nacos
+    spec:
+      containers:
+      - name: nacos 
+        image: repository:5000/nacos/nacos-server
+        imagePullPolicy: Always
+        env:
+        - name: "JVM_XMS"
+          value: "256m"
+        - name: "JVM_XMX"
+          value: "256m"
+        - name: "MODE"
+          value: "standalone"
+        - name: "PREFER_HOST_MODE"
+          value: "hostname"
+        - name: "MYSQL_SERVICE_HOST"
+          value: "mysql"
+        - name: "MYSQL_SERVICE_DB_NAME"
+          value: "nacos"
+        - name: "MYSQL_SERVICE_USER"
+          value: "nacos"
+        - name: "MYSQL_SERVICE_PASSWORD"
+          value: "nacos1234"
+---
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: nacos
+  name: nacos
+  namespace: default
+spec:
+  type: NodePort
+  ports:
+  - port: 8848 
+    targetPort: 8848
+    nodePort: 30848
+  selector:
+    app: nacos

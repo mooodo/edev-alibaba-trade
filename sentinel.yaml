@@ -1,0 +1,38 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  labels:
+    app: sentinel
+  name: sentinel 
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sentinel
+  template:
+    metadata:
+      name: sentinel
+      labels:
+        app: sentinel
+    spec:
+      containers:
+      - name: sentinel 
+        image: repository:5000/sentinel
+        imagePullPolicy: Always
+---
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: sentinel
+  name: sentinel
+  namespace: default
+spec:
+  type: NodePort
+  ports:
+  - port: 8858 
+    targetPort: 8858
+    nodePort: 31858
+  selector:
+    app: sentinel
