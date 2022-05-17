@@ -69,4 +69,4 @@ spec:
               service:
                 name: edev-alibaba-trade-gateway
                 port:
-                  number: 80
+                  number: 9009
