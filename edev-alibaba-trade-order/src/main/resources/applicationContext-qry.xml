@@ -4,11 +4,11 @@
 	<description>The application context for query</description>
 	<bean id="orderQry" class="com.edev.support.ddd.AutofillQueryServiceImpl">
 		<property name="queryDao">
-			<bean class="com.edev.support.dao.impl.QueryDaoMybatisImpl">
+			<bean class="com.edev.support.ddd.QueryDaoMybastisImplForDdd">
 				<property name="entityClass" value="com.edev.trade.order.entity.Order"/>
 				<property name="sqlMapper" value="com.edev.trade.query.dao.OrderMapper"/>
 			</bean>
 		</property>
-		<property name="dao" ref="repository"/>
+		<property name="autofillDao" ref="repository"/>
 	</bean>
 </beans>
