@@ -156,7 +156,7 @@ public class CustomerMvcTest {
         ).andExpect(status().isOk());
         mvc.perform(post("/list/customer/loadAll")
                 .content("[1,2]").contentType(MediaType.APPLICATION_JSON)
-        ).andExpect(status().isOk()).andExpect(content().string(""));
+        ).andExpect(status().isOk()).andExpect(content().json("[]"));
     }
 
     @Test
@@ -204,6 +204,6 @@ public class CustomerMvcTest {
         ).andExpect(status().isOk());
         mvc.perform(get("/orm/customer/loadAll")
                 .param("customerIds", "1,2")
-        ).andExpect(status().isOk()).andExpect(content().string(""));
+        ).andExpect(status().isOk()).andExpect(content().json("[]"));
     }
 }

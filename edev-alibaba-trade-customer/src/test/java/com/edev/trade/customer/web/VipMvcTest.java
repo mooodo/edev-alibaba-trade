@@ -135,7 +135,7 @@ public class VipMvcTest {
         ).andExpect(status().isOk());
         mvc.perform(post("/list/vip/loadAll")
                 .content("[1,10001]").contentType(MediaType.APPLICATION_JSON)
-        ).andExpect(status().isOk()).andExpect(content().string(""));
+        ).andExpect(status().isOk()).andExpect(content().json("[]"));
     }
 
     @Test
@@ -174,6 +174,6 @@ public class VipMvcTest {
         ).andExpect(status().isOk());
         mvc.perform(get("/orm/vip/loadAll")
                 .param("vipIds", "1,10001")
-        ).andExpect(status().isOk()).andExpect(content().string(""));
+        ).andExpect(status().isOk()).andExpect(content().json("[]"));
     }
 }

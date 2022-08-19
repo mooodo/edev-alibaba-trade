@@ -2,7 +2,6 @@ package com.edev.trade.customer.web;
 
 import com.edev.support.web.OrmController;
 import com.edev.support.web.QueryController;
-import com.edev.trade.customer.entity.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

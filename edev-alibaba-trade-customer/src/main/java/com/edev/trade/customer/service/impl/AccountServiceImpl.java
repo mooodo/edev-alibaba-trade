@@ -6,11 +6,8 @@ import com.edev.support.utils.DateUtils;
 import com.edev.trade.customer.entity.Account;
 import com.edev.trade.customer.exception.AccountException;
 import com.edev.trade.customer.service.AccountService;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 public class AccountServiceImpl implements AccountService {
-    private final static Log log = LogFactory.getLog(AccountServiceImpl.class);
     private BasicDao dao;
 
     public BasicDao getDao() {

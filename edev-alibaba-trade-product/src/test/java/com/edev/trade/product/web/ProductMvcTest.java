@@ -105,7 +105,7 @@ public class ProductMvcTest {
         ).andExpect(status().isOk());
         mvc.perform(post("/list/product/listProducts")
                 .content("[1,2]").contentType(MediaType.APPLICATION_JSON)
-        ).andExpect(status().isOk()).andExpect(content().string(""));
+        ).andExpect(status().isOk()).andExpect(content().json("[]"));
     }
     @Test
     public void testSaveAndDeleteForJsonList() throws Exception {
@@ -152,6 +152,6 @@ public class ProductMvcTest {
         ).andExpect(status().isOk());
         mvc.perform(get("/orm/product/listProducts")
                 .param("ids","1,2")
-        ).andExpect(status().isOk()).andExpect(content().string(""));
+        ).andExpect(status().isOk()).andExpect(content().json("[]"));
     }
 }
