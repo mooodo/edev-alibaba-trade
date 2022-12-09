@@ -59,7 +59,7 @@ feign:
     enabled: true
 ribbon:
   connectTimeout: 3000
-  readTimeout: 5000
+  readTimeout: 8000
 management:
   endpoints:
     web:

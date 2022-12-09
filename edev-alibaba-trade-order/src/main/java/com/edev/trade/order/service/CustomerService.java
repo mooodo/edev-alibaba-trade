@@ -25,8 +25,8 @@ public interface CustomerService {
     List<Address> loadAddresses(@RequestBody List<Long> addressIds);
     @GetMapping("orm/vip/discount")
     Double discount(@RequestParam Long customerId);
-    @GetMapping("orm/accountAgg/payoff")
+    @GetMapping("account/payoff")
     public Double payoff(@RequestParam Long id, @RequestParam Double amount);
-    @GetMapping("orm/accountAgg/refund")
+    @GetMapping("account/refund")
     public Double refund(@RequestParam Long id, @RequestParam Double amount);
 }
