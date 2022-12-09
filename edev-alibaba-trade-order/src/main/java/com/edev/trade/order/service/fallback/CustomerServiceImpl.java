@@ -1,4 +1,4 @@
-package com.edev.trade.order.service.hystrix;
+package com.edev.trade.order.service.fallback;
 
 import com.edev.trade.order.entity.Address;
 import com.edev.trade.order.entity.Customer;
@@ -37,11 +37,16 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Double discount(Long customerId) {
-        return null;
+        return 1D;
     }
 
     @Override
     public Double payoff(Long id, Double amount) {
         throw new OrderException("do payoff failure! [orderId:%s]", id);
+    }
+
+    @Override
+    public Double refund(Long id, Double amount) {
+        throw new OrderException("do refund failure! [orderId:%s]", id);
     }
 }

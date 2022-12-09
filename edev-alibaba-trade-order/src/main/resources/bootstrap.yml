@@ -43,7 +43,7 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
   redis:
     database: 0
-    host: master
+    host: kubernetes
     port: 31379
     password:
     pool:
@@ -58,8 +58,8 @@ feign:
   sentinel:
     enabled: true
 ribbon:
-  connectTimeout: 10000
-  readTimeout: 15000
+  connectTimeout: 3000
+  readTimeout: 5000
 management:
   endpoints:
     web:

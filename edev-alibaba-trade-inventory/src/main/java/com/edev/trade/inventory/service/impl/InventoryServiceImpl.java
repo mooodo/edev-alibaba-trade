@@ -6,21 +6,14 @@ import com.edev.support.utils.DateUtils;
 import com.edev.trade.inventory.entity.Inventory;
 import com.edev.trade.inventory.exception.InventoryException;
 import com.edev.trade.inventory.service.InventoryService;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import java.util.Collection;
 import java.util.List;
 
 public class InventoryServiceImpl implements InventoryService {
-    private final static Log log = LogFactory.getLog(InventoryServiceImpl.class);
-    private BasicDao dao;
+    private final BasicDao dao;
 
-    public BasicDao getDao() {
-        return dao;
-    }
-
-    public void setDao(BasicDao dao) {
+    public InventoryServiceImpl(BasicDao dao) {
         this.dao = dao;
     }
 

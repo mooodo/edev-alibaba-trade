@@ -1,4 +1,4 @@
-package com.edev.trade.inventory.service.hystrix;
+package com.edev.trade.inventory.service.fallback;
 
 import com.edev.trade.inventory.entity.Product;
 import com.edev.trade.inventory.service.ProductService;

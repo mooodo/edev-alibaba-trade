@@ -15,5 +15,6 @@ public interface VipService {
     void deleteAll(List<Long> vipIds);
     Collection<Vip> loadAll(List<Long> vipIds);
     Vip loadByCustomer(Long customerId);
+    Double discount(Vip vip);
     Double discount(Long customerId);
 }

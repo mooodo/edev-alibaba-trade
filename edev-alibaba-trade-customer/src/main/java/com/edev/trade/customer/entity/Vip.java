@@ -1,6 +1,7 @@
 package com.edev.trade.customer.entity;
 
 import com.edev.support.entity.Entity;
+import com.edev.support.utils.DateUtils;
 
 import java.util.Date;
 
@@ -13,13 +14,19 @@ public class Vip extends Entity<Long> {
     protected String vipType;
     protected Customer customer;
 
-    public Vip() { super(); }
+    public Vip() {}
 
     public Vip(Long id, Boolean available, Long coin, String vipType) {
-        this.id = id;
-        this.setAvailable(available);
-        this.coin = coin;
-        this.vipType = vipType;
+        this(id, null, null, available, coin, vipType);
+    }
+
+    public Vip(Long id, Date createTime, Date updateTime, Boolean available, Long coin, String vipType) {
+        setId(id);
+        setCreateTime(createTime);
+        setUpdateTime(updateTime);
+        setAvailable(available);
+        setCoin(coin);
+        setVipType(vipType);
     }
 
     @Override
@@ -37,6 +44,7 @@ public class Vip extends Entity<Long> {
     }
 
     public void setCreateTime(Date createTime) {
+        if(createTime == null) createTime = DateUtils.getNow();
         this.createTime = createTime;
     }
 
@@ -83,5 +91,9 @@ public class Vip extends Entity<Long> {
     @Override
     protected String[] exclude() {
         return new String[]{"createTime","updateTime"};
+    }
+
+    public Double discount() {
+        return 0D;
     }
 }

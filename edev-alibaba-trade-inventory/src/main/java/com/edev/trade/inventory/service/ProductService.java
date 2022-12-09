@@ -1,7 +1,7 @@
 package com.edev.trade.inventory.service;
 
 import com.edev.trade.inventory.entity.Product;
-import com.edev.trade.inventory.service.hystrix.ProductServiceImpl;
+import com.edev.trade.inventory.service.fallback.ProductServiceImpl;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;

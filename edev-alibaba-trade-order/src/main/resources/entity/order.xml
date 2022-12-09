@@ -14,6 +14,8 @@
   		<ref name="address" refKey="addressId" refType="manyToOne"
 			  bean="com.edev.trade.order.service.CustomerService"
 			  method="loadAddress" listMethod="loadAddresses"/>
+		<join name="payment" joinType="oneToOne" isAggregation="true"
+			  class="com.edev.trade.order.entity.Payment"/>
 		<join name="orderItems" joinKey="orderId" joinType="oneToMany"
 			  isAggregation="true" class="com.edev.trade.order.entity.OrderItem"/>
 		</do>
@@ -28,6 +30,12 @@
 			 bean="com.edev.trade.order.service.ProductService"
 			 method="getProduct" listMethod="listProducts"
 		/>
+	</do>
+	<do class="com.edev.trade.order.entity.Payment" tableName="t_payment">
+		<property name="id" column="id" isPrimaryKey="true"/>
+		<property name="accountId" column="account_id"/>
+		<property name="amount" column="amount"/>
+		<property name="status" column="status"/>
 	</do>
 	<do class="com.edev.trade.order.entity.Customer">
 		<property name="id"/>

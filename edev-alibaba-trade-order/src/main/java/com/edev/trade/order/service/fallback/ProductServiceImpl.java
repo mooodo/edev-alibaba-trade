@@ -1,4 +1,4 @@
-package com.edev.trade.order.service.hystrix;
+package com.edev.trade.order.service.fallback;
 
 import com.edev.trade.order.entity.Product;
 import com.edev.trade.order.service.ProductService;

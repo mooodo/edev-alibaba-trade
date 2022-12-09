@@ -2,7 +2,7 @@ package com.edev.trade.order.service;
 
 import com.edev.trade.order.entity.Address;
 import com.edev.trade.order.entity.Customer;
-import com.edev.trade.order.service.hystrix.CustomerServiceImpl;
+import com.edev.trade.order.service.fallback.CustomerServiceImpl;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,16 +15,18 @@ import java.util.List;
 @Service
 @FeignClient(value = "service-customer", fallback = CustomerServiceImpl.class)
 public interface CustomerService {
-    @GetMapping("customer/load")
+    @GetMapping("orm/customer/load")
     Customer load(@RequestParam Long customerId);
-    @PostMapping("customer/loadAll")
+    @PostMapping("list/customer/loadAll")
     List<Customer> loadAll(@RequestBody List<Long> customerIds);
-    @GetMapping("customer/loadAddress")
+    @GetMapping("orm/customer/loadAddress")
     Address loadAddress(@RequestParam Long addressId);
-    @PostMapping("customer/loadAddresses")
+    @PostMapping("list/customer/loadAddresses")
     List<Address> loadAddresses(@RequestBody List<Long> addressIds);
-    @GetMapping("vip/discount")
+    @GetMapping("orm/vip/discount")
     Double discount(@RequestParam Long customerId);
-    @GetMapping("account/payoff")
-    Double payoff(@RequestParam Long id, @RequestParam Double amount);
+    @GetMapping("orm/accountAgg/payoff")
+    public Double payoff(@RequestParam Long id, @RequestParam Double amount);
+    @GetMapping("orm/accountAgg/refund")
+    public Double refund(@RequestParam Long id, @RequestParam Double amount);
 }

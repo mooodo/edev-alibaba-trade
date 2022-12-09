@@ -23,26 +23,22 @@ public class Order extends Entity<Long> {
 	private String flag;
 	private Customer customer;
 	private Address address;
+	private Payment payment;
 	private List<OrderItem> orderItems;
 
 	public Order() {}
 
 	public Order(Long id, Long customerId, Long addressId, Double amount, Date orderTime, String flag) {
-		this.id = id;
-		this.customerId = customerId;
-		this.addressId = addressId;
-		this.amount = amount;
-		this.orderTime = (orderTime==null) ? DateUtils.getNow() : orderTime;
-		this.flag = (flag==null) ? "CREATE" : flag;
+		setId(id);
+		setCustomerId(customerId);
+		setAddressId(addressId);
+		setAmount(amount);
+		setOrderTime(orderTime);
+		setFlag(flag);
 	}
 
-	public Order(Long id, Long customerId, Long addressId) {
-		this.id = id;
-		this.customerId = customerId;
-		this.addressId = addressId;
-		this.amount = 0D;
-		this.orderTime = DateUtils.getNow();
-		this.flag = "create";
+	public Order(Long id, Long customerId, Long addressId, Double amount) {
+		this(id, customerId, addressId, amount, null, "CREATE");
 	}
 
 	@Override
@@ -76,7 +72,7 @@ public class Order extends Entity<Long> {
 	}
 
 	public void setAmount(Double amount) {
-		this.amount = amount;
+		this.amount = (amount==null) ? 0D : amount;
 	}
 
 	public Date getOrderTime() {
@@ -84,7 +80,7 @@ public class Order extends Entity<Long> {
 	}
 
 	public void setOrderTime(Date orderTime) {
-		this.orderTime = orderTime;
+		this.orderTime = (orderTime==null) ? DateUtils.getNow() : orderTime;
 	}
 
 	public Date getModifyTime() {
@@ -100,7 +96,7 @@ public class Order extends Entity<Long> {
 	}
 
 	public void setFlag(String flag) {
-		this.flag = flag;
+		this.flag = (flag==null) ? "create" : flag;
 	}
 
 	public Customer getCustomer() {
@@ -119,6 +115,14 @@ public class Order extends Entity<Long> {
 		this.address = address;
 	}
 
+	public Payment getPayment() {
+		return payment;
+	}
+
+	public void setPayment(Payment payment) {
+		this.payment = payment;
+	}
+
 	public List<OrderItem> getOrderItems() {
 		return orderItems;
 	}
@@ -130,10 +134,5 @@ public class Order extends Entity<Long> {
 	public void addOrderItem(OrderItem orderItem) {
 		if(this.orderItems==null) this.orderItems = new ArrayList<>();
 		this.orderItems.add(orderItem);
-	}
-
-	@Override
-	protected String[] exclude() {
-		return new String[]{"orderTime","modifyTime"};
 	}
 }

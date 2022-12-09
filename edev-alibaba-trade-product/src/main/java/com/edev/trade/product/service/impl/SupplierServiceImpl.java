@@ -9,13 +9,9 @@ import java.util.Collection;
 import java.util.List;
 
 public class SupplierServiceImpl implements SupplierService {
-    private BasicDao dao;
+    private final BasicDao dao;
 
-    public BasicDao getDao() {
-        return dao;
-    }
-
-    public void setDao(BasicDao dao) {
+    public SupplierServiceImpl(BasicDao dao) {
         this.dao = dao;
     }
 

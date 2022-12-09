@@ -21,7 +21,7 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
   redis:
     database: 0
-    host: master
+    host: kubernetes
     port: 31379
     password:
     pool:

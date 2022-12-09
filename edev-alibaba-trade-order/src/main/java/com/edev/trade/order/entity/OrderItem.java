@@ -25,7 +25,7 @@ public class OrderItem extends Entity<Long> {
 		this.productId = productId;
 		this.quantity = quantity;
 		this.price = price;
-		this.amount = amount;
+		setAmount(amount);
 	}
 
 	@Override
@@ -75,7 +75,7 @@ public class OrderItem extends Entity<Long> {
 	}
 
 	public void setAmount(Double amount) {
-		this.amount = amount;
+		this.amount = (amount==null) ? 0D : amount;
 	}
 
 	public Product getProduct() {

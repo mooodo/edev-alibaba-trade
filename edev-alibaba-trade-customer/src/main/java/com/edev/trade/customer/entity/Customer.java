@@ -24,15 +24,20 @@ public class Customer extends Entity<Long> {
 	public Customer() {
 		super();
 	}
-	
+
+	public Customer(Long id, String name, String gender, Date birthdate,
+					String identification, String phoneNumber) {
+		setId(id);
+		setName(name);
+		setGender(gender);
+		setIdentification(identification);
+		setBirthdate(birthdate);
+		setPhoneNumber(phoneNumber);
+	}
+
 	public Customer(Long id, String name, String gender,
 			String identification, String phoneNumber) {
-		this.id = id;
-		this.name = name;
-		this.gender = gender;
-		this.identification = identification;
-		setBirthdateByIdentification();
-		this.phoneNumber = phoneNumber;
+		this(id, name, gender, null, identification, phoneNumber);
 	}
 
 	/**
@@ -86,7 +91,8 @@ public class Customer extends Entity<Long> {
 	 * @param birthdate the birthdate to set
 	 */
 	public void setBirthdate(Date birthdate) {
-		this.birthdate = birthdate;
+		if(birthdate != null) this.birthdate = birthdate;
+		else setBirthdateByIdentification();
 	}
 
 	/**
@@ -100,7 +106,6 @@ public class Customer extends Entity<Long> {
 	 */
 	public void setIdentification(String identification) {
 		this.identification = identification;
-		setBirthdateByIdentification();
 	}
 	/**
 	 * @return the phoneNumber

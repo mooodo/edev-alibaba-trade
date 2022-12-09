@@ -16,4 +16,9 @@ public class GoldenVip extends Vip{
     public void setCashback(Double cashback) {
         this.cashback = cashback;
     }
+
+    @Override
+    public Double discount() {
+        return 0.9D;
+    }
 }

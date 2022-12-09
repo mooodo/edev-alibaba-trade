@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -14,50 +13,32 @@ import java.util.Map;
 public class CustomerController {
     @Autowired
     private OrmController ormController;
+    private static final String BEAN = "customer";
     @PostMapping("register")
     public Object register(@RequestBody Map<String, Object> json) {
-        return ormController.doPost("customer","register",json);
+        return ormController.doPost(BEAN,"register",json);
     }
     @PostMapping("modify")
     public void modify(@RequestBody Map<String, Object> json) {
-        ormController.doPost("customer","modify",json);
+        ormController.doPost(BEAN,"modify",json);
     }
     @GetMapping("delete")
     public void delete(HttpServletRequest request) {
-        ormController.doGet("customer","delete", request);
+        ormController.doGet(BEAN,"delete", request);
     }
     @GetMapping("load")
     public Object load(HttpServletRequest request) {
-        return ormController.doGet("customer","load",request);
-    }
-    @PostMapping("saveAll")
-    public void saveAll(@RequestBody List<Object> list) {
-        ormController.doList("customer","saveAll", list);
-    }
-    @PostMapping("deleteAll")
-    public void deleteAll(@RequestBody List<Object> list) {
-        ormController.doList("customer","deleteAll",list);
-    }
-    @PostMapping("loadAll")
-    public Object loadAll(@RequestBody List<Object> list) {
-        return ormController.doList("customer", "loadAll",list);
-    }
-    @GetMapping("loadAddress")
-    public Object loadAddress(HttpServletRequest request) {
-        return ormController.doGet("customer","loadAddress",request);
-    }
-    @PostMapping("loadAddresses")
-    public Object loadAddresses(@RequestBody List<Object> list) {
-        return ormController.doList("customer","loadAddresses",list);
+        return ormController.doGet(BEAN,"load",request);
     }
     @Autowired
     private QueryController queryController;
+    private static final String QRY_BEAN = "customerQry";
     @PostMapping("query")
     public Object query(@RequestBody Map<String, Object> json) {
-        return queryController.queryByPost("customerQry", json);
+        return queryController.queryByPost(QRY_BEAN, json);
     }
     @GetMapping("query")
     public Object query(HttpServletRequest request) {
-        return queryController.queryByGet("customerQry", request);
+        return queryController.queryByGet(QRY_BEAN, request);
     }
 }

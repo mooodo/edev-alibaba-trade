@@ -32,13 +32,13 @@ spring:
         dashboard: localhost:8858
       eager: true
   datasource:
-    url: jdbc:mysql://master:32306/edevProduct?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
+    url: jdbc:mysql://kubernetes:32306/edevProduct?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
     username: product
     password: product1234
     type: com.alibaba.druid.pool.DruidDataSource
   redis:
     database: 0
-    host: master
+    host: kubernetes
     port: 31379
     password:
     pool:

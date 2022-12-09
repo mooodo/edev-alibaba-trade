@@ -6,7 +6,7 @@ Contract.make {
 	description("load an address by id.")
 	request {
 	    method GET()
-	    url("/customer/loadAddress") {
+	    url("/orm/customer/loadAddress") {
 	        queryParameters {
 	            parameter("addressId","1000100")
 	        }

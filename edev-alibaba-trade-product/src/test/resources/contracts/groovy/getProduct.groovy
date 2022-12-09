@@ -6,7 +6,7 @@ Contract.make {
 	description("load a product by id.")
 	request {
 	    method GET()
-	    url("/product/get") {
+	    url("/orm/product/getProduct") {
 	        queryParameters {
 	            parameter("id","30001")
 	        }

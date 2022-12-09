@@ -10,13 +10,8 @@ import java.util.Collection;
 import java.util.List;
 
 public class CustomerServiceImpl implements CustomerService {
-    private BasicDao dao;
-
-    public BasicDao getDao() {
-        return dao;
-    }
-
-    public void setDao(BasicDao dao) {
+    private final BasicDao dao;
+    public CustomerServiceImpl(BasicDao dao) {
         this.dao = dao;
     }
 
@@ -72,6 +67,5 @@ public class CustomerServiceImpl implements CustomerService {
     public Collection<Address> loadAddresses(List<Long> addressIds) {
         return dao.loadForList(addressIds, Address.class);
     }
-
 
 }

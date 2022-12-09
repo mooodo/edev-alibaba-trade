@@ -3,22 +3,17 @@ package com.edev.trade.customer.service.impl;
 import com.edev.support.dao.BasicDao;
 import com.edev.support.exception.ValidException;
 import com.edev.support.utils.DateUtils;
-import com.edev.trade.customer.entity.GoldenVip;
-import com.edev.trade.customer.entity.SilverVip;
 import com.edev.trade.customer.entity.Vip;
 import com.edev.trade.customer.service.VipService;
+import org.springframework.dao.DataAccessException;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Collection;
 import java.util.List;
 
 public class VipServiceImpl implements VipService {
-    private BasicDao dao;
-
-    public BasicDao getDao() {
-        return dao;
-    }
-
-    public void setDao(BasicDao dao) {
+    private final BasicDao dao;
+    public VipServiceImpl(BasicDao dao) {
         this.dao = dao;
     }
 
@@ -30,7 +25,6 @@ public class VipServiceImpl implements VipService {
     @Override
     public Long register(Vip vip) {
         validVip(vip);
-        vip.setCreateTime(DateUtils.getNow());
         return dao.insert(vip);
     }
 
@@ -60,12 +54,14 @@ public class VipServiceImpl implements VipService {
     public void saveAll(List<Vip> list) {
         list.forEach(vip->{
             validVip(vip);
-            if(vip.getCreateTime()==null)
-                vip.setCreateTime(DateUtils.getNow());
-            else
-                vip.setUpdateTime(DateUtils.getNow());
+            try {
+                register(vip);
+            } catch (DataAccessException e) {
+                if(e.getCause() instanceof SQLIntegrityConstraintViolationException)
+                    modify(vip);
+                else throw e;
+            }
         });
-        dao.insertOrUpdateForList(list);
     }
 
     @Override
@@ -84,10 +80,14 @@ public class VipServiceImpl implements VipService {
     }
 
     @Override
+    public Double discount(Vip vip) {
+        return vip.discount();
+    }
+
+    @Override
     public Double discount(Long customerId) {
         Vip vip = loadByCustomer(customerId);
-        if(vip instanceof GoldenVip) return 0.9D;
-        if(vip instanceof SilverVip) return 0.75D;
-        return null;
+        if (vip==null|| !vip.isAvailable()) return 1D;
+        return discount(vip);
     }
 }
