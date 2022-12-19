@@ -1,0 +1,44 @@
+node {
+    def parent = 'edev-alibaba-trade'
+    def app = 'edev-alibaba-trade-customer'
+    stage('拉取代码') {
+        git "https://gitee.com/mooodo/${parent}.git"
+    }
+    stage('编译测试') {
+        sh """
+        cd ${app}
+        mvn clean test -Dmaven.test.failure.ignore=true
+        """
+    }
+    stage('报告生成') {
+        allure(includeProperties: false,
+            jdk: '',
+            properties: [],
+            results: [[path: "${app}/target/surefire-reports/"]])
+    }
+    stage('代码检查') {
+        sh """
+        cd ${app}
+        mvn sonar:sonar \
+          -Dsonar.projectKey=edev-alibaba-trade-customer \
+          -Dsonar.host.url=http://master:9000 \
+          -Dsonar.login=dafc0c2f9883e47a321ee9ab8208ce9d69f75d93
+        """
+    }
+    stage('制作镜像') {
+        sh "/var/jenkins_home/docker.sh ${app}"
+        sh """
+        cd ${app}
+        mvn clean install docker:build -DpushImageTag -Dmaven.test.skip=true
+        """
+    }
+    stage('云端部署') {
+        sh """
+        cd ${app}
+        VER=\$(docker images |grep ${app} |grep -v latest |awk '{print \$2}')
+        echo "version:\${VER}"
+        sed -i "s/<VERSION>/\${VER}/" "${app}.yaml"
+        kubectl apply -f ${app}.yaml
+        """
+    }
+}

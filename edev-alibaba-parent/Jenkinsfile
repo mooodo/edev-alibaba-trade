@@ -1,0 +1,13 @@
+node {
+    def parent = 'edev-alibaba-trade'
+    def app = 'edev-alibaba-parent'
+    stage('拉取代码') {
+        git "https://gitee.com/mooodo/${parent}.git"
+    }
+    stage('编译发布') {
+        sh """
+        cd ${app}
+        mvn clean install
+        """
+    }
+}
