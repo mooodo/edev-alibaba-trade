@@ -1,0 +1,59 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "level": 0,
+      "name": "John",
+      "gender": "male",
+      "birthdate": "1999-01-01 00:00:00",
+      "identification": "510212199901012211",
+      "phoneNumber": "13677778888",
+      "addresses": null
+    },
+    {
+      "id": 2,
+      "level": 0,
+      "name": "Mary",
+      "gender": "female",
+      "birthdate": "2000-12-13 00:00:00",
+      "identification": "510212200012137812",
+      "phoneNumber": "13456567878",
+      "addresses": [
+        {
+          "id": 20,
+          "level": 0,
+          "customerId": 2,
+          "countryId": 1000,
+          "provinceId": 370000,
+          "cityId": 370100,
+          "zoneId": 370102,
+          "address": "Happy street No.12",
+          "phoneNumber": "0531-88896666",
+          "country": null,
+          "province": null,
+          "city": null,
+          "zone": null
+        },
+        {
+          "id": 21,
+          "level": 0,
+          "customerId": 2,
+          "countryId": 1000,
+          "provinceId": 370000,
+          "cityId": 370100,
+          "zoneId": 370102,
+          "address": "The park of Gushan",
+          "phoneNumber": "0531-64128989",
+          "country": null,
+          "province": null,
+          "city": null,
+          "zone": null
+        }
+      ]
+    }
+  ],
+  "page": 0,
+  "size": 10,
+  "count": 2,
+  "aggregation": null
+}

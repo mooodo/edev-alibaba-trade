@@ -1,0 +1,70 @@
+{
+  "id": 2,
+  "name": "John",
+  "gender": "male",
+  "birthdate": "1999-01-01 00:00:00",
+  "identification": "510212199901012211",
+  "phoneNumber": "13677778888",
+  "addresses": [
+    {
+      "id": 20,
+      "customerId": 2,
+      "countryId": 1000,
+      "provinceId": 370000,
+      "cityId": 370100,
+      "zoneId": 370102,
+      "address": "Happy street No.12",
+      "phoneNumber": "0531-88896666",
+      "country": {
+        "id": 1000,
+        "name": "中国"
+      },
+      "province": {
+        "id": 370000,
+        "name": "山东省",
+        "countryId": 1000
+      },
+      "city": {
+        "id": 370100,
+        "name": "济南市",
+        "provinceId": 370000
+      },
+      "zone": {
+        "id": 370102,
+        "name": "历下区",
+        "provinceId": 370000,
+        "cityId": 370100
+      }
+    },
+    {
+      "id": 21,
+      "customerId": 2,
+      "countryId": 1000,
+      "provinceId": 370000,
+      "cityId": 370100,
+      "zoneId": 370102,
+      "address": "The park of Gushan",
+      "phoneNumber": "0531-64128989",
+      "country": {
+        "id": 1000,
+        "name": "中国"
+      },
+      "province": {
+        "id": 370000,
+        "name": "山东省",
+        "countryId": 1000
+      },
+      "city": {
+        "id": 370100,
+        "name": "济南市",
+        "provinceId": 370000
+      },
+      "zone": {
+        "id": 370102,
+        "name": "历下区",
+        "provinceId": 370000,
+        "cityId": 370100
+      }
+    }
+  ]
+}

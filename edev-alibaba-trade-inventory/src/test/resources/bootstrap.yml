@@ -50,3 +50,6 @@ logging:
     com.edev.support.dao: DEBUG
 seata:
   enabled: false
+stubrunner:
+  idsToServiceIds:
+    edev-alibaba-trade-product: service-product

@@ -1,0 +1,17 @@
+{
+  "id": 1,
+  "name": "BookNode",
+  "price": 7500.0,
+  "unit": "unit",
+  "supplierId": null,
+  "classifyId": 100300,
+  "classify": {
+    "id": 100300,
+    "name": "笔记本电脑",
+    "parentId": 100000,
+    "layer": 2
+  },
+  "image": "/img/NodeBook",
+  "originalPrice": 8000.0,
+  "tip": "自营"
+}

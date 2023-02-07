@@ -1,7 +1,5 @@
 package com.edev.trade.customer.web;
 
-import com.alibaba.fastjson.JSONObject;
-import com.edev.trade.customer.entity.JournalAccount;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +29,7 @@ public class JournalAccountMvcTest {
      */
     @Test
     public void test() throws Exception {
-        JournalAccount journalAccount =
-                new JournalAccount(10001L,10D,"TopUp");
-        String json = JSONObject.toJSONStringWithDateFormat(journalAccount, "yyyy-MM-dd HH:mm:ss");
+        String json = "{\"accountId\":10001,\"amount\":10.0,\"operation\":\"TopUp\"}";
         MvcResult result = mvc.perform(post("/orm/journalAccount/addJournalAccount")
                 .content(json).contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isOk()).andReturn();

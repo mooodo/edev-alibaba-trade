@@ -10,7 +10,6 @@ import com.edev.support.entity.Entity;
  * @author fangang
  */
 public class Product extends Entity<Long> {
-	private static final long serialVersionUID = 7149822235159719740L;
 	private Long id;
 	private String name;
 	private Double price;

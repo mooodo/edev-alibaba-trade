@@ -22,22 +22,4 @@
     <property name="parentId" column="parent_id"/>
     <property name="layer" column="layer"/>
   </do>
-  <do class="com.edev.trade.product.entity.Supplier" subclassType="union">
-    <property name="supplierType" column="supplier_type" isDiscriminator="true"/>
-    <subclass class="com.edev.trade.product.entity.Distributor" value="distributor"/>
-    <subclass class="com.edev.trade.product.entity.Vendor" value="vendor"/>
-  </do>
-  <do class="com.edev.trade.product.entity.Distributor" tableName="t_distributor">
-    <property name="id" column="id" isPrimaryKey="true"/>
-    <property name="name" column="name"/>
-    <property name="supplierType" column="supplier_type" isDiscriminator="true"/>
-  </do>
-  <do class="com.edev.trade.product.entity.Vendor" tableName="t_vendor">
-    <property name="id" column="id" isPrimaryKey="true"/>
-    <property name="name" column="name"/>
-    <property name="supplierType" column="supplier_type" isDiscriminator="true"/>
-    <property name="distributorId" column="distributor_id"/>
-    <join name="distributor" joinKey="distributorId" joinType="manyToOne"
-          class="com.edev.trade.product.entity.Distributor"/>
-  </do>
 </dobjs>

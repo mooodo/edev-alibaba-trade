@@ -19,7 +19,6 @@ public class Product extends Entity<Long> {
 	private Double originalPrice;
 	private String tip;
 	private Long classifyId;
-	private Supplier supplier;
 	private Classify classify;
 	
 	public Product() { super(); }
@@ -129,18 +128,6 @@ public class Product extends Entity<Long> {
 	 */
 	public void setTip(String tip) {
 		this.tip = tip;
-	}
-	/**
-	 * @return the supplier
-	 */
-	public Supplier getSupplier() {
-		return supplier;
-	}
-	/**
-	 * @param supplier the supplier to set
-	 */
-	public void setSupplier(Supplier supplier) {
-		this.supplier = supplier;
 	}
 
 	public Long getClassifyId() {

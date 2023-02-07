@@ -1,14 +1,8 @@
 package com.edev.trade.customer;
 
 import com.edev.support.dao.BasicDao;
-import com.edev.trade.customer.service.AccountService;
-import com.edev.trade.customer.service.CustomerService;
-import com.edev.trade.customer.service.JournalAccountService;
-import com.edev.trade.customer.service.VipService;
-import com.edev.trade.customer.service.impl.AccountServiceImpl;
-import com.edev.trade.customer.service.impl.CustomerServiceImpl;
-import com.edev.trade.customer.service.impl.JournalAccountServiceImpl;
-import com.edev.trade.customer.service.impl.VipServiceImpl;
+import com.edev.trade.customer.service.*;
+import com.edev.trade.customer.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
