@@ -66,4 +66,32 @@
 		<property name="tip"/>
 		<property name="classifyId"/>
 	</do>
+	<do class="com.edev.trade.order.entity.Discount" subclassType="union">
+		<property name="id" column="id" isPrimaryKey="true"/>
+		<property name="name" column="name"/>
+		<property name="beginTime" column="begin_time"/>
+		<property name="endTime" column="end_time"/>
+		<property name="discount" column="discount"/>
+		<property name="discountType" column="discount_type" isDiscriminator="true"/>
+		<subclass class="com.edev.trade.order.entity.VipDiscount" value="vipDiscount"/>
+		<subclass class="com.edev.trade.order.entity.ProductDiscount" value="productDiscount"/>
+	</do>
+	<do class="com.edev.trade.order.entity.VipDiscount" tableName="t_vip_discount">
+		<property name="id" column="id" isPrimaryKey="true"/>
+		<property name="name" column="name"/>
+		<property name="beginTime" column="begin_time"/>
+		<property name="endTime" column="end_time"/>
+		<property name="discount" column="discount"/>
+		<property name="discountType" column="discount_type" isDiscriminator="true"/>
+		<property name="vipType" column="vip_type"/>
+	</do>
+	<do class="com.edev.trade.order.entity.ProductDiscount" tableName="t_product_discount">
+		<property name="id" column="id" isPrimaryKey="true"/>
+		<property name="name" column="name"/>
+		<property name="beginTime" column="begin_time"/>
+		<property name="endTime" column="end_time"/>
+		<property name="discount" column="discount"/>
+		<property name="discountType" column="discount_type" isDiscriminator="true"/>
+		<property name="productId" column="product_id"/>
+	</do>
 </dobjs>

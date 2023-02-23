@@ -2,6 +2,7 @@ package com.edev.trade.order.service;
 
 import com.edev.trade.order.entity.Address;
 import com.edev.trade.order.entity.Customer;
+import com.edev.trade.order.entity.Vip;
 import com.edev.trade.order.service.fallback.CustomerServiceImpl;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Service;
@@ -29,4 +30,6 @@ public interface CustomerService {
     public Double payoff(@RequestParam Long id, @RequestParam Double amount);
     @GetMapping("account/refund")
     public Double refund(@RequestParam Long id, @RequestParam Double amount);
+    @GetMapping("orm/vip/loadByCustomer")
+    Vip loadByCustomer(Long customerId);
 }
