@@ -12,14 +12,35 @@
     <property name="classifyId" column="classify_id"/>
     <join name="classify" joinKey="classifyId" joinType="manyToOne"
           class="com.edev.trade.product.entity.Classify"/>
-    <!--
     <join name="supplier" joinKey="supplierId" joinType="manyToOne"
-          class="com.edev.trade.product.entity.Supplier"/>-->
+          class="com.edev.trade.product.entity.Supplier"/>
   </do>
   <do class="com.edev.trade.product.entity.Classify" tableName="t_classify">
     <property name="id" column="id" isPrimaryKey="true"/>
     <property name="name" column="name"/>
     <property name="parentId" column="parent_id"/>
     <property name="layer" column="layer"/>
+  </do>
+  <do class="com.edev.trade.product.entity.Supplier" tableName="t_supplier" subclassType="joined">
+    <property name="id" column="id" isPrimaryKey="true"/>
+    <property name="name" column="name"/>
+    <property name="supplierType" column="supplier_type" isDiscriminator="true"/>
+    <subclass class="com.edev.trade.product.entity.Distributor" value="distributor"/>
+    <subclass class="com.edev.trade.product.entity.Vendor" value="vendor"/>
+  </do>
+  <do class="com.edev.trade.product.entity.Distributor" tableName="t_distributor">
+    <property name="id" column="id" isPrimaryKey="true"/>
+    <property name="name" column="name"/>
+    <property name="introduce" column="introduce"/>
+    <property name="address" column="address"/>
+    <property name="range" column="range"/>
+    <join name="vendors" joinKey="distributorId" joinType="oneToMany"
+          class="com.edev.trade.product.entity.Vendor"/>
+  </do>
+  <do class="com.edev.trade.product.entity.Vendor" tableName="t_vendor">
+    <property name="id" column="id" isPrimaryKey="true"/>
+    <property name="name" column="name"/>
+    <property name="position" column="position"/>
+    <property name="distributorId" column="distributor_id"/>
   </do>
 </dobjs>
