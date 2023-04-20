@@ -6,9 +6,6 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
-logging:
-  level:
-    com.edev.trade: INFO
 ---
 spring:
   profiles: dev
@@ -58,6 +55,8 @@ management:
     web:
       exposure:
         include: '*'
+logging:
+  # config: classpath:logback-dev.xml
 ---
 spring:
   profiles: docker
@@ -72,3 +71,19 @@ spring:
         file-extension: yaml
 server:
   port: ${SERVICE_PORT:9009}
+---
+spring:
+  profiles: kafka
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_ADDR}
+        username: ${NACOS_USR:nacos}
+        password: ${NACOS_PWD:nacos}
+      config:
+        server-addr: ${NACOS_ADDR}
+        file-extension: yaml
+server:
+  port: ${SERVICE_PORT:9009}
+logging:
+  config: classpath:logback-docker.xml
