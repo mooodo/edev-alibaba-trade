@@ -37,6 +37,8 @@ spec:
           value: "nacos"
         - name: "MYSQL_SERVICE_PASSWORD"
           value: "nacos1234"
+        - name: "SPRING_DATASOURCE_PLATFORM"
+          value: "mysql"
 ---
 kind: Service
 apiVersion: v1
