@@ -12,8 +12,8 @@
     <property name="classifyId" column="classify_id"/>
     <join name="classify" joinKey="classifyId" joinType="manyToOne"
           class="com.edev.trade.product.entity.Classify"/>
-    <join name="supplier" joinKey="supplierId" joinType="manyToOne"
-          class="com.edev.trade.product.entity.Supplier"/>
+    <!--<join name="supplier" joinKey="supplierId" joinType="manyToOne"
+          class="com.edev.trade.product.entity.Supplier"/>-->
   </do>
   <do class="com.edev.trade.product.entity.Classify" tableName="t_classify">
     <property name="id" column="id" isPrimaryKey="true"/>
