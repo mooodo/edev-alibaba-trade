@@ -34,7 +34,7 @@ spec:
         imagePullPolicy: Always
         env:
           - name: NACOS_ADDR
-            value: "nacos-cluster:8848"
+            value: "nacos:8848"
 
 ---
 kind: Service
