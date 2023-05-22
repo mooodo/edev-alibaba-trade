@@ -1,0 +1,77 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: seata-server-config
+data:
+  registry.conf: |
+    registry {
+      # file 、nacos 、eureka、redis、zk、consul、etcd3、sofa
+      type = "nacos"
+      nacos {
+        application = "seata-server"
+        serverAddr = "nacos:8848"
+        group = "SEATA_GROUP"
+        namespace = ""
+        cluster = "default"
+        username = "nacos"
+        password = "nacos"
+      }
+    }
+    config {
+      # file、nacos 、apollo、zk、consul、etcd3
+      type = "nacos"
+      nacos {
+        serverAddr = "nacos:8848"
+        namespace = ""
+        group = "SEATA_GROUP"
+        username = "nacos"
+        password = "nacos"
+      }
+    }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: seata
+  namespace: default
+  labels:
+    k8s-app: seata
+spec:
+  ports:
+    - port: 8091
+      protocol: TCP
+      name: http
+  selector:
+    k8s-app: seata
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: seata
+  namespace: default
+  labels:
+    k8s-app: seata
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: seata
+  template:
+    metadata:
+      labels:
+        k8s-app: seata
+    spec:
+      containers:
+        - name: seata
+          image: repository:5000/seata
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: SEATA_PORT
+              value: "8091"
+          volumeMounts:
+            - name: seata-config
+              mountPath: /usr/local/seata/conf
+      volumes:
+        - name: seata-config
+          configMap:
+            name: seata-server-config

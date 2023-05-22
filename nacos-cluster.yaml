@@ -2,70 +2,70 @@ kind: StatefulSet
 apiVersion: apps/v1
 metadata:
   labels:
-    app: nacos-cluster
-  name: nacos-cluster 
+    app: nacos
+  name: nacos
   namespace: default
 spec:
   replicas: 3
-  serviceName: nacos-cluster
+  serviceName: nacos
   podManagementPolicy: "Parallel"
   selector:
     matchLabels:
-      app: nacos-cluster
+      app: nacos
   template:
     metadata:
-      name: nacos-cluster
+      name: nacos
       labels:
-        app: nacos-cluster
+        app: nacos
     spec:
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 50
-            podAffinityTerm: 
-              labelSelector:
-                matchExpressions:
-                  - key: "app"
-                    operator: In
-                    values:
-                      - nacos-cluster
-              topologyKey: "kubernetes.io/hostname"
+            - weight: 50
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: "app"
+                      operator: In
+                      values:
+                        - nacos
+                topologyKey: "kubernetes.io/hostname"
       containers:
-      - name: nacos 
-        image: nacos/nacos-server:2.0.0
-        imagePullPolicy: Always
-        env:
-        - name: "JVM_XMS"
-          value: "256m"
-        - name: "JVM_XMX"
-          value: "256m"
-        - name: "MYSQL_SERVICE_HOST"
-          value: "mysql"
-        - name: "MYSQL_SERVICE_DB_NAME"
-          value: "nacos"
-        - name: "MYSQL_SERVICE_USER"
-          value: "nacos"
-        - name: "MYSQL_SERVICE_PASSWORD"
-          value: "nacos1234"
-        - name: "PREFER_HOST_MODE"
-          value: "hostname"
-        - name: "NACOS_SERVER_PORT"
-          value: "8848"
-        - name: "NACOS_REPLICAS"
-          value: "3"
-        - name: "MODE"
-          value: "cluster"
-        - name: "SPRING_DATASOURCE_PLATFORM"
-          value: "mysql"
-        - name: "NACOS_SERVERS"
-          value: "nacos-cluster-0.nacos-cluster.default.svc.cluster.local:8848 nacos-cluster-1.nacos-cluster.default.svc.cluster.local:8848 nacos-cluster-2.nacos-cluster.default.svc.cluster.local:8848"
+        - name: nacos
+          image: nacos/nacos-server:2.0.0
+          imagePullPolicy: Always
+          env:
+            - name: "JVM_XMS"
+              value: "256m"
+            - name: "JVM_XMX"
+              value: "256m"
+            - name: "MYSQL_SERVICE_HOST"
+              value: "mysql"
+            - name: "MYSQL_SERVICE_DB_NAME"
+              value: "nacos"
+            - name: "MYSQL_SERVICE_USER"
+              value: "nacos"
+            - name: "MYSQL_SERVICE_PASSWORD"
+              value: "nacos1234"
+            - name: "PREFER_HOST_MODE"
+              value: "hostname"
+            - name: "NACOS_SERVER_PORT"
+              value: "8848"
+            - name: "NACOS_REPLICAS"
+              value: "3"
+            - name: "MODE"
+              value: "cluster"
+            - name: "SPRING_DATASOURCE_PLATFORM"
+              value: "mysql"
+            - name: "NACOS_SERVERS"
+              value: "nacos-0.nacos.default.svc.cluster.local:8848 nacos-1.nacos.default.svc.cluster.local:8848 nacos-2.nacos.default.svc.cluster.local:8848"
 ---
 kind: Service
 apiVersion: v1
 metadata:
   labels:
-    app: nacos-cluster
-  name: nacos-cluster
+    app: nacos
+  name: nacos
   namespace: default
 spec:
   ports:
@@ -80,23 +80,23 @@ spec:
       targetPort: 9849
     - port: 7848
       name: old-raft-rpc
-      targetPort: 784
+      targetPort: 7848
   clusterIP: None
   selector:
-    app: nacos-cluster
+    app: nacos
 ---
 kind: Service
 apiVersion: v1
 metadata:
   labels:
-    app: nacos-cluster
-  name: nacos-cluster-svc
+    app: nacos
+  name: nacos-svc
   namespace: default
 spec:
   type: NodePort
   ports:
-  - port: 8848 
-    targetPort: 8848
-    nodePort: 30848
+    - port: 8848
+      targetPort: 8848
+      nodePort: 30848
   selector:
-    app: nacos-cluster
+    app: nacos
