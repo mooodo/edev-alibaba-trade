@@ -1,3 +1,18 @@
+/*
+Navicat MySQL Data Transfer
+
+Source Server         : mysql
+Source Server Version : 50635
+Source Host           : kubernetes:32306
+Source Database       : edevCustomer
+
+Target Server Type    : MYSQL
+Target Server Version : 50635
+File Encoding         : 65001
+
+Date: 2023-06-23 21:16:46
+*/
+
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
@@ -6,6 +21,7 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `t_account`;
 CREATE TABLE `t_account` (
   `id` int(20) NOT NULL,
+  `customer_id` int(20) NOT NULL,
   `balance` decimal(20,2) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
@@ -15,19 +31,19 @@ CREATE TABLE `t_account` (
 -- ----------------------------
 -- Records of t_account
 -- ----------------------------
-INSERT INTO `t_account` VALUES ('10001', '100000.00', '2022-03-31 02:51:49', null);
-INSERT INTO `t_account` VALUES ('10002', '100000.00', '2022-03-31 02:51:49', null);
-INSERT INTO `t_account` VALUES ('10003', '100000.00', '2022-03-31 02:51:49', null);
-INSERT INTO `t_account` VALUES ('10004', '100000.00', '2022-03-31 02:51:49', null);
-INSERT INTO `t_account` VALUES ('10005', '100000.00', '2022-03-31 02:51:49', null);
-INSERT INTO `t_account` VALUES ('10006', '100000.00', '2022-03-31 02:51:49', null);
-INSERT INTO `t_account` VALUES ('10007', '100000.00', '2022-03-31 02:51:49', null);
-INSERT INTO `t_account` VALUES ('10008', '100000.00', '2022-03-31 02:51:49', null);
-INSERT INTO `t_account` VALUES ('10009', '905344.00', '2022-03-31 02:51:49', '2022-07-27 16:16:12');
-INSERT INTO `t_account` VALUES ('10012', '100000.00', '2022-03-31 02:51:49', null);
-INSERT INTO `t_account` VALUES ('10013', '100000.00', '2022-03-31 02:51:49', null);
-INSERT INTO `t_account` VALUES ('10014', '100000.00', '2022-03-31 02:51:49', null);
-INSERT INTO `t_account` VALUES ('10015', '100000.00', '2022-03-31 02:51:49', null);
+INSERT INTO `t_account` VALUES ('1000101', '10001', '100000.00', '2022-03-31 02:51:49', null);
+INSERT INTO `t_account` VALUES ('1000201', '10002', '100000.00', '2022-03-31 02:51:49', null);
+INSERT INTO `t_account` VALUES ('1000301', '10003', '100000.00', '2022-03-31 02:51:49', null);
+INSERT INTO `t_account` VALUES ('1000401', '10004', '100000.00', '2022-03-31 02:51:49', null);
+INSERT INTO `t_account` VALUES ('1000501', '10005', '100000.00', '2022-03-31 02:51:49', null);
+INSERT INTO `t_account` VALUES ('1000601', '10006', '100000.00', '2022-03-31 02:51:49', null);
+INSERT INTO `t_account` VALUES ('1000701', '10007', '100000.00', '2022-03-31 02:51:49', null);
+INSERT INTO `t_account` VALUES ('1000801', '10008', '100000.00', '2022-03-31 02:51:49', null);
+INSERT INTO `t_account` VALUES ('1000901', '10009', '76336.00', '2022-03-31 02:51:49', '2023-02-03 22:23:14');
+INSERT INTO `t_account` VALUES ('1001201', '10012', '100000.00', '2022-03-31 02:51:49', null);
+INSERT INTO `t_account` VALUES ('1001301', '10013', '100000.00', '2022-03-31 02:51:49', null);
+INSERT INTO `t_account` VALUES ('1001401', '10014', '100000.00', '2022-03-31 02:51:49', null);
+INSERT INTO `t_account` VALUES ('1001501', '10015', '100000.00', '2022-03-31 02:51:49', null);
 
 -- ----------------------------
 -- Table structure for t_address
@@ -74,7 +90,8 @@ DROP TABLE IF EXISTS `t_city`;
 CREATE TABLE `t_city` (
   `id` int(6) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `province_id` int(6) DEFAULT NULL
+  `province_id` int(6) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -420,7 +437,8 @@ INSERT INTO `t_city` VALUES ('654300', '阿勒泰地区', '650000');
 DROP TABLE IF EXISTS `t_country`;
 CREATE TABLE `t_country` (
   `id` int(4) NOT NULL DEFAULT '0',
-  `name` varchar(2) NOT NULL DEFAULT ''
+  `name` varchar(2) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -460,13 +478,189 @@ INSERT INTO `t_customer` VALUES ('10014', '次仁顿珠', '男', '1992-08-18', '
 INSERT INTO `t_customer` VALUES ('10015', '娜扎买买提', '女', '1962-11-09', '410110196211093349', '13478692312');
 
 -- ----------------------------
+-- Table structure for t_journal_account
+-- ----------------------------
+DROP TABLE IF EXISTS `t_journal_account`;
+CREATE TABLE `t_journal_account` (
+  `id` int(20) NOT NULL AUTO_INCREMENT,
+  `account_id` int(20) DEFAULT NULL,
+  `amount` decimal(20,2) DEFAULT NULL,
+  `operation` varchar(50) DEFAULT NULL,
+  `operate_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=229 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_journal_account
+-- ----------------------------
+INSERT INTO `t_journal_account` VALUES ('1', '1', '1000.00', 'topUp', '2022-12-02 01:07:51');
+INSERT INTO `t_journal_account` VALUES ('2', '1', '1000.00', 'payoff', '2022-12-02 01:07:51');
+INSERT INTO `t_journal_account` VALUES ('4', '1000901', '5916.00', 'payoff', '2022-12-02 17:19:06');
+INSERT INTO `t_journal_account` VALUES ('5', '1000901', '5916.00', 'payoff', '2022-12-02 18:46:50');
+INSERT INTO `t_journal_account` VALUES ('6', '1000901', '5916.00', 'refund', '2022-12-02 20:09:11');
+INSERT INTO `t_journal_account` VALUES ('9', '1000901', '5916.00', 'refund', '2022-12-02 20:23:31');
+INSERT INTO `t_journal_account` VALUES ('10', '1000901', '5916.00', 'payoff', '2022-12-02 20:29:12');
+INSERT INTO `t_journal_account` VALUES ('11', '1000901', '5916.00', 'refund', '2022-12-02 20:33:09');
+INSERT INTO `t_journal_account` VALUES ('17', '1', '1000.00', 'topUp', '2022-12-03 13:30:45');
+INSERT INTO `t_journal_account` VALUES ('18', '1', '1000.00', 'payoff', '2022-12-03 13:30:46');
+INSERT INTO `t_journal_account` VALUES ('19', '1', '1000.00', 'topUp', '2022-12-03 13:31:38');
+INSERT INTO `t_journal_account` VALUES ('20', '1', '1000.00', 'payoff', '2022-12-03 13:31:39');
+INSERT INTO `t_journal_account` VALUES ('22', '1', '1000.00', 'topUp', '2022-12-03 13:37:12');
+INSERT INTO `t_journal_account` VALUES ('23', '1', '1000.00', 'payoff', '2022-12-03 13:37:13');
+INSERT INTO `t_journal_account` VALUES ('25', '1', '1000.00', 'topUp', '2022-12-03 13:39:25');
+INSERT INTO `t_journal_account` VALUES ('26', '1', '1000.00', 'payoff', '2022-12-03 13:39:26');
+INSERT INTO `t_journal_account` VALUES ('34', '1', '1000.00', 'topUp', '2022-12-03 20:49:35');
+INSERT INTO `t_journal_account` VALUES ('35', '1', '1000.00', 'payoff', '2022-12-03 20:49:36');
+INSERT INTO `t_journal_account` VALUES ('37', '1', '1000.00', 'topUp', '2022-12-03 21:10:41');
+INSERT INTO `t_journal_account` VALUES ('38', '1', '1000.00', 'payoff', '2022-12-03 21:10:41');
+INSERT INTO `t_journal_account` VALUES ('40', '1', '1000.00', 'topUp', '2022-12-07 22:07:09');
+INSERT INTO `t_journal_account` VALUES ('41', '1', '1000.00', 'payoff', '2022-12-07 22:07:10');
+INSERT INTO `t_journal_account` VALUES ('43', '1000901', '5916.00', 'payoff', '2022-12-07 23:47:49');
+INSERT INTO `t_journal_account` VALUES ('44', '1000901', '5916.00', 'payoff', '2022-12-07 23:58:55');
+INSERT INTO `t_journal_account` VALUES ('45', '1000901', '5916.00', 'refund', '2022-12-07 23:58:56');
+INSERT INTO `t_journal_account` VALUES ('46', '1000901', '5916.00', 'payoff', '2022-12-08 00:10:36');
+INSERT INTO `t_journal_account` VALUES ('47', '1000901', '5916.00', 'payoff', '2022-12-08 00:17:50');
+INSERT INTO `t_journal_account` VALUES ('48', '1000901', '5916.00', 'payoff', '2022-12-08 00:25:31');
+INSERT INTO `t_journal_account` VALUES ('49', '1000901', '5916.00', 'refund', '2022-12-08 00:26:32');
+INSERT INTO `t_journal_account` VALUES ('50', '1000901', '5916.00', 'payoff', '2022-12-08 00:27:10');
+INSERT INTO `t_journal_account` VALUES ('51', '1000901', '5916.00', 'refund', '2022-12-08 00:28:24');
+INSERT INTO `t_journal_account` VALUES ('52', '1000901', '5916.00', 'payoff', '2022-12-08 00:50:25');
+INSERT INTO `t_journal_account` VALUES ('53', '1000901', '5916.00', 'refund', '2022-12-08 00:50:58');
+INSERT INTO `t_journal_account` VALUES ('54', '1', '1000.00', 'topUp', '2022-12-08 11:38:39');
+INSERT INTO `t_journal_account` VALUES ('55', '1', '1000.00', 'payoff', '2022-12-08 11:38:39');
+INSERT INTO `t_journal_account` VALUES ('57', '1', '1000.00', 'topUp', '2022-12-08 11:41:43');
+INSERT INTO `t_journal_account` VALUES ('58', '1', '1000.00', 'payoff', '2022-12-08 11:41:43');
+INSERT INTO `t_journal_account` VALUES ('60', '1', '1000.00', 'topUp', '2022-12-08 14:46:48');
+INSERT INTO `t_journal_account` VALUES ('61', '1', '1000.00', 'payoff', '2022-12-08 14:46:48');
+INSERT INTO `t_journal_account` VALUES ('63', '1', '1000.00', 'topUp', '2022-12-08 15:24:20');
+INSERT INTO `t_journal_account` VALUES ('64', '1', '1000.00', 'payoff', '2022-12-08 15:24:21');
+INSERT INTO `t_journal_account` VALUES ('65', '1', '1000.00', 'topUp', '2022-12-08 15:25:54');
+INSERT INTO `t_journal_account` VALUES ('66', '1', '1000.00', 'payoff', '2022-12-08 15:25:55');
+INSERT INTO `t_journal_account` VALUES ('68', '1', '1000.00', 'topUp', '2022-12-08 15:35:37');
+INSERT INTO `t_journal_account` VALUES ('69', '1', '1000.00', 'payoff', '2022-12-08 15:35:38');
+INSERT INTO `t_journal_account` VALUES ('70', '1000901', '5916.00', 'payoff', '2022-12-08 15:45:46');
+INSERT INTO `t_journal_account` VALUES ('71', '1000901', '5916.00', 'refund', '2022-12-08 15:46:47');
+INSERT INTO `t_journal_account` VALUES ('72', '1', '1000.00', 'topUp', '2022-12-08 17:14:58');
+INSERT INTO `t_journal_account` VALUES ('73', '1', '1000.00', 'payoff', '2022-12-08 17:14:59');
+INSERT INTO `t_journal_account` VALUES ('75', '1', '1000.00', 'topUp', '2022-12-08 17:19:08');
+INSERT INTO `t_journal_account` VALUES ('76', '1', '1000.00', 'payoff', '2022-12-08 17:19:08');
+INSERT INTO `t_journal_account` VALUES ('78', '1', '1000.00', 'topUp', '2022-12-08 17:23:53');
+INSERT INTO `t_journal_account` VALUES ('79', '1', '1000.00', 'payoff', '2022-12-08 17:23:53');
+INSERT INTO `t_journal_account` VALUES ('81', '1', '1000.00', 'topUp', '2022-12-08 17:29:19');
+INSERT INTO `t_journal_account` VALUES ('82', '1', '1000.00', 'payoff', '2022-12-08 17:29:20');
+INSERT INTO `t_journal_account` VALUES ('84', '1000901', '5916.00', 'payoff', '2022-12-09 14:41:28');
+INSERT INTO `t_journal_account` VALUES ('85', '1000901', '5916.00', 'payoff', '2022-12-09 14:44:32');
+INSERT INTO `t_journal_account` VALUES ('86', '1000901', '5916.00', 'refund', '2022-12-09 14:46:08');
+INSERT INTO `t_journal_account` VALUES ('88', '1', '1000.00', 'topUp', '2022-12-09 18:41:02');
+INSERT INTO `t_journal_account` VALUES ('89', '1', '1000.00', 'payoff', '2022-12-09 18:41:02');
+INSERT INTO `t_journal_account` VALUES ('90', '1000901', '5916.00', 'payoff', '2022-12-09 19:28:54');
+INSERT INTO `t_journal_account` VALUES ('91', '1000901', '5916.00', 'refund', '2022-12-09 19:33:58');
+INSERT INTO `t_journal_account` VALUES ('93', '1000901', '5916.00', 'payoff', '2022-12-10 03:07:17');
+INSERT INTO `t_journal_account` VALUES ('94', '1000901', '5916.00', 'refund', '2022-12-10 03:07:17');
+INSERT INTO `t_journal_account` VALUES ('95', '1', '1000.00', 'topUp', '2022-12-10 03:07:18');
+INSERT INTO `t_journal_account` VALUES ('96', '1', '1000.00', 'payoff', '2022-12-10 03:07:18');
+INSERT INTO `t_journal_account` VALUES ('97', '1000901', '5916.00', 'payoff', '2022-12-10 15:37:31');
+INSERT INTO `t_journal_account` VALUES ('98', '1000901', '5916.00', 'refund', '2022-12-10 15:39:16');
+INSERT INTO `t_journal_account` VALUES ('100', '1', '1000.00', 'topUp', '2022-12-10 16:09:54');
+INSERT INTO `t_journal_account` VALUES ('101', '1', '1000.00', 'payoff', '2022-12-10 16:09:54');
+INSERT INTO `t_journal_account` VALUES ('103', '1', '1000.00', 'topUp', '2022-12-10 16:45:54');
+INSERT INTO `t_journal_account` VALUES ('104', '1', '1000.00', 'payoff', '2022-12-10 16:45:54');
+INSERT INTO `t_journal_account` VALUES ('105', '1000901', '5916.00', 'payoff', '2022-12-10 17:10:04');
+INSERT INTO `t_journal_account` VALUES ('106', '1000901', '5916.00', 'payoff', '2022-12-10 17:25:20');
+INSERT INTO `t_journal_account` VALUES ('107', '1000901', '5916.00', 'payoff', '2022-12-10 17:29:08');
+INSERT INTO `t_journal_account` VALUES ('108', '1000901', '5916.00', 'refund', '2022-12-10 17:30:30');
+INSERT INTO `t_journal_account` VALUES ('109', '1000901', '5916.00', 'payoff', '2022-12-21 19:03:58');
+INSERT INTO `t_journal_account` VALUES ('110', '1000901', '5916.00', 'refund', '2022-12-21 19:05:48');
+INSERT INTO `t_journal_account` VALUES ('111', '1', '1000.00', 'topUp', '2023-02-02 17:23:17');
+INSERT INTO `t_journal_account` VALUES ('112', '1', '1000.00', 'payoff', '2023-02-02 17:23:17');
+INSERT INTO `t_journal_account` VALUES ('114', '1', '1000.00', 'topUp', '2023-02-03 17:30:33');
+INSERT INTO `t_journal_account` VALUES ('115', '1', '1000.00', 'payoff', '2023-02-03 17:30:33');
+INSERT INTO `t_journal_account` VALUES ('117', '1', '1000.00', 'topUp', '2023-02-03 17:33:36');
+INSERT INTO `t_journal_account` VALUES ('118', '1', '1000.00', 'payoff', '2023-02-03 17:33:36');
+INSERT INTO `t_journal_account` VALUES ('120', '1', '1000.00', 'topUp', '2023-02-03 17:44:52');
+INSERT INTO `t_journal_account` VALUES ('121', '1', '1000.00', 'payoff', '2023-02-03 17:44:53');
+INSERT INTO `t_journal_account` VALUES ('123', '1000901', '5916.00', 'refund', '2023-02-03 22:23:13');
+INSERT INTO `t_journal_account` VALUES ('124', '1000901', '5916.00', 'payoff', '2023-02-03 22:23:13');
+INSERT INTO `t_journal_account` VALUES ('125', '1000901', '5916.00', 'refund', '2023-02-03 22:23:14');
+INSERT INTO `t_journal_account` VALUES ('126', '1000901', '5916.00', 'payoff', '2023-02-03 22:23:14');
+INSERT INTO `t_journal_account` VALUES ('127', '1', '1000.00', 'topUp', '2023-02-03 22:23:14');
+INSERT INTO `t_journal_account` VALUES ('128', '1', '1000.00', 'payoff', '2023-02-03 22:23:14');
+INSERT INTO `t_journal_account` VALUES ('130', '1', '1000.00', 'topUp', '2023-02-03 22:46:59');
+INSERT INTO `t_journal_account` VALUES ('131', '1', '1000.00', 'payoff', '2023-02-03 22:47:00');
+INSERT INTO `t_journal_account` VALUES ('133', '1', '1000.00', 'topUp', '2023-02-03 23:20:17');
+INSERT INTO `t_journal_account` VALUES ('134', '1', '1000.00', 'payoff', '2023-02-03 23:20:17');
+INSERT INTO `t_journal_account` VALUES ('136', '1', '1000.00', 'topUp', '2023-02-03 23:23:32');
+INSERT INTO `t_journal_account` VALUES ('137', '1', '1000.00', 'payoff', '2023-02-03 23:23:32');
+INSERT INTO `t_journal_account` VALUES ('139', '1', '1000.00', 'topUp', '2023-02-21 14:34:03');
+INSERT INTO `t_journal_account` VALUES ('140', '1', '1000.00', 'payoff', '2023-02-21 14:34:03');
+INSERT INTO `t_journal_account` VALUES ('142', '1', '1000.00', 'topUp', '2023-02-21 15:03:47');
+INSERT INTO `t_journal_account` VALUES ('143', '1', '1000.00', 'payoff', '2023-02-21 15:03:47');
+INSERT INTO `t_journal_account` VALUES ('145', '1', '1000.00', 'topUp', '2023-02-21 15:44:36');
+INSERT INTO `t_journal_account` VALUES ('146', '1', '1000.00', 'payoff', '2023-02-21 15:44:36');
+INSERT INTO `t_journal_account` VALUES ('148', '1', '1000.00', 'topUp', '2023-05-21 21:23:00');
+INSERT INTO `t_journal_account` VALUES ('149', '1', '1000.00', 'payoff', '2023-05-21 21:23:00');
+INSERT INTO `t_journal_account` VALUES ('150', '1', '1000.00', 'topUp', '2023-05-22 05:37:59');
+INSERT INTO `t_journal_account` VALUES ('151', '1', '1000.00', 'payoff', '2023-05-22 05:37:59');
+INSERT INTO `t_journal_account` VALUES ('153', '1', '1000.00', 'topUp', '2023-05-22 07:38:57');
+INSERT INTO `t_journal_account` VALUES ('154', '1', '1000.00', 'payoff', '2023-05-22 07:38:57');
+INSERT INTO `t_journal_account` VALUES ('156', '1', '1000.00', 'topUp', '2023-05-22 10:08:58');
+INSERT INTO `t_journal_account` VALUES ('157', '1', '1000.00', 'payoff', '2023-05-22 10:08:58');
+INSERT INTO `t_journal_account` VALUES ('160', '1', '1000.00', 'topUp', '2023-05-22 10:35:19');
+INSERT INTO `t_journal_account` VALUES ('161', '1', '1000.00', 'payoff', '2023-05-22 10:35:19');
+INSERT INTO `t_journal_account` VALUES ('162', '1', '1000.00', 'topUp', '2023-05-22 11:22:19');
+INSERT INTO `t_journal_account` VALUES ('163', '1', '1000.00', 'payoff', '2023-05-22 11:22:20');
+INSERT INTO `t_journal_account` VALUES ('166', '1', '1000.00', 'topUp', '2023-05-22 11:29:17');
+INSERT INTO `t_journal_account` VALUES ('167', '1', '1000.00', 'payoff', '2023-05-22 11:29:17');
+INSERT INTO `t_journal_account` VALUES ('169', '1', '1000.00', 'topUp', '2023-05-22 12:50:18');
+INSERT INTO `t_journal_account` VALUES ('170', '1', '1000.00', 'payoff', '2023-05-22 12:50:18');
+INSERT INTO `t_journal_account` VALUES ('172', '1', '1000.00', 'topUp', '2023-06-17 19:25:18');
+INSERT INTO `t_journal_account` VALUES ('173', '1', '1000.00', 'payoff', '2023-06-17 19:25:19');
+INSERT INTO `t_journal_account` VALUES ('175', '1', '1000.00', 'topUp', '2023-06-17 20:31:43');
+INSERT INTO `t_journal_account` VALUES ('176', '1', '1000.00', 'payoff', '2023-06-17 20:31:43');
+INSERT INTO `t_journal_account` VALUES ('178', '1', '1000.00', 'topUp', '2023-06-20 08:38:46');
+INSERT INTO `t_journal_account` VALUES ('179', '1', '1000.00', 'payoff', '2023-06-20 08:38:47');
+INSERT INTO `t_journal_account` VALUES ('181', '1', '1000.00', 'topUp', '2023-06-22 12:03:27');
+INSERT INTO `t_journal_account` VALUES ('182', '1', '1000.00', 'payoff', '2023-06-22 12:03:28');
+INSERT INTO `t_journal_account` VALUES ('184', '1', '1000.00', 'topUp', '2023-06-22 12:05:07');
+INSERT INTO `t_journal_account` VALUES ('185', '1', '1000.00', 'payoff', '2023-06-22 12:05:07');
+INSERT INTO `t_journal_account` VALUES ('187', '1', '1000.00', 'topUp', '2023-06-22 12:55:53');
+INSERT INTO `t_journal_account` VALUES ('188', '1', '1000.00', 'payoff', '2023-06-22 12:55:53');
+INSERT INTO `t_journal_account` VALUES ('190', '1', '1000.00', 'topUp', '2023-06-22 13:03:37');
+INSERT INTO `t_journal_account` VALUES ('191', '1', '1000.00', 'payoff', '2023-06-22 13:03:38');
+INSERT INTO `t_journal_account` VALUES ('193', '1', '1000.00', 'topUp', '2023-06-22 13:06:30');
+INSERT INTO `t_journal_account` VALUES ('194', '1', '1000.00', 'payoff', '2023-06-22 13:06:30');
+INSERT INTO `t_journal_account` VALUES ('196', '1', '1000.00', 'topUp', '2023-06-22 13:18:34');
+INSERT INTO `t_journal_account` VALUES ('197', '1', '1000.00', 'payoff', '2023-06-22 13:18:35');
+INSERT INTO `t_journal_account` VALUES ('199', '1', '1000.00', 'topUp', '2023-06-22 14:01:54');
+INSERT INTO `t_journal_account` VALUES ('200', '1', '1000.00', 'payoff', '2023-06-22 14:01:55');
+INSERT INTO `t_journal_account` VALUES ('202', '1', '1000.00', 'topUp', '2023-06-22 17:28:56');
+INSERT INTO `t_journal_account` VALUES ('203', '1', '1000.00', 'payoff', '2023-06-22 17:28:56');
+INSERT INTO `t_journal_account` VALUES ('205', '1', '1000.00', 'topUp', '2023-06-22 17:29:53');
+INSERT INTO `t_journal_account` VALUES ('206', '1', '1000.00', 'payoff', '2023-06-22 17:29:53');
+INSERT INTO `t_journal_account` VALUES ('208', '1', '1000.00', 'topUp', '2023-06-22 20:30:04');
+INSERT INTO `t_journal_account` VALUES ('209', '1', '1000.00', 'payoff', '2023-06-22 20:30:04');
+INSERT INTO `t_journal_account` VALUES ('211', '1', '1000.00', 'topUp', '2023-06-22 20:37:48');
+INSERT INTO `t_journal_account` VALUES ('212', '1', '1000.00', 'payoff', '2023-06-22 20:37:49');
+INSERT INTO `t_journal_account` VALUES ('214', '1', '1000.00', 'topUp', '2023-06-22 20:40:50');
+INSERT INTO `t_journal_account` VALUES ('215', '1', '1000.00', 'payoff', '2023-06-22 20:40:50');
+INSERT INTO `t_journal_account` VALUES ('217', '1', '1000.00', 'topUp', '2023-06-22 20:57:59');
+INSERT INTO `t_journal_account` VALUES ('218', '1', '1000.00', 'payoff', '2023-06-22 20:57:59');
+INSERT INTO `t_journal_account` VALUES ('220', '1', '1000.00', 'topUp', '2023-06-23 16:54:43');
+INSERT INTO `t_journal_account` VALUES ('221', '1', '1000.00', 'payoff', '2023-06-23 16:54:44');
+INSERT INTO `t_journal_account` VALUES ('223', '1', '1000.00', 'topUp', '2023-06-23 18:31:31');
+INSERT INTO `t_journal_account` VALUES ('224', '1', '1000.00', 'payoff', '2023-06-23 18:31:32');
+INSERT INTO `t_journal_account` VALUES ('226', '1', '1000.00', 'topUp', '2023-06-23 19:55:00');
+INSERT INTO `t_journal_account` VALUES ('227', '1', '1000.00', 'payoff', '2023-06-23 19:55:00');
+
+-- ----------------------------
 -- Table structure for t_province
 -- ----------------------------
 DROP TABLE IF EXISTS `t_province`;
 CREATE TABLE `t_province` (
   `id` int(6) NOT NULL,
   `name` varchar(80) DEFAULT NULL,
-  `country_id` int(4) NOT NULL DEFAULT '0'
+  `country_id` int(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -525,7 +719,7 @@ CREATE TABLE `t_vip` (
 -- ----------------------------
 -- Records of t_vip
 -- ----------------------------
-INSERT INTO `t_vip` VALUES ('10009', '2022-08-18 14:40:15', null, 'Y', '100000', 'golden', null);
+INSERT INTO `t_vip` VALUES ('10009', '2022-08-18 14:40:15', null, 'Y', '100000', 'golden', '4000.00');
 INSERT INTO `t_vip` VALUES ('10012', '2022-08-18 14:40:15', '2022-08-18 14:42:12', 'Y', '100000', 'golden', '3000.00');
 INSERT INTO `t_vip` VALUES ('10013', '2021-03-12 00:00:00', null, 'Y', '2000', 'silver', null);
 INSERT INTO `t_vip` VALUES ('10014', '2021-12-09 00:00:00', null, 'Y', '1000', 'silver', null);
@@ -538,7 +732,8 @@ CREATE TABLE `t_zone` (
   `id` int(6) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `province_id` int(6) DEFAULT NULL,
-  `city_id` int(6) DEFAULT NULL
+  `city_id` int(6) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -2416,8 +2611,8 @@ INSERT INTO `t_zone` VALUES ('450327', '灌阳县', '450000', '450300');
 INSERT INTO `t_zone` VALUES ('450328', '龙胜各族自治县', '450000', '450300');
 INSERT INTO `t_zone` VALUES ('450329', '资源县', '450000', '450300');
 INSERT INTO `t_zone` VALUES ('450330', '平乐县', '450000', '450300');
-INSERT INTO `t_zone` VALUES ('450381', '荔浦市', '450000', '450300');
 INSERT INTO `t_zone` VALUES ('450332', '恭城瑶族自治县', '450000', '450300');
+INSERT INTO `t_zone` VALUES ('450381', '荔浦市', '450000', '450300');
 INSERT INTO `t_zone` VALUES ('450403', '万秀区', '450000', '450400');
 INSERT INTO `t_zone` VALUES ('450405', '长洲区', '450000', '450400');
 INSERT INTO `t_zone` VALUES ('450406', '龙圩区', '450000', '450400');
