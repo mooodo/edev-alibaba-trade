@@ -27,9 +27,9 @@ public interface CustomerService {
     @GetMapping("orm/vip/discount")
     Double discount(@RequestParam Long customerId);
     @GetMapping("account/payoff")
-    public Double payoff(@RequestParam Long id, @RequestParam Double amount);
+    Double payoff(@RequestParam Long id, @RequestParam Double amount);
     @GetMapping("account/refund")
-    public Double refund(@RequestParam Long id, @RequestParam Double amount);
+    Double refund(@RequestParam Long id, @RequestParam Double amount);
     @GetMapping("orm/vip/loadByCustomer")
-    Vip loadByCustomer(Long customerId);
+    Vip loadByCustomer(@RequestParam Long customerId);
 }

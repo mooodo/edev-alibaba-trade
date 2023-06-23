@@ -11,15 +11,13 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
     @Override
     public Product getProduct(Long id) {
-        return new Product(id,"Unknown",null,"Unknown",null,null);
+        return Product.build().setValues(id,"Unknown","Unknown");
     }
 
     @Override
     public List<Product> listProducts(List<Long> ids) {
         List<Product> list = new ArrayList<>();
-        ids.forEach(id->{
-            list.add(getProduct(id));
-        });
+        ids.forEach(id-> list.add(getProduct(id)));
         return list;
     }
 }

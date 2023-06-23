@@ -18,7 +18,7 @@
 			  class="com.edev.trade.order.entity.Payment"/>
 		<join name="orderItems" joinKey="orderId" joinType="oneToMany"
 			  isAggregation="true" class="com.edev.trade.order.entity.OrderItem"/>
-		</do>
+	</do>
 	<do class="com.edev.trade.order.entity.OrderItem" tableName="t_order_item">
 		<property name="id" column="id" isPrimaryKey="true"/>
 		<property name="orderId" column="order_id"/>
@@ -61,10 +61,10 @@
 		<property name="price"/>
 		<property name="unit"/>
 		<property name="supplierId"/>
+		<property name="classifyId"/>
 		<property name="image"/>
 		<property name="originalPrice"/>
 		<property name="tip"/>
-		<property name="classifyId"/>
 	</do>
 	<do class="com.edev.trade.order.entity.Discount" subclassType="union">
 		<property name="id" column="id" isPrimaryKey="true"/>
@@ -93,5 +93,19 @@
 		<property name="discount" column="discount"/>
 		<property name="discountType" column="discount_type" isDiscriminator="true"/>
 		<property name="productId" column="product_id"/>
+	</do>
+	<do class="com.edev.trade.order.entity.Vip" subclassType="simple">
+		<property name="id" column="id" isPrimaryKey="true"/>
+		<property name="createTime" column="create_time"/>
+		<property name="updateTime" column="update_time"/>
+		<property name="available" column="available"/>
+		<property name="coin" column="coin"/>
+		<join name="customer" joinType="oneToOne"
+			  class="com.edev.trade.order.entity.Customer"/>
+		<property name="vipType" column="vip_type" isDiscriminator="true"/>
+		<subclass class="com.edev.trade.order.entity.GoldenVip" value="golden">
+			<property name="cashback" column="cashback"/>
+		</subclass>
+		<subclass class="com.edev.trade.order.entity.SilverVip" value="silver"/>
 	</do>
 </dobjs>

@@ -1,0 +1,39 @@
+{
+	"id": 10009,
+	"name": "张一德",
+	"gender": "男",
+	"identification": "510212200004213344",
+	"phoneNumber": "13656781234",
+	"addresses": [
+		{
+			"id": 1000900,
+			"customerId": 10009,
+			"countryId": 1000,
+			"provinceId": 510000,
+			"cityId": 510100,
+			"zoneId": 510105,
+			"country": {
+				"id": 1000,
+				"name": "中国"
+			},
+			"province": {
+				"id": 510000,
+				"name": "四川省",
+				"countryId": 1000
+			},
+			"city": {
+				"id": 510100,
+				"name": "成都市",
+				"provinceId": 510000
+			},
+			"zone": {
+				"id": 510105,
+				"name": "青羊区",
+				"provinceId": 510000,
+				"cityId": 510100
+			},
+			"address": "宽窄巷子",
+			"phoneNumber": null
+		}
+	]
+}

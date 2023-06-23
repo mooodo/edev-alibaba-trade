@@ -1,0 +1,14 @@
+{
+  "id": 10009,
+  "available": true,
+  "coin": 100000,
+  "vipType": "golden",
+  "customer": {
+    "id": 10009,
+    "name": "张一德",
+    "gender": "男",
+    "identification": "510212200004213344",
+    "phoneNumber": "13656781234"
+  },
+  "cashback": 4000.0
+}

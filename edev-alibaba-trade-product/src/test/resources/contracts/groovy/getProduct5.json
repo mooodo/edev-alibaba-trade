@@ -1,0 +1,25 @@
+{
+  "id": 30005,
+  "name": "微软（Microsoft）新Surface Pro 二合一平板电脑笔记本 12.3英寸（i5 8G内存 256G存储）",
+  "price": 8288.0,
+  "unit": "台",
+  "supplierId": 20005,
+  "classifyId": 100300,
+  "image": "/static/img/product5.jpg",
+  "originalPrice": 8888.0,
+  "tip": null,
+  "classify": {
+    "id": 100300,
+    "name": "笔记本电脑",
+    "parentId": 100000,
+    "layer": 2
+  },
+  "supplier": {
+    "id": 20005,
+    "name": "微软公司(Microsoft)",
+    "supplierType": "distributor",
+    "introduce": "一家美国跨国科技企业，1975年4月4日创立，以研发、制造、授权和提供广泛的电脑软件服务业务为主",
+    "address": "北京市海淀区丹棱街5号",
+    "range": "软件服务"
+  }
+}

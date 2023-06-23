@@ -27,4 +27,37 @@ public class QryConfig {
         return new AutofillQueryServiceImpl(
                 productQryDao(), basicDaoWithCache);
     }
+    @Bean
+    public QueryDao supplierQryDao() {
+        return new QueryDaoMybastisImplForDdd(
+                "com.edev.trade.product.entity.Supplier",
+                "com.edev.trade.query.dao.SupplierMapper");
+    }
+    @Bean
+    public QueryService supplierQry() {
+        return new AutofillQueryServiceImpl(
+                supplierQryDao(), basicDaoWithCache);
+    }
+    @Bean
+    public QueryDao distributorQryDao() {
+        return new QueryDaoMybastisImplForDdd(
+                "com.edev.trade.product.entity.Distributor",
+                "com.edev.trade.query.dao.DistributorMapper");
+    }
+    @Bean
+    public QueryService distributorQry() {
+        return new AutofillQueryServiceImpl(
+                distributorQryDao(), basicDaoWithCache);
+    }
+    @Bean
+    public QueryDao vendorQryDao() {
+        return new QueryDaoMybastisImplForDdd(
+                "com.edev.trade.product.entity.Vendor",
+                "com.edev.trade.query.dao.VendorMapper");
+    }
+    @Bean
+    public QueryService vendorQry() {
+        return new AutofillQueryServiceImpl(
+                vendorQryDao(), basicDaoWithCache);
+    }
 }

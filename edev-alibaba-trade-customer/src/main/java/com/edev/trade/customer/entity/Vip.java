@@ -1,9 +1,13 @@
 package com.edev.trade.customer.entity;
 
 import com.edev.support.entity.Entity;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Date;
 
+@Data
+@EqualsAndHashCode(callSuper = true)
 public class Vip extends Entity<Long> {
     protected Long id;
     protected Date createTime;
@@ -13,85 +17,34 @@ public class Vip extends Entity<Long> {
     protected String vipType;
     protected Customer customer;
 
-    public Vip() {}
-
-    public Vip(Long id, Boolean available, Long coin, String vipType) {
-        this(id, null, null, available, coin, vipType);
+    public static Vip build() {
+        return new Vip();
     }
 
-    public Vip(Long id, Date createTime, Date updateTime, Boolean available, Long coin, String vipType) {
-        setId(id);
-        setCreateTime(createTime);
-        setUpdateTime(updateTime);
-        setAvailable(available);
-        setCoin(coin);
-        setVipType(vipType);
+    public Vip setValues(Long id, Boolean available, Long coin, String vipType) {
+        return this.setValues(id, null, null, available, coin, vipType);
     }
 
-    @Override
-    public Long getId() {
-        return id;
+    public Vip setValues(Long id, Date createTime, Date updateTime, Boolean available, Long coin, String vipType) {
+        this.setId(id);
+        this.setCreateTime(createTime);
+        this.setUpdateTime(updateTime);
+        this.setAvailable(available);
+        this.setCoin(coin);
+        this.setVipType(vipType);
+        return this;
     }
 
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public Boolean isAvailable() {
-        return "1".equals(available);
+    public Boolean getAvailable() {
+        return "Y".equals(available);
     }
 
     public void setAvailable(Boolean available) {
-        this.available = available ? "1" : "0";
-    }
-
-    public Long getCoin() {
-        return coin;
-    }
-
-    public void setCoin(Long coin) {
-        this.coin = coin;
-    }
-
-    public String getVipType() {
-        return vipType;
-    }
-
-    public void setVipType(String vipType) {
-        this.vipType = vipType;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    @Override
-    protected String[] exclude() {
-        return new String[]{"createTime","updateTime"};
+        this.available = available ? "Y" : "N";
     }
 
     public Double discount() {
-        return 0D;
+        return 1D;
     }
+
 }

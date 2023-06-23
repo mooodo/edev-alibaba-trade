@@ -1,0 +1,50 @@
+[{
+  "id": 30005,
+  "name": "微软（Microsoft）新Surface Pro 二合一平板电脑笔记本 12.3英寸（i5 8G内存 256G存储）",
+  "price": 8288.0,
+  "unit": "台",
+  "supplierId": 20005,
+  "classifyId": 100300,
+  "image": "/static/img/product5.jpg",
+  "originalPrice": 8888.0,
+  "tip": null,
+  "classify": {
+    "id": 100300,
+    "name": "笔记本电脑",
+    "parentId": 100000,
+    "layer": 2
+  },
+  "supplier": {
+    "id": 20005,
+    "name": "微软公司(Microsoft)",
+    "supplierType": "distributor",
+    "introduce": "一家美国跨国科技企业，1975年4月4日创立，以研发、制造、授权和提供广泛的电脑软件服务业务为主",
+    "address": "北京市海淀区丹棱街5号",
+    "range": "软件服务"
+  }
+},
+  {
+    "id": 30007,
+    "name": "华为 HUAWEI Mate 30E Pro 5G麒麟990E SoC芯片 双4000万徕卡电影影像 8GB+256GB青山黛全网通手机",
+    "price": 5799.0,
+    "unit": "台",
+    "supplierId": 20003,
+    "classifyId": 100100,
+    "image": "/static/img/HUAWEI_Mate_30E Pro.jpg",
+    "originalPrice": 6000.0,
+    "tip": "秒杀",
+    "classify": {
+      "id": 100100,
+      "name": "智能手机",
+      "parentId": 100000,
+      "layer": 2
+    },
+    "supplier": {
+      "id": 20003,
+      "name": "华为技术有限公司",
+      "supplierType": "distributor",
+      "introduce": "全球领先的ICT(信息与通信)基础设施和智能终端提供商,致力于把数字世界带入每个人、每个家庭、每个组织,构建万物互联的智能世界",
+      "address": "广东省深圳市龙岗区坂田华为基地",
+      "range": "通信技术、智能手机"
+    }
+  }]

@@ -56,7 +56,9 @@ management:
       exposure:
         include: '*'
 logging:
-  # config: classpath:logback-dev.xml
+  config: classpath:logback-dev.xml
+  level:
+    com.alibaba.nacos: WARN
 ---
 spring:
   profiles: docker
