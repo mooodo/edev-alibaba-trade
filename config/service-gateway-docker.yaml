@@ -1,0 +1,75 @@
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  cloud:
+    sentinel:
+      transport:
+        dashboard: sentinel:8858
+      eager: true
+      datasource:
+        flow:
+          nacos:
+            server-addr: ${spring.cloud.nacos.discovery.server-addr}
+            dataId: ${spring.application.name}-flow-rules
+            groupId: DEFAULT_GROUP
+            rule-type: flow
+            username: ${spring.cloud.nacos.discovery.username}
+            password: ${spring.cloud.nacos.discovery.password}
+        degrade:
+          nacos:
+            server-addr: ${spring.cloud.nacos.discovery.server-addr}
+            dataId: ${spring.application.name}-degrade-rules
+            groupId: DEFAULT_GROUP
+            rule-type: degrade
+            username: ${spring.cloud.nacos.discovery.username}
+            password: ${spring.cloud.nacos.discovery.password}
+    loadbalancer:
+      retry:
+        enabled: true
+    gateway:
+      routes:
+        - id: customer
+          uri: lb://service-customer
+          predicates:
+            - Path=/customer/**
+          filters:
+            - StripPrefix= 1
+        - id: product
+          uri: lb://service-product
+          predicates:
+            - Path=/product/**
+          filters:
+            - StripPrefix= 1
+        - id: supplier
+          uri: lb://service-supplier
+          predicates:
+            - Path=/supplier/**
+          filters:
+            - StripPrefix= 1
+        - id: order
+          uri: lb://service-order
+          predicates:
+            - Path=/order/**
+          filters:
+            - StripPrefix= 1
+        - id: else
+          uri: https://www.baidu.com/
+          predicates:
+            - Path=/**
+          filters:
+            - StripPrefix= 0
+ribbon:
+  connectTimeout: 2000 # 请求连接的超时时间
+  readTimeout: 5000 # 请求处理的超时时间
+  maxAutoRetries: 1 # 对当前实例的重试次数
+  maxAutoRetriesNextServer: 3 # 切换实例的重试次数
+  okToRetryOnAllOperations: true # 对所有操作请求都进行重试
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+logging:
+  level:
+    com.alibaba: WARN
