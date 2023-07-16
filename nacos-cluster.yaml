@@ -34,6 +34,13 @@ spec:
         - name: nacos
           image: nacos/nacos-server:2.0.0
           imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: 500m
+              memory: 1500Mi
+            requests:
+              cpu: 100m
+              memory: 500Mi
           env:
             - name: "JVM_XMS"
               value: "256m"

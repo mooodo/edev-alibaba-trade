@@ -32,10 +32,16 @@ spec:
       - name: edev-alibaba-trade-customer
         image: repository:5000/edev-alibaba-trade-customer:<VERSION>
         imagePullPolicy: Always
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1000Mi
+          requests:
+            cpu: 100m
+            memory: 300Mi
         env:
           - name: NACOS_ADDR
             value: "nacos:8848"
-
 ---
 kind: Service
 apiVersion: v1

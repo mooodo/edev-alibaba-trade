@@ -20,6 +20,13 @@ spec:
       - name: sentinel 
         image: repository:5000/sentinel
         imagePullPolicy: Always
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1500Mi
+          requests:
+            cpu: 100m
+            memory: 500Mi
 ---
 kind: Service
 apiVersion: v1
