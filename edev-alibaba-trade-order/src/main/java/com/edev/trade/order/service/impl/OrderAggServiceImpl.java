@@ -3,18 +3,25 @@ package com.edev.trade.order.service.impl;
 import com.edev.support.ddd.NullEntityException;
 import com.edev.support.exception.ValidException;
 import com.edev.trade.order.entity.Order;
+import com.edev.trade.order.entity.OrderItem;
 import com.edev.trade.order.entity.Payment;
 import com.edev.trade.order.exception.OrderException;
 import com.edev.trade.order.service.CustomerService;
 import com.edev.trade.order.service.InventoryService;
 import com.edev.trade.order.service.OrderAggService;
 import com.edev.trade.order.service.OrderService;
+import io.seata.core.context.RootContext;
 import io.seata.spring.annotation.GlobalTransactional;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class OrderAggServiceImpl implements OrderAggService {
@@ -30,6 +37,7 @@ public class OrderAggServiceImpl implements OrderAggService {
     @Transactional
     public Long placeOrder(Order order) {
         if (order==null) throw new NullEntityException();
+        log.info("begin the trade... xid: "+ RootContext.getXID());
         Long orderId = orderService.create(order);
         log.debug(String.format("create an order: [orderId: %d]", orderId));
 
@@ -42,20 +50,30 @@ public class OrderAggServiceImpl implements OrderAggService {
         stockOut(order);
         return orderId;
     }
+
     private void stockOut(Order order) {
-        order.getOrderItems().forEach(orderItem -> {
-            Long productId = orderItem.getProductId();
-            Long quantity = orderItem.getQuantity();
-            Long balance = inventoryService.stockOut(productId, quantity);
-            log.debug(String.format("stock out for order: [productId:%d,quantity:%d,balance:%d]",
-                    productId, quantity, balance));
-        });
+        List<Map<String, Long>> list = convertOrderToList(order);
+        inventoryService.stockOutForList(list);
+        log.debug("stock out for orders");
     }
+
+    private List<Map<String, Long>> convertOrderToList(Order order) {
+        List<Map<String, Long>> list = new ArrayList<>();
+        for(OrderItem orderItem : order.getOrderItems()) {
+            Map<String, Long> map = new HashMap<>();
+            map.put("id", orderItem.getProductId());
+            map.put("quantity", orderItem.getQuantity());
+            list.add(map);
+        }
+        return list;
+    }
+
     @Override
     @GlobalTransactional(name = "seata-group-trade", rollbackFor = Exception.class)
     @Transactional
     public void returnGoods(Long orderId) {
         if(orderId==null) throw new ValidException("The order id is null!");
+        log.info("begin the trade... xid: "+ RootContext.getXID());
         Order order = orderService.load(orderId);
         orderService.delete(orderId);
         log.debug(String.format("return the goods: [orderId: %d]", orderId));
@@ -68,13 +86,10 @@ public class OrderAggServiceImpl implements OrderAggService {
 
         stockIn(order);
     }
+
     private void stockIn(Order order) {
-        order.getOrderItems().forEach(orderItem -> {
-            Long productId = orderItem.getProductId();
-            Long quantity = orderItem.getQuantity();
-            Long balance = inventoryService.stockIn(productId, quantity);
-            log.debug(String.format("stock in for order: [productId:%d,quantity:%d,balance:%d]",
-                    productId, quantity, balance));
-        });
+        List<Map<String, Long>> list = convertOrderToList(order);
+        inventoryService.stockInForList(list);
+        log.debug("stock in for orders");
     }
 }

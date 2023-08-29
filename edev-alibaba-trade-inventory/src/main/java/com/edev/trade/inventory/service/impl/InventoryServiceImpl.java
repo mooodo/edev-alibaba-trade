@@ -6,11 +6,18 @@ import com.edev.support.utils.DateUtils;
 import com.edev.trade.inventory.entity.Inventory;
 import com.edev.trade.inventory.exception.InventoryException;
 import com.edev.trade.inventory.service.InventoryService;
+import io.seata.core.context.RootContext;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 public class InventoryServiceImpl implements InventoryService {
+    private final Log log = LogFactory.getLog(InventoryServiceImpl.class);
     private final BasicDao dao;
 
     public InventoryServiceImpl(BasicDao dao) {
@@ -52,6 +59,17 @@ public class InventoryServiceImpl implements InventoryService {
     }
 
     @Override
+    @Transactional
+    public void stockInForList(List<Map<String, Object>> list) {
+        log.info("begin the trade... xid: "+ RootContext.getXID());
+        list.forEach(map -> {
+            Long id = Long.valueOf(map.get("id").toString());
+            Long quantity = Long.valueOf(map.get("quantity").toString());
+            stockIn(id, quantity);
+        });
+    }
+
+    @Override
     public Long stockOut(Long id, Long quantity) {
         Inventory inventory = checkInventory(id);
         if(inventory==null||inventory.getQuantity()==null)
@@ -63,6 +81,17 @@ public class InventoryServiceImpl implements InventoryService {
         inventory.setQuantity(deducted);
         modify(inventory);
         return deducted;
+    }
+
+    @Override
+    @Transactional
+    public void stockOutForList(@NotNull List<Map<String, Object>> list) {
+        log.info("begin the trade... xid: "+ RootContext.getXID());
+        list.forEach(map -> {
+            Long id = Long.valueOf(map.get("id").toString());
+            Long quantity = Long.valueOf(map.get("quantity").toString());
+            stockOut(id, quantity);
+        });
     }
 
     @Override
