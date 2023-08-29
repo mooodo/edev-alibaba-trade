@@ -16,10 +16,10 @@ import java.util.Map;
 public interface InventoryService {
     @GetMapping("orm/inventory/stockIn")
     Long stockIn(@RequestParam Long id, @RequestParam Long quantity);
-    @PostMapping("list/inventory/stockInForList")
+    @PostMapping("list/inventoryAgg/stockInForList")
     void stockInForList(@RequestBody List<Map<String, Long>> list);
     @GetMapping("orm/inventory/stockOut")
     Long stockOut(@RequestParam Long id, @RequestParam Long quantity);
-    @PostMapping("list/inventory/stockOutForList")
+    @PostMapping("list/inventoryAgg/stockOutForList")
     void stockOutForList(@RequestBody List<Map<String, Long>> list);
 }
