@@ -52,12 +52,12 @@ public class OrderAggServiceImpl implements OrderAggService {
     }
 
     private void stockOut(Order order) {
-        List<Map<String, Long>> list = convertOrderToList(order);
+        List<Map<String, Long>> list = convertOrderItemsToList(order);
         inventoryService.stockOutForList(list);
         log.debug("stock out for orders");
     }
 
-    private List<Map<String, Long>> convertOrderToList(Order order) {
+    private List<Map<String, Long>> convertOrderItemsToList(Order order) {
         List<Map<String, Long>> list = new ArrayList<>();
         for(OrderItem orderItem : order.getOrderItems()) {
             Map<String, Long> map = new HashMap<>();
@@ -88,7 +88,7 @@ public class OrderAggServiceImpl implements OrderAggService {
     }
 
     private void stockIn(Order order) {
-        List<Map<String, Long>> list = convertOrderToList(order);
+        List<Map<String, Long>> list = convertOrderItemsToList(order);
         inventoryService.stockInForList(list);
         log.debug("stock in for orders");
     }
