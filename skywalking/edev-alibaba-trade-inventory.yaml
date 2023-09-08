@@ -32,19 +32,12 @@ spec:
       - name: edev-alibaba-trade-inventory
         image: repository:5000/edev-alibaba-trade-inventory
         imagePullPolicy: Always
-        resources:
-          limits:
-            cpu: 500m
-            memory: 1000Mi
-          requests:
-            cpu: 100m
-            memory: 300Mi
         command: ["java", "-Djava.security.egd=file:/dev/./urandom", "-javaagent:/var/lib/skywalking/agent/skywalking-agent.jar", "-jar", "/app.jar","--spring.profiles.active=docker"]
         env:
           - name: NACOS_ADDR
             value: "nacos:8848"
           - name: SW_AGENT_NAME
-            value: "edev-alibaba-trade-inventory"
+            value: "service-inventory"
           - name: SW_AGENT_COLLECTOR_BACKEND_SERVICES
             value: "skywalking:11800"
         volumeMounts:
@@ -60,6 +53,7 @@ spec:
       volumes:
       - name: skywalking
         emptyDir: {}
+
 ---
 kind: Service
 apiVersion: v1
