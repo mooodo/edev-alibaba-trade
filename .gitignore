@@ -1,7 +1,3 @@
 /.idea/
-/edev-alibaba-trade-customer/target
-/edev-alibaba-trade-gateway/target
-/edev-alibaba-trade-inventory/target
-/edev-alibaba-trade-order/target
-/edev-alibaba-trade-product/target
+/*/target
 /**/*.iml
