@@ -23,7 +23,6 @@
     "classifyId": 100100,
     "classify": {
       "id": 100100,
-      "level": 0,
       "name": "智能手机",
       "parentId": 100000,
       "layer": 2

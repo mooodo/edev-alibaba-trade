@@ -2,7 +2,6 @@
   "data": [
     {
       "id": 1,
-      "level": 0,
       "name": "John",
       "gender": "male",
       "birthdate": "1999-01-01 00:00:00",
@@ -12,7 +11,6 @@
     },
     {
       "id": 2,
-      "level": 0,
       "name": "Mary",
       "gender": "female",
       "birthdate": "2000-12-13 00:00:00",
@@ -21,7 +19,6 @@
       "addresses": [
         {
           "id": 20,
-          "level": 0,
           "customerId": 2,
           "countryId": 1000,
           "provinceId": 370000,
@@ -36,7 +33,6 @@
         },
         {
           "id": 21,
-          "level": 0,
           "customerId": 2,
           "countryId": 1000,
           "provinceId": 370000,
