@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Service
+@Service("orderAgg")
 public class OrderAggServiceImpl implements OrderAggService {
     private final static Log log = LogFactory.getLog(OrderAggServiceImpl.class);
     @Autowired
