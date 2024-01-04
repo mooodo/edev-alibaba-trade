@@ -42,21 +42,21 @@ public class DefaultUserDetails implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return !user.isAccountExpired();
+        return !user.getAccountExpired();
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return !user.isAccountLocked();
+        return !user.getAccountLocked();
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return !user.isCredentialsExpired();
+        return !user.getCredentialsExpired();
     }
 
     @Override
     public boolean isEnabled() {
-        return !user.isDisabled();
+        return !user.getDisabled();
     }
 }

@@ -31,7 +31,7 @@ public class User extends Entity<Long> {
         return this;
     }
 
-    public Boolean isAccountExpired() {
+    public Boolean getAccountExpired() {
         return accountExpired!=0;
     }
 
@@ -39,7 +39,7 @@ public class User extends Entity<Long> {
         this.accountExpired = (accountExpired ? 1 : 0);
     }
 
-    public Boolean isAccountLocked() {
+    public Boolean getAccountLocked() {
         return accountLocked!=0;
     }
 
@@ -47,7 +47,7 @@ public class User extends Entity<Long> {
         this.accountLocked = (accountLocked ? 1 : 0);
     }
 
-    public Boolean isCredentialsExpired() {
+    public Boolean getCredentialsExpired() {
         return credentialsExpired!=0;
     }
 
@@ -55,7 +55,7 @@ public class User extends Entity<Long> {
         this.credentialsExpired = (credentialsExpired ? 1 : 0);
     }
 
-    public Boolean isDisabled() {
+    public Boolean getDisabled() {
         return disabled!=0;
     }
 
