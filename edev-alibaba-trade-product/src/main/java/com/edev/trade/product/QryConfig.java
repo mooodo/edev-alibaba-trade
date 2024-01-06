@@ -60,4 +60,15 @@ public class QryConfig {
         return new AutofillQueryServiceImpl(
                 vendorQryDao(), basicDaoWithCache);
     }
+    @Bean
+    public QueryDao classifyQryDao() {
+        return new QueryDaoMybastisImplForDdd(
+                "com.edev.trade.product.entity.Classify",
+                "com.edev.trade.query.dao.ClassifyMapper");
+    }
+    @Bean
+    public QueryService classifyQry() {
+        return new AutofillQueryServiceImpl(
+                classifyQryDao(), basicDaoWithCache);
+    }
 }

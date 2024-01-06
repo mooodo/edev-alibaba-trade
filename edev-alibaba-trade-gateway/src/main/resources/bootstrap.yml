@@ -48,6 +48,12 @@ spring:
             - Path=/inventory/**
           filters:
             - StripPrefix=1
+        - id: authority
+          uri: lb://service-authority
+          predicates:
+            - Path=/auth/**
+          filters:
+            - StripPrefix=1
 server:
   port: 9009
 management:
@@ -56,7 +62,7 @@ management:
       exposure:
         include: '*'
 logging:
-  config: classpath:logback-dev.xml
+  # config: classpath:logback-dev.xml
   level:
     com.alibaba.nacos: WARN
 ---

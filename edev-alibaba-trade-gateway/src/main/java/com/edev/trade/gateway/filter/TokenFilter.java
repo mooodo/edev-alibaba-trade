@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
-@Component
+//@Component
 public class TokenFilter implements GlobalFilter, Ordered {
 
     @Override
