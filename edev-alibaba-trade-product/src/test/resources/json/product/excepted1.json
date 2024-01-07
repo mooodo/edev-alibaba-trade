@@ -3,15 +3,32 @@
   "name": "BookNode",
   "price": 7500.0,
   "unit": "unit",
-  "supplierId": null,
+  "supplierId": 20001,
   "classifyId": 100300,
+  "image": "/img/NodeBook",
+  "originalPrice": 8000.0,
+  "tip": "自营",
   "classify": {
     "id": 100300,
     "name": "笔记本电脑",
     "parentId": 100000,
     "layer": 2
   },
-  "image": "/img/NodeBook",
-  "originalPrice": 8000.0,
-  "tip": "自营"
+  "supplier": {
+    "id": 20001,
+    "name": "国际商用机器公司(IBM)",
+    "supplierType": "distributor",
+    "introduce": "简称IBM（International Business Machines Corporation），总公司在纽约州阿蒙克市，1911年托马斯·约翰·沃森创立于美国，是全球最大的信息技术和业务解决方案公司",
+    "address": "北京市朝阳区奥运村街道北四环中路27号",
+    "range": "软件服务",
+    "vendors": [
+      {
+        "id": 40004,
+        "name": "IMB专卖店（建国门店）",
+        "supplierType": "vendor",
+        "distributorId": 20001,
+        "position": "北京市朝阳区建国门"
+      }
+    ]
+  }
 }

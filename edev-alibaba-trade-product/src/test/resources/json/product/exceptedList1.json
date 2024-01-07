@@ -4,31 +4,74 @@
     "name": "BookNode",
     "price": 7500.0,
     "unit": "unit",
+    "supplierId": 20001,
     "classifyId": 100300,
+    "image": "/img/NodeBook",
+    "originalPrice": 8000.0,
+    "tip": "自营",
     "classify": {
       "id": 100300,
       "name": "笔记本电脑",
       "parentId": 100000,
       "layer": 2
     },
-    "image": "/img/NodeBook",
-    "originalPrice": 8000.0,
-    "tip": "自营"
+    "supplier": {
+      "id": 20001,
+      "name": "国际商用机器公司(IBM)",
+      "supplierType": "distributor",
+      "introduce": "简称IBM（International Business Machines Corporation），总公司在纽约州阿蒙克市，1911年托马斯·约翰·沃森创立于美国，是全球最大的信息技术和业务解决方案公司",
+      "address": "北京市朝阳区奥运村街道北四环中路27号",
+      "range": "软件服务",
+      "vendors": [
+        {
+          "id": 40004,
+          "name": "IMB专卖店（建国门店）",
+          "supplierType": "vendor",
+          "distributorId": 20001,
+          "position": "北京市朝阳区建国门"
+        }
+      ]
+    }
   },
   {
     "id": 2,
     "name": "SmartPhone",
     "price": 2000.0,
     "unit": "unit",
+    "supplierId": 20003,
     "classifyId": 100100,
+    "image": null,
+    "originalPrice": null,
+    "tip": null,
     "classify": {
       "id": 100100,
       "name": "智能手机",
       "parentId": 100000,
       "layer": 2
     },
-    "image": null,
-    "originalPrice": null,
-    "tip": null
+    "supplier": {
+      "id": 20003,
+      "name": "华为技术有限公司",
+      "supplierType": "distributor",
+      "introduce": "全球领先的ICT(信息与通信)基础设施和智能终端提供商,致力于把数字世界带入每个人、每个家庭、每个组织,构建万物互联的智能世界",
+      "address": "广东省深圳市龙岗区坂田华为基地",
+      "range": "通信技术、智能手机",
+      "vendors": [
+        {
+          "id": 40001,
+          "name": "华为专卖店（西直门店）",
+          "supplierType": "vendor",
+          "distributorId": 20003,
+          "position": "北京市西城区西直门"
+        },
+        {
+          "id": 40002,
+          "name": "华为专卖店（中关村店）",
+          "supplierType": "vendor",
+          "distributorId": 20003,
+          "position": "北京市海淀区中关村南路"
+        }
+      ]
+    }
   }
 ]
