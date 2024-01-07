@@ -4,7 +4,7 @@
       "id": 1,
       "name": "John",
       "gender": "male",
-      "birthdate": "1999-01-01 00:00:00",
+      "birthdate": "1999-01-01",
       "identification": "510212199901012211",
       "phoneNumber": "13677778888",
       "addresses": null
@@ -13,7 +13,7 @@
       "id": 2,
       "name": "Mary",
       "gender": "female",
-      "birthdate": "2000-12-13 00:00:00",
+      "birthdate": "2000-12-13",
       "identification": "510212200012137812",
       "phoneNumber": "13456567878",
       "addresses": [
@@ -24,12 +24,28 @@
           "provinceId": 370000,
           "cityId": 370100,
           "zoneId": 370102,
+          "country": {
+            "id": 1000,
+            "name": "中国"
+          },
+          "province": {
+            "id": 370000,
+            "name": "山东省",
+            "countryId": 1000
+          },
+          "city": {
+            "id": 370100,
+            "name": "济南市",
+            "provinceId": 370000
+          },
+          "zone": {
+            "id": 370102,
+            "name": "历下区",
+            "provinceId": 370000,
+            "cityId": 370100
+          },
           "address": "Happy street No.12",
-          "phoneNumber": "0531-88896666",
-          "country": null,
-          "province": null,
-          "city": null,
-          "zone": null
+          "phoneNumber": "0531-88896666"
         },
         {
           "id": 21,
@@ -38,18 +54,33 @@
           "provinceId": 370000,
           "cityId": 370100,
           "zoneId": 370102,
+          "country": {
+            "id": 1000,
+            "name": "中国"
+          },
+          "province": {
+            "id": 370000,
+            "name": "山东省",
+            "countryId": 1000
+          },
+          "city": {
+            "id": 370100,
+            "name": "济南市",
+            "provinceId": 370000
+          },
+          "zone": {
+            "id": 370102,
+            "name": "历下区",
+            "provinceId": 370000,
+            "cityId": 370100
+          },
           "address": "The park of Gushan",
-          "phoneNumber": "0531-64128989",
-          "country": null,
-          "province": null,
-          "city": null,
-          "zone": null
+          "phoneNumber": "0531-64128989"
         }
       ]
     }
   ],
   "page": 0,
   "size": 10,
-  "count": 2,
-  "aggregation": null
+  "count": 2
 }
