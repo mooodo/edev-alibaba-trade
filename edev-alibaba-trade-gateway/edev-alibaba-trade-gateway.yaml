@@ -2,19 +2,19 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   labels:
-    app: edev-alibaba-trade-gateway
-  name: edev-alibaba-trade-gateway 
+    app: edev-trade-gateway
+  name: edev-trade-gateway
   namespace: default
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: edev-alibaba-trade-gateway
+      app: edev-trade-gateway
   template:
     metadata:
-      name: edev-alibaba-trade-gateway
+      name: edev-trade-gateway
       labels:
-        app: edev-alibaba-trade-gateway
+        app: edev-trade-gateway
     spec:
       affinity:
         podAntiAffinity:
@@ -26,7 +26,7 @@ spec:
                     - key: "app"
                       operator: In
                       values:
-                        - edev-alibaba-trade-gateway
+                        - edev-trade-gateway
                 topologyKey: "kubernetes.io/hostname"
       containers:
       - name: edev-alibaba-trade-gateway
@@ -47,15 +47,15 @@ kind: Service
 apiVersion: v1
 metadata:
   labels:
-    app: edev-alibaba-trade-gateway
-  name: edev-alibaba-trade-gateway
+    app: edev-trade-gateway
+  name: edev-trade-gateway
   namespace: default
 spec:
   ports:
   - port: 9009
     targetPort: 9009
   selector:
-    app: edev-alibaba-trade-gateway
+    app: edev-trade-gateway
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -73,6 +73,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: edev-alibaba-trade-gateway
+                name: edev-trade-gateway
                 port:
                   number: 9009
