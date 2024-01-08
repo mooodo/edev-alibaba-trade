@@ -12,7 +12,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("product")
 public class ProductController {
-    private final static String BEAN = "product";
+    private static final String BEAN = "product";
     @Autowired
     private OrmController ormController;
     @PostMapping("save")
