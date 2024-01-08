@@ -13,6 +13,6 @@ public class ClassifyServiceImpl implements ClassifyService {
     }
     @Override
     public Collection<Classify> getAll() {
-        return dao.loadAll(Classify.build());
+        return dao.loadAll(new Classify());
     }
 }
