@@ -11,7 +11,4 @@ public class Zone extends Entity<Long> {
 	private String name;
 	private Long provinceId;
 	private Long cityId;
-	public static Zone build() {
-		return new Zone();
-	}
 }

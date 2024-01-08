@@ -19,11 +19,9 @@ public class Customer extends Entity<Long> {
 	private String phoneNumber;
 	private List<Address> addresses;
 
-	public static Customer build() {
-		return new Customer();
-	}
+	public Customer() {}
 
-	public Customer setValues(Long id, String name, String gender, Date birthdate,
+	public Customer(Long id, String name, String gender, Date birthdate,
 							  String identification, String phoneNumber) {
 		this.setId(id);
 		this.setName(name);
@@ -31,12 +29,11 @@ public class Customer extends Entity<Long> {
 		this.setIdentification(identification);
 		this.setBirthdate(birthdate);
 		this.setPhoneNumber(phoneNumber);
-		return this;
 	}
 
-	public Customer setValues(Long id, String name, String gender,
+	public Customer(Long id, String name, String gender,
 							  String identification, String phoneNumber) {
-		return setValues(id, name, gender, null, identification, phoneNumber);
+		this(id, name, gender, null, identification, phoneNumber);
 	}
 
 	public void setBirthdate(Date birthdate) {

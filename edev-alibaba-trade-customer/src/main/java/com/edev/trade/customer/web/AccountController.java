@@ -1,7 +1,6 @@
 package com.edev.trade.customer.web;
 
 import com.edev.support.web.OrmController;
-import com.edev.trade.customer.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

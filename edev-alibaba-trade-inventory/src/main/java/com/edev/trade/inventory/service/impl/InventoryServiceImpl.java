@@ -42,7 +42,7 @@ public class InventoryServiceImpl implements InventoryService {
     public Long stockIn(Long id, Long quantity) {
         Inventory inventory = checkInventory(id);
         if(inventory==null) {
-            inventory = Inventory.build().setValues(id, quantity, null);
+            inventory = new Inventory(id, quantity, null);
             create(inventory);
             return quantity;
         }

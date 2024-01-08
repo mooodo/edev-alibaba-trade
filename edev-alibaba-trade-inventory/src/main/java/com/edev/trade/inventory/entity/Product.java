@@ -17,28 +17,10 @@ public class Product extends Entity<Long> {
 	private Double originalPrice;
 	private String tip;
 
-	public static Product build() {
-		return new Product();
-	}
-
-	public Product setValues(Long id, String name, Double price, String unit,
-							 Long supplierId, Long classifyId) {
-		return setValues(id, name, price, unit, supplierId, classifyId,
-				null, null, null);
-	}
-
-	public Product setValues(Long id, String name, Double price, String unit,
-							 Long supplierId, Long classifyId, String image,
-							 Double originalPrice, String tip) {
+	public Product() {}
+	public Product(Long id, String name, String unit) {
 		this.id = id;
 		this.name = name;
-		this.price = price;
 		this.unit = unit;
-		this.supplierId = supplierId;
-		this.classifyId = classifyId;
-		this.image = image;
-		this.originalPrice = originalPrice;
-		this.tip = tip;
-		return this;
 	}
 }

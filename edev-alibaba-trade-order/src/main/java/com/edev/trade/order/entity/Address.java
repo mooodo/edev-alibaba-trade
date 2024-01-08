@@ -15,12 +15,9 @@ public class Address extends Entity<Long> {
 	private Long zoneId;
 	private String address;
 	private String phoneNumber;
-	public static Address build() {
-		return new Address();
-	}
-	public Address setValues(Long id, String address) {
+	public Address() {}
+	public Address(Long id, String address) {
 		this.id = id;
 		this.address = address;
-		return this;
 	}
 }

@@ -10,7 +10,4 @@ public class Province extends Entity<Long> {
 	private Long id;
 	private String name;
 	private Long countryId;
-	public static Province build() {
-		return new Province();
-	}
 }

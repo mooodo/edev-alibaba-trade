@@ -11,7 +11,7 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
     @Override
     public Product getProduct(Long id) {
-        return Product.build().setValues(id,"Unknown","Unknown");
+        return new Product(id,"Unknown","Unknown");
     }
 
     @Override

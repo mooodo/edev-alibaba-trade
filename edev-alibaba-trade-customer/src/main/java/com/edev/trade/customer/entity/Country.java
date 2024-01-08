@@ -9,7 +9,4 @@ import lombok.EqualsAndHashCode;
 public class Country extends Entity<Long> {
 	private Long id;
 	private String name;
-	public static Country build() {
-		return new Country();
-	}
 }

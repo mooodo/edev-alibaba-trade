@@ -10,8 +10,4 @@ public class City extends Entity<Long> {
 	private Long id;
 	private String name;
 	private Long provinceId;
-
-	public static City build() {
-		return new City();
-	}
 }

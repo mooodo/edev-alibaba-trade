@@ -15,13 +15,10 @@ public class Customer extends Entity<Long> {
 	private Date birthdate;
 	private String identification;
 	private String phoneNumber;
-	public static Customer build() {
-		return new Customer();
-	}
-	public Customer setValues(Long id, String name, String gender) {
+	public Customer() {}
+	public Customer(Long id, String name, String gender) {
 		this.id = id;
 		this.name = name;
 		this.gender = gender;
-		return this;
 	}
 }

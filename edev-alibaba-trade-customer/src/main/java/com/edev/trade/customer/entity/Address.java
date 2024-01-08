@@ -19,21 +19,4 @@ public class Address extends Entity<Long> {
 	private Zone zone;
 	private String address;
 	private String phoneNumber;
-
-	public static Address build() {
-		return new Address();
-	}
-
-	public Address setValues(Long id, Long customerId, Long countryId, Long provinceId,
-							 Long cityId, Long zoneId, String address, String phoneNumber) {
-		this.setId(id);
-		this.setCustomerId(customerId);
-		this.setCountryId(countryId);
-		this.setProvinceId(provinceId);
-		this.setCityId(cityId);
-		this.setZoneId(zoneId);
-		this.setAddress(address);
-		this.setPhoneNumber(phoneNumber);
-		return this;
-	}
 }

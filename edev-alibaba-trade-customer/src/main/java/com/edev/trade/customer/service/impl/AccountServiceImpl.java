@@ -59,7 +59,7 @@ public class AccountServiceImpl implements AccountService {
         this.modify(account);
 
         JournalAccount journalAccount =
-                JournalAccount.build().setValues(account.getId(), amount, "topUp");
+                new JournalAccount(account.getId(), amount, "topUp");
         journalAccountService.addJournalAccount(journalAccount);
         return balance;
     }
@@ -79,7 +79,7 @@ public class AccountServiceImpl implements AccountService {
         this.modify(account);
 
         JournalAccount journalAccount =
-                JournalAccount.build().setValues(account.getId(), amount, "payoff");
+                new JournalAccount(account.getId(), amount, "payoff");
         journalAccountService.addJournalAccount(journalAccount);
         return balance;
     }
@@ -97,7 +97,7 @@ public class AccountServiceImpl implements AccountService {
         this.modify(account);
 
         JournalAccount journalAccount =
-                JournalAccount.build().setValues(account.getId(), amount, "refund");
+                new JournalAccount(account.getId(), amount, "refund");
         journalAccountService.addJournalAccount(journalAccount);
         return balance;
     }

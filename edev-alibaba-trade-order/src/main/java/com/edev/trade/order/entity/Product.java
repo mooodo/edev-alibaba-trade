@@ -16,13 +16,10 @@ public class Product extends Entity<Long> {
 	private String image;
 	private Double originalPrice;
 	private String tip;
-	public static Product build() {
-		return new Product();
-	}
-	public Product setValues(Long id, String name, String unit) {
+	public Product() {}
+	public Product(Long id, String name, String unit) {
 		this.id = id;
 		this.name = name;
 		this.unit = unit;
-		return this;
 	}
 }
