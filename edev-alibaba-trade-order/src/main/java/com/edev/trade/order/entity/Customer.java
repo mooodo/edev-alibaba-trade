@@ -1,7 +1,6 @@
 package com.edev.trade.order.entity;
 
 import com.edev.support.entity.Entity;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -13,7 +12,6 @@ public class Customer extends Entity<Long> {
 	private Long id;
 	private String name;
 	private String gender;
-	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date birthdate;
 	private String identification;
 	private String phoneNumber;
