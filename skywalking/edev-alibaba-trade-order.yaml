@@ -32,6 +32,13 @@ spec:
       - name: edev-alibaba-trade-order
         image: repository:5000/edev-alibaba-trade-order
         imagePullPolicy: Always
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1500Mi
+          requests:
+            cpu: 100m
+            memory: 1000Mi
         command: ["java", "-Djava.security.egd=file:/dev/./urandom", "-javaagent:/var/lib/skywalking/agent/skywalking-agent.jar", "-jar", "/app.jar","--spring.profiles.active=docker"]
         env:
           - name: NACOS_ADDR
