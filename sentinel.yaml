@@ -3,7 +3,7 @@ apiVersion: apps/v1
 metadata:
   labels:
     app: sentinel
-  name: sentinel 
+  name: sentinel
   namespace: default
 spec:
   replicas: 1
@@ -17,16 +17,16 @@ spec:
         app: sentinel
     spec:
       containers:
-      - name: sentinel 
-        image: repository:5000/sentinel
-        imagePullPolicy: Always
-        resources:
-          limits:
-            cpu: 500m
-            memory: 1500Mi
-          requests:
-            cpu: 100m
-            memory: 500Mi
+        - name: sentinel
+          image: repository:5000/sentinel
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: 500m
+              memory: 1500Mi
+            requests:
+              cpu: 100m
+              memory: 1000Mi
 ---
 kind: Service
 apiVersion: v1
@@ -36,10 +36,28 @@ metadata:
   name: sentinel
   namespace: default
 spec:
-  type: NodePort
   ports:
-  - port: 8858 
-    targetPort: 8858
-    nodePort: 31858
+    - port: 8858
+      targetPort: 8858
   selector:
     app: sentinel
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-sentinel
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+    - host: sentinel
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: sentinel
+                port:
+                  number: 8858

@@ -32,7 +32,7 @@ spec:
             - "-c"
             - |
               bash startup.sh
-              tail -f $SW_HOME/logs/skywalking-oap-server.log
+              tail -f ../logs/webapp-console.log
           env:
             - name: SW_CLUSTER
               value: nacos
@@ -73,25 +73,29 @@ spec:
     - port: 12800
       targetPort: 12800
       name: "12800"
-    - port: 1234
-      targetPort: 1234
-      name: "1234"
+    - port: 8080
+      targetPort: 8080
+      name: webui
   selector:
     app: skywalking
   clusterIP: None
 ---
-kind: Service
-apiVersion: v1
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
-  labels:
-    app: skywalking
-  name: skywalking-svc
+  name: ingress-skywalking
   namespace: default
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
 spec:
-  type: NodePort
-  ports:
-    - port: 8080
-      targetPort: 8080
-      nodePort: 30080
-  selector:
-    app: skywalking
+  rules:
+    - host: skywalking
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: skywalking
+                port:
+                  number: 8080
