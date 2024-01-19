@@ -61,6 +61,18 @@ spec:
       labels:
         k8s-app: seata
     spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 50
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: "app"
+                      operator: In
+                      values:
+                        - seata
+                topologyKey: "kubernetes.io/hostname"
       containers:
         - name: seata
           image: repository:5000/seata

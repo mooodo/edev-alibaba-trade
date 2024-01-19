@@ -16,6 +16,18 @@ spec:
       labels:
         app: sentinel
     spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 50
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: "app"
+                      operator: In
+                      values:
+                        - sentinel
+                topologyKey: "kubernetes.io/hostname"
       containers:
         - name: sentinel
           image: repository:5000/sentinel

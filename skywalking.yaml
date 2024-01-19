@@ -16,6 +16,18 @@ spec:
       labels:
         app: skywalking
     spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 50
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: "app"
+                      operator: In
+                      values:
+                        - skywalking
+                topologyKey: "kubernetes.io/hostname"
       containers:
         - name: skywalking
           image: repository:5000/skywalking-oap-server

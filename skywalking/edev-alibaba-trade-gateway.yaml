@@ -60,8 +60,6 @@ spec:
       volumes:
       - name: skywalking
         emptyDir: {}
-
-
 ---
 kind: Service
 apiVersion: v1
