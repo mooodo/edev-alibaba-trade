@@ -97,6 +97,8 @@ public class OrderServiceImpl implements OrderService {
             discount(order);
             sumOfAmount(order);
             payoff(order);
+            if(order.getOrderTime()==null) order.setOrderTime(DateUtils.getNow());
+            else order.setModifyTime(DateUtils.getNow());
         });
         dao.insertOrUpdateForList(orders);
     }
