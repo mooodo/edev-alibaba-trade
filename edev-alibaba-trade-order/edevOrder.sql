@@ -1,18 +1,3 @@
-/*
-Navicat MySQL Data Transfer
-
-Source Server         : tidb
-Source Server Version : 50725
-Source Host           : master:4000
-Source Database       : edevOrder
-
-Target Server Type    : MYSQL
-Target Server Version : 50725
-File Encoding         : 65001
-
-Date: 2023-06-23 21:10:58
-*/
-
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------

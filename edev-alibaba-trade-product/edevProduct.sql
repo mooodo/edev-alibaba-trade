@@ -1,18 +1,3 @@
-/*
-Navicat MySQL Data Transfer
-
-Source Server         : mysql
-Source Server Version : 50635
-Source Host           : kubernetes:32306
-Source Database       : edevProduct
-
-Target Server Type    : MYSQL
-Target Server Version : 50635
-File Encoding         : 65001
-
-Date: 2023-06-23 21:17:56
-*/
-
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
@@ -151,3 +136,4 @@ CREATE TABLE `t_vendor` (
 INSERT INTO `t_vendor` VALUES ('40001', '华为专卖店（西直门店）', '北京市西城区西直门', '20003');
 INSERT INTO `t_vendor` VALUES ('40002', '华为专卖店（中关村店）', '北京市海淀区中关村南路', '20003');
 INSERT INTO `t_vendor` VALUES ('40003', '苹果专卖店（望京店）', '北京市朝阳区望京西', '20004');
+INSERT INTO `t_vendor` VALUES ('40004', 'IMB专卖店（建国门店）', '北京市朝阳区建国门', '20001');
