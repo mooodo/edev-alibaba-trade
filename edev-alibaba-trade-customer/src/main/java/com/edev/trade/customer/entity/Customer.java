@@ -19,23 +19,6 @@ public class Customer extends Entity<Long> {
 	private String phoneNumber;
 	private List<Address> addresses;
 
-	public Customer() {}
-
-	public Customer(Long id, String name, String gender, Date birthdate,
-							  String identification, String phoneNumber) {
-		this.setId(id);
-		this.setName(name);
-		this.setGender(gender);
-		this.setIdentification(identification);
-		this.setBirthdate(birthdate);
-		this.setPhoneNumber(phoneNumber);
-	}
-
-	public Customer(Long id, String name, String gender,
-							  String identification, String phoneNumber) {
-		this(id, name, gender, null, identification, phoneNumber);
-	}
-
 	public void setBirthdate(Date birthdate) {
 		if(birthdate != null) this.birthdate = birthdate;
 		else setBirthdateByIdentification();

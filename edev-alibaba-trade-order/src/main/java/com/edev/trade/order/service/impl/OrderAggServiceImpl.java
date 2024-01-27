@@ -12,6 +12,7 @@ import com.edev.trade.order.service.OrderAggService;
 import com.edev.trade.order.service.OrderService;
 import io.seata.core.context.RootContext;
 import io.seata.spring.annotation.GlobalTransactional;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,8 +35,7 @@ public class OrderAggServiceImpl implements OrderAggService {
     @Override
     @GlobalTransactional(name = "seata-group-trade", rollbackFor = Exception.class)
     @Transactional
-    public Long placeOrder(Order order) {
-        if (order==null) throw new NullEntityException();
+    public Long placeOrder(@NonNull Order order) {
         log.info("begin the trade... xid: "+ RootContext.getXID());
         Long orderId = orderService.create(order);
         log.debug(String.format("create an order: [orderId: %d]", orderId));
@@ -50,7 +50,7 @@ public class OrderAggServiceImpl implements OrderAggService {
         return orderId;
     }
 
-    private void stockOut(Order order) {
+    private void stockOut(@NonNull Order order) {
         List<Map<String, Long>> list = convertOrderItemsToList(order);
         inventoryService.stockOutForList(list);
         log.debug("stock out for orders");
@@ -70,10 +70,10 @@ public class OrderAggServiceImpl implements OrderAggService {
     @Override
     @GlobalTransactional(name = "seata-group-trade", rollbackFor = Exception.class)
     @Transactional
-    public void returnGoods(Long orderId) {
-        if(orderId==null) throw new ValidException("The order id is null!");
+    public void returnGoods(@NonNull Long orderId) {
         log.info("begin the trade... xid: "+ RootContext.getXID());
         Order order = orderService.load(orderId);
+        if(order==null) throw new OrderException("no found the order[orderId:%d]", orderId);
         orderService.delete(orderId);
         log.debug(String.format("return the goods: [orderId: %d]", orderId));
 

@@ -7,6 +7,7 @@ import com.edev.trade.customer.entity.Account;
 import com.edev.trade.customer.entity.JournalAccount;
 import com.edev.trade.customer.service.AccountService;
 import com.edev.trade.customer.service.JournalAccountService;
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,39 +19,37 @@ public class AccountServiceImpl implements AccountService {
         this.dao = dao;
     }
 
-    private void validAccount(Account account) {
+    private void validAccount(@NonNull Account account) {
         if(account.getId()==null) throw new ValidException("The id is null");
         if(account.getCustomerId()==null) throw new ValidException("The customer id is null");
     }
 
     @Override
-    public Long create(Account account) {
+    public Long create(@NonNull Account account) {
         validAccount(account);
         account.setCreateTime(DateUtils.getNow());
         return dao.insert(account);
     }
 
     @Override
-    public void modify(Account account) {
+    public void modify(@NonNull Account account) {
         validAccount(account);
         account.setUpdateTime(DateUtils.getNow());
         dao.update(account);
     }
 
     @Override
-    public void remove(Long id) {
+    public void remove(@NonNull Long id) {
         dao.delete(id, Account.class);
     }
 
     @Override
-    public Account get(Long id) {
+    public Account get(@NonNull Long id) {
         return dao.load(id, Account.class);
     }
     @Override
     @Transactional
-    public Double topUp(Long id, Double amount) {
-        if(id==null||amount==null)
-            throw new ValidException("The id[%d] or amount[%d] is null", id, amount);
+    public Double topUp(@NonNull Long id, @NonNull Double amount) {
         Account account = this.get(id);
         if(account==null)
             throw new ValidException("The account[id:%d] isn't available", id);
@@ -66,9 +65,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     @Transactional
-    public Double payoff(Long id, Double amount) {
-        if(id==null||amount==null)
-            throw new ValidException("The id[%d] or amount[%d] is null", id, amount);
+    public Double payoff(@NonNull Long id, @NonNull Double amount) {
         Account account = this.get(id);
         if(account==null)
             throw new ValidException("The account[id:%d] isn't available", id);
@@ -86,9 +83,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     @Transactional
-    public Double refund(Long id, Double amount) {
-        if(id==null||amount==null)
-            throw new ValidException("The id[%d] or amount[%d] is null", id, amount);
+    public Double refund(@NonNull Long id, @NonNull Double amount) {
         Account account = this.get(id);
         if(account==null)
             throw new ValidException("The account[id:%d] isn't available", id);
