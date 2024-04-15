@@ -33,21 +33,27 @@ public class OrderAggServiceImpl implements OrderAggService {
     @Autowired
     private InventoryService inventoryService;
     @Override
-    @GlobalTransactional(name = "seata-group-trade", rollbackFor = Exception.class)
-    @Transactional
     public Long placeOrder(@NonNull Order order) {
         log.info("begin the trade... xid: "+ RootContext.getXID());
         Long orderId = orderService.create(order);
         log.debug(String.format("create an order: [orderId: %d]", orderId));
+        return orderId;
+    }
 
+    @Override
+    @GlobalTransactional(name = "seata-group-trade", rollbackFor = Exception.class)
+    @Transactional
+    public void payoff(@NonNull Order order) {
+        if(order.getPayment()==null||order.getPayment().getAccountId()==null)
+            throw new ValidException("no account for payoff: [orderId: %s]", order.getId());
         Payment payment = order.getPayment();
-        if(payment==null) throw new OrderException("no payment in the order[orderId:%d]", orderId);
         Double balance = customerService.payoff(payment.getAccountId(), payment.getAmount());
         log.debug(String.format("payoff for the order: [orderId:%d,accountId:%d,amount:%f,balance:%f]",
-                orderId, payment.getAccountId(), payment.getAmount(), balance));
-
+                order.getId(), payment.getAccountId(), payment.getAmount(), balance));
         stockOut(order);
-        return orderId;
+        order.setStatus("PAYOFF");
+        order.getPayment().setStatus("PAYOFF");
+        orderService.modify(order);
     }
 
     private void stockOut(@NonNull Order order) {
@@ -70,7 +76,7 @@ public class OrderAggServiceImpl implements OrderAggService {
     @Override
     @GlobalTransactional(name = "seata-group-trade", rollbackFor = Exception.class)
     @Transactional
-    public void returnGoods(@NonNull Long orderId) {
+    public void cancelOrder(@NonNull Long orderId) {
         log.info("begin the trade... xid: "+ RootContext.getXID());
         Order order = orderService.load(orderId);
         if(order==null) throw new OrderException("no found the order[orderId:%d]", orderId);
