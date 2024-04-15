@@ -7,7 +7,7 @@
 		<property name="amount" column="amount"/>
 		<property name="orderTime" column="order_time"/>
 		<property name="modifyTime" column="modify_time"/>
-		<property name="flag" column="flag"/>
+		<property name="status" column="status"/>
 		<ref name="customer" refKey="customerId" refType="manyToOne"
 			  bean="com.edev.trade.order.service.CustomerService"
 			  method="load" listMethod="loadAll"/>
