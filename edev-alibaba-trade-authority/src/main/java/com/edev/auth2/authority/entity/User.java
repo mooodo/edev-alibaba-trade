@@ -36,7 +36,7 @@ public class User extends Entity<Long> {
     }
 
     public void setAccountExpired(Boolean accountExpired) {
-        this.accountExpired = (accountExpired ? 1 : 0);
+        this.accountExpired = (accountExpired!=null&&accountExpired ? 1 : 0);
     }
 
     public Boolean getAccountLocked() {
@@ -44,7 +44,7 @@ public class User extends Entity<Long> {
     }
 
     public void setAccountLocked(Boolean accountLocked) {
-        this.accountLocked = (accountLocked ? 1 : 0);
+        this.accountLocked = (accountLocked!=null&&accountLocked ? 1 : 0);
     }
 
     public Boolean getCredentialsExpired() {
@@ -52,7 +52,7 @@ public class User extends Entity<Long> {
     }
 
     public void setCredentialsExpired(Boolean credentialsExpired) {
-        this.credentialsExpired = (credentialsExpired ? 1 : 0);
+        this.credentialsExpired = (credentialsExpired!=null&&credentialsExpired ? 1 : 0);
     }
 
     public Boolean getDisabled() {
@@ -60,7 +60,7 @@ public class User extends Entity<Long> {
     }
 
     public void setDisabled(Boolean disabled) {
-        this.disabled = (disabled ? 1 : 0);
+        this.disabled = (disabled!=null&&disabled ? 1 : 0);
     }
 
     public void addAuthority(Authority authority) {

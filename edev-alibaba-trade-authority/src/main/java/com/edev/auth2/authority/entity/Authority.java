@@ -27,11 +27,11 @@ public class Authority extends Entity<Long> {
         return this;
     }
 
-    public boolean getAuthenticated() {
+    public Boolean getAuthenticated() {
         return "T".equals(authenticated);
     }
 
-    public void setAuthenticated(boolean authenticated) {
-        this.authenticated = authenticated?"T":"F";
+    public void setAuthenticated(Boolean authenticated) {
+        this.authenticated = (authenticated!=null&&authenticated)?"T":"F";
     }
 }
