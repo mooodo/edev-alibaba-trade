@@ -1,8 +1,8 @@
 package com.edev.trade.order.service.impl.discount;
 
 import com.edev.trade.order.entity.*;
-import com.edev.trade.order.service.CustomerService;
 import com.edev.trade.order.service.DiscountService;
+import com.edev.trade.order.service.VipService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,12 +11,12 @@ import java.util.List;
 @Component
 public class VipDiscountStrategy implements DiscountStrategy {
     @Autowired
-    private CustomerService customerService;
+    private VipService vipService;
     @Autowired
     private DiscountService discountService;
     @Override
     public void doDiscount(Order order) {
-        Vip vip = customerService.loadByCustomer(order.getCustomerId());
+        Vip vip = vipService.loadByCustomer(order.getCustomerId());
         if(vip==null) return;
         VipDiscount template = new VipDiscount();
         template.setVipType(vip.getVipType());

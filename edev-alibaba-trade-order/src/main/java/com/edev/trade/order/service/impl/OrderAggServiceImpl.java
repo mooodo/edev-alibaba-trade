@@ -1,15 +1,11 @@
 package com.edev.trade.order.service.impl;
 
-import com.edev.support.ddd.NullEntityException;
 import com.edev.support.exception.ValidException;
 import com.edev.trade.order.entity.Order;
 import com.edev.trade.order.entity.OrderItem;
 import com.edev.trade.order.entity.Payment;
 import com.edev.trade.order.exception.OrderException;
-import com.edev.trade.order.service.CustomerService;
-import com.edev.trade.order.service.InventoryService;
-import com.edev.trade.order.service.OrderAggService;
-import com.edev.trade.order.service.OrderService;
+import com.edev.trade.order.service.*;
 import io.seata.core.context.RootContext;
 import io.seata.spring.annotation.GlobalTransactional;
 import lombok.NonNull;
@@ -29,7 +25,7 @@ public class OrderAggServiceImpl implements OrderAggService {
     @Autowired
     private OrderService orderService;
     @Autowired
-    private CustomerService customerService;
+    private AccountService accountService;
     @Autowired
     private InventoryService inventoryService;
     @Override
@@ -47,7 +43,7 @@ public class OrderAggServiceImpl implements OrderAggService {
         if(order.getPayment()==null||order.getPayment().getAccountId()==null)
             throw new ValidException("no account for payoff: [orderId: %s]", order.getId());
         Payment payment = order.getPayment();
-        Double balance = customerService.payoff(payment.getAccountId(), payment.getAmount());
+        Double balance = accountService.payoff(payment.getAccountId(), payment.getAmount());
         log.debug(String.format("payoff for the order: [orderId:%d,accountId:%d,amount:%f,balance:%f]",
                 order.getId(), payment.getAccountId(), payment.getAmount(), balance));
         stockOut(order);
@@ -85,7 +81,7 @@ public class OrderAggServiceImpl implements OrderAggService {
 
         Payment payment = order.getPayment();
         if(payment==null) throw new OrderException("no payment in the order[orderId:%d]", orderId);
-        Double balance = customerService.refund(payment.getAccountId(), payment.getAmount());
+        Double balance = accountService.refund(payment.getAccountId(), payment.getAmount());
         log.debug(String.format("refund goods for the order: [orderId:%d,accountId:%d,amount:%f,balance:%f]",
                 orderId, payment.getAccountId(), payment.getAmount(), balance));
 
