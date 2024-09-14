@@ -11,7 +11,7 @@ CREATE TABLE `t_order` (
   `amount` decimal(20,2) DEFAULT NULL,
   `order_time` datetime DEFAULT NULL,
   `modify_time` datetime DEFAULT NULL,
-  `flag` varchar(20) DEFAULT NULL,
+  `status` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -39,6 +39,23 @@ INSERT INTO `t_order` VALUES ('10018', '10014', '1001400', '2599.00', '2013-01-1
 INSERT INTO `t_order` VALUES ('10019', '10015', '1001500', '4999.00', '2013-02-28 23:59:59', null, 'CREATE');
 INSERT INTO `t_order` VALUES ('10020', '10012', '1001201', '2380.00', '2014-06-30 20:00:00', null, 'CREATE');
 INSERT INTO `t_order` VALUES ('10021', '10012', '1001201', '28.90', '2014-06-30 21:00:00', null, 'CREATE');
+
+-- ----------------------------
+-- Table structure for t_order_discount
+-- ----------------------------
+DROP TABLE IF EXISTS `t_order_discount`;
+CREATE TABLE `t_order_discount` (
+  `id` int(20) NOT NULL AUTO_INCREMENT,
+  `order_id` int(20) NOT NULL,
+  `discount_id` int(20) NOT NULL,
+  `discount_type` varchar(20) DEFAULT NULL,
+  `discount` decimal(5,4) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+-- Records of t_order_discount
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for t_order_item
