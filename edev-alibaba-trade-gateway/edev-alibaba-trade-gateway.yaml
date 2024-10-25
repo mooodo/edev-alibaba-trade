@@ -15,6 +15,7 @@ spec:
       name: edev-trade-gateway
       labels:
         app: edev-trade-gateway
+        project: edev-alibaba-trade
     spec:
       affinity:
         podAntiAffinity:
@@ -27,18 +28,31 @@ spec:
                       operator: In
                       values:
                         - edev-trade-gateway
+                    - key: "project"
+                      operator: In
+                      values:
+                        - edev-alibaba-trade
                 topologyKey: "kubernetes.io/hostname"
       containers:
       - name: edev-alibaba-trade-gateway
         image: repository:5000/edev-alibaba-trade-gateway:<VERSION>
         imagePullPolicy: Always
+        livenessProbe:
+          failureThreshold: 5       #检测失败5次表示未就绪
+          initialDelaySeconds: 40   #延迟加载时间
+          periodSeconds: 10         #重试时间间隔
+          timeoutSeconds: 5         #超时时间设置
+          httpGet:
+            scheme: HTTP
+            port: 9009
+            path: /actuator/health
         resources:
           limits:
             cpu: 500m
             memory: 1500Mi
           requests:
             cpu: 100m
-            memory: 1000Mi
+            memory: 500Mi
         env:
           - name: NACOS_ADDR
             value: "nacos:8848"
