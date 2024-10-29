@@ -94,3 +94,14 @@ spec:
         - name: seata-config
           configMap:
             name: seata-server-config
+---
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: seata-pdb
+  namespace: default
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: seata

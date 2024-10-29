@@ -73,3 +73,14 @@ spec:
                 name: sentinel
                 port:
                   number: 8858
+---
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: sentinel-pdb
+  namespace: default
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: sentinel

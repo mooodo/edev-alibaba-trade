@@ -111,3 +111,14 @@ spec:
                 name: nacos
                 port:
                   number: 8848
+---
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: nacos-pdb
+  namespace: default
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: nacos

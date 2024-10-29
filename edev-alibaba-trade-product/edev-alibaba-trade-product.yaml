@@ -70,3 +70,14 @@ spec:
     targetPort: 9003
   selector:
     app: edev-trade-product
+---
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: edev-trade-product-pdb
+  namespace: default
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: edev-trade-product

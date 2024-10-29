@@ -70,3 +70,14 @@ spec:
     targetPort: 9004
   selector:
     app: edev-trade-inventory
+---
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: edev-trade-inventory-pdb
+  namespace: default
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: edev-trade-inventory

@@ -70,3 +70,14 @@ spec:
     targetPort: 9005
   selector:
     app: edev-trade-order
+---
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: edev-trade-order-pdb
+  namespace: default
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: edev-trade-order

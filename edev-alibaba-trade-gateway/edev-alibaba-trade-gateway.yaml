@@ -90,3 +90,14 @@ spec:
                 name: edev-trade-gateway
                 port:
                   number: 9009
+---
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: edev-trade-gateway-pdb
+  namespace: default
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: edev-trade-gateway

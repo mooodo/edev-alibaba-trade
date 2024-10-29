@@ -111,3 +111,14 @@ spec:
                 name: skywalking
                 port:
                   number: 8080
+---
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: skywalking-pdb
+  namespace: default
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: skywalking
