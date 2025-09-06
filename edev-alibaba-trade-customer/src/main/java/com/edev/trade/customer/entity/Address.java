@@ -12,11 +12,11 @@ public class Address extends Entity<Long> {
 	private Long countryId;
 	private Long provinceId;
 	private Long cityId;
-	private Long zoneId;
+	private Long districtId;
 	private Country country;
 	private Province province;
 	private City city;
-	private Zone zone;
-	private String address;
+	private District district;
+	private String addressDetail;
 	private String phoneNumber;
 }

@@ -5,31 +5,20 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class User extends Entity<Long> {
     private Long id;
-    private String name;
+    private String username;
     private String password;
     private int accountExpired;
     private int accountLocked;
     private int credentialsExpired;
     private int disabled;
-    private List<Authority> authorities = new ArrayList<>();
-    private List<Role> roles = new ArrayList<>();
-
-    public static User build() {
-        return new User();
-    }
-
-    public User setValues(Long id, String name, String password) {
-        this.id = id;
-        this.name = name;
-        this.password = password;
-        return this;
-    }
+    private Collection<Authority> authorities = new ArrayList<>();
+    private Collection<Role> roles = new ArrayList<>();
 
     public Boolean getAccountExpired() {
         return accountExpired!=0;

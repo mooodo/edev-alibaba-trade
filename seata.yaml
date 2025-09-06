@@ -73,6 +73,8 @@ spec:
                       values:
                         - seata
                 topologyKey: "kubernetes.io/hostname"
+      nodeSelector:
+        layer: frontend
       containers:
         - name: seata
           image: repository:5000/seata

@@ -8,6 +8,10 @@ spring:
     time-zone: GMT+8
 mybatis:
   mapperLocations: classpath*:mapper/*Mapper.xml
+security:
+  passwordEncoder: noop
+  loginUrl: http://localhost:8080
+  whiteListUrls: /login,/logout,/user/register,/orm/**,/query/**,/list/**,/actuator/**,/userinfo
 logging:
   level:
     com.edev.support: INFO
@@ -53,6 +57,11 @@ management:
     web:
       exposure:
         include: '*'
+coke:
+  jwt:
+    header: Authorization
+    expire: 604800
+    secret: secretkey
 ---
 spring:
   profiles: docker

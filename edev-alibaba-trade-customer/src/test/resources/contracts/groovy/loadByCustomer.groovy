@@ -8,15 +8,15 @@ Contract.make {
         method GET()
         url("/orm/vip/loadByCustomer") {
             queryParameters {
-                parameter("customerId","10009")
+                parameter("customerId","10001")
             }
         }
     }
     response {
-        body(file('loadByCustomer.json'))
+        body("null")
         status 200
         headers {
-            contentType(applicationJson())
+            contentType(textPlain())
         }
     }
 }

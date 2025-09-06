@@ -8,16 +8,10 @@ import com.edev.trade.customer.web.AccountController;
 import com.edev.trade.customer.web.CustomerController;
 import com.edev.trade.customer.web.VipController;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
-import org.junit.Before;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
-/**
- * @author fangang
- */
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class ContractBase {
 	@Autowired
@@ -28,7 +22,7 @@ public class ContractBase {
 	private CustomerController customerController;
 	@Autowired
 	private VipController vipController;
-	@Before
+	@BeforeEach
 	public void setup() {
 		RestAssuredMockMvc.standaloneSetup(ormController,accountController,customerController,vipController);
 	}

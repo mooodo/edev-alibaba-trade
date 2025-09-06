@@ -10,8 +10,8 @@
 	  "countryId":1000,
 	  "provinceId":420000,
 	  "cityId":420100,
-	  "zoneId":420111,
-	  "address":"珞瑜路726号",
+	  "districtId":420111,
+	  "addressDetail":"珞瑜路726号",
 	  "customerId":10001,
 	  "phoneNumber":"13300224466"
   	},
@@ -19,8 +19,8 @@
 	  "countryId":1000,
 	  "provinceId":420000,
 	  "cityId":421000,
-	  "zoneId":421002,
-	  "address":"北京西路410号",
+	  "districtId":421002,
+	  "addressDetail":"北京西路410号",
 	  "customerId":10001,
 	  "phoneNumber":"13388990123"
   	}]

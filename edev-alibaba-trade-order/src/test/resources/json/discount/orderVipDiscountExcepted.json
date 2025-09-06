@@ -18,8 +18,8 @@
     "countryId": 1000,
     "provinceId": 510000,
     "cityId": 510100,
-    "zoneId": 510105,
-    "address": "宽窄巷子",
+    "districtId": 510105,
+    "addressDetail": "宽窄巷子",
     "phoneNumber": null
   },
   "payment": {

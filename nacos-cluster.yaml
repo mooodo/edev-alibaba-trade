@@ -30,6 +30,8 @@ spec:
                       values:
                         - nacos
                 topologyKey: "kubernetes.io/hostname"
+      nodeSelector:
+        layer: frontend
       containers:
         - name: nacos
           image: nacos/nacos-server:2.0.0

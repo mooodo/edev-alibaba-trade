@@ -6,7 +6,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class Zone extends Entity<Long> {
+public class District extends Entity<Long> {
 	private Long id;
 	private String name;
 	private Long provinceId;

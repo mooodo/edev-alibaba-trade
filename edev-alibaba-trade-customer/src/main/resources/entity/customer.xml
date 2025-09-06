@@ -16,8 +16,8 @@
         <property name="countryId" column="country_id"/>
         <property name="provinceId" column="province_id"/>
         <property name="cityId" column="city_id"/>
-        <property name="zoneId" column="zone_id"/>
-        <property name="address" column="address"/>
+        <property name="districtId" column="district_id"/>
+        <property name="addressDetail" column="address_detail"/>
         <property name="phoneNumber" column="phone_number"/>
         <join name="country" joinKey="countryId" joinType="manyToOne"
               class="com.edev.trade.customer.entity.Country"/>
@@ -25,8 +25,8 @@
               class="com.edev.trade.customer.entity.Province"/>
         <join name="city" joinKey="cityId" joinType="manyToOne"
               class="com.edev.trade.customer.entity.City"/>
-        <join name="zone" joinKey="zoneId" joinType="manyToOne"
-              class="com.edev.trade.customer.entity.Zone"/>
+        <join name="district" joinKey="districtId" joinType="manyToOne"
+              class="com.edev.trade.customer.entity.District"/>
     </do>
     <do class="com.edev.trade.customer.entity.Country" tableName="t_country">
         <property name="id" column="id" isPrimaryKey="true"/>
@@ -42,7 +42,7 @@
         <property name="name" column="name"/>
         <property name="provinceId" column="province_id"/>
     </do>
-    <do class="com.edev.trade.customer.entity.Zone" tableName="t_zone">
+    <do class="com.edev.trade.customer.entity.District" tableName="t_district">
         <property name="id" column="id" isPrimaryKey="true"/>
         <property name="name" column="name"/>
         <property name="provinceId" column="province_id"/>
@@ -71,7 +71,7 @@
         <join name="customer" joinKey="customerId" joinType="manyToOne"
               class="com.edev.trade.customer.entity.Customer"/>
     </do>
-    <do class="com.edev.trade.customer.entity.JournalAccount" tableName="t_journal_account">
+    <do class="com.edev.trade.customer.entity.AccountLogs" tableName="t_account_logs">
         <property name="id" column="id" isPrimaryKey="true"/>
         <property name="accountId" column="account_id"/>
         <property name="amount" column="amount"/>

@@ -15,9 +15,4 @@ public class Account extends Entity<Long> {
     private Date createTime;
     private Date updateTime;
     private Customer customer;
-
-    public void setBalance(Double balance) {
-        if (balance == null) balance = 0D;
-        this.balance = balance;
-    }
 }

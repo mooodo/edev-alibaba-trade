@@ -3,6 +3,7 @@ apiVersion: apps/v1
 metadata:
   labels:
     app: edev-trade-customer
+    project: edev-alibaba-trade
   name: edev-trade-customer
   namespace: default
 spec:
@@ -33,6 +34,8 @@ spec:
                       values:
                         - edev-alibaba-trade
                 topologyKey: "kubernetes.io/hostname"
+      nodeSelector:
+        layer: frontend
       containers:
       - name: edev-alibaba-trade-customer
         image: repository:5000/edev-alibaba-trade-customer:<VERSION>
@@ -62,6 +65,7 @@ apiVersion: v1
 metadata:
   labels:
     app: edev-trade-customer
+    project: edev-alibaba-trade
   name: edev-trade-customer
   namespace: default
 spec:

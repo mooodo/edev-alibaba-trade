@@ -12,8 +12,8 @@
       "countryId": 1000,
       "provinceId": 370000,
       "cityId": 370100,
-      "zoneId": 370102,
-      "address": "Happy street No.12",
+      "districtId": 370102,
+      "addressDetail": "Happy street No.12",
       "phoneNumber": "0531-88896666",
       "country": {
         "id": 1000,
@@ -29,7 +29,7 @@
         "name": "济南市",
         "provinceId": 370000
       },
-      "zone": {
+      "district": {
         "id": 370102,
         "name": "历下区",
         "provinceId": 370000,
@@ -42,8 +42,8 @@
       "countryId": 1000,
       "provinceId": 500000,
       "cityId": null,
-      "zoneId": 500106,
-      "address": "The ChongQing University",
+      "districtId": 500106,
+      "addressDetail": "The ChongQing University",
       "phoneNumber": "023-62325544",
       "country": {
         "id": 1000,
@@ -55,7 +55,7 @@
         "countryId": 1000
       },
       "city": null,
-      "zone": {
+      "district": {
         "id": 500106,
         "name": "沙坪坝区",
         "provinceId": 500000,

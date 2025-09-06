@@ -40,7 +40,7 @@ spring:
     database: 0
     host: kubernetes
     port: 31379
-    password:
+    password: redis1234
     pool:
       maxActive: 200
       maxWait: -1

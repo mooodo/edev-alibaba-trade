@@ -3,43 +3,46 @@ package com.edev.auth2.authority.service.impl;
 import com.edev.auth2.authority.entity.Role;
 import com.edev.auth2.authority.service.RoleService;
 import com.edev.support.dao.BasicDao;
-import lombok.NonNull;
 
 import java.util.Collection;
+import java.util.List;
+
+import static com.edev.auth2.utils.ValidUtils.isNull;
 
 public class RoleServiceImpl implements RoleService {
     private final BasicDao dao;
-
     public RoleServiceImpl(BasicDao dao) {
         this.dao = dao;
     }
-
+    private void valid(Role role) {
+        isNull(role, "role");
+        isNull(role.getId(), "id");
+        isNull(role.getName(), "name");
+    }
     @Override
-    public Long create(@NonNull Role role) {
+    public Long create(Role role) {
+        valid(role);
         return dao.insert(role);
     }
 
     @Override
-    public void modify(@NonNull Role role) {
+    public void modify(Role role) {
+        valid(role);
         dao.update(role);
     }
 
     @Override
-    public void remove(@NonNull Long id) {
-        dao.delete(id, Role.class);
+    public void remove(Long roleId) {
+        dao.delete(roleId, Role.class);
     }
 
     @Override
-    public Role load(@NonNull Long id) {
-        return dao.load(id, Role.class);
+    public Role load(Long roleId) {
+        return dao.load(roleId, Role.class);
     }
 
     @Override
-    public Role loadByName(@NonNull String roleName) {
-        Role template = Role.build();
-        template.setName(roleName);
-        Collection<Role> roles = dao.loadAll(template);
-        if(roles==null||roles.isEmpty()) return null;
-        return roles.iterator().next();
+    public Collection<Role> loadAll(List<Long> roleIds) {
+        return dao.loadForList(roleIds, Role.class);
     }
 }

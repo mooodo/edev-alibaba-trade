@@ -9,6 +9,8 @@ import lombok.NonNull;
 import java.util.Collection;
 import java.util.List;
 
+import static com.edev.support.utils.ValidUtils.isNull;
+
 public class SupplierServiceImpl implements SupplierService {
     private final BasicDao dao;
 
@@ -17,8 +19,8 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     private void valid(@NonNull Supplier supplier) {
-        if(supplier.getName()==null) throw new ValidException("The name cannot be null!");
-        if(supplier.getSupplierType()==null) throw new ValidException("The supplier type cannot be null!");
+        isNull(supplier.getId(), "The supplier name is null");
+        isNull(supplier.getSupplierType(), "The supplier type is null");
     }
     @Override
     public Long register(@NonNull Supplier supplier) {
@@ -28,6 +30,7 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     public void modify(@NonNull Supplier supplier) {
+        valid(supplier);
         dao.update(supplier);
     }
 

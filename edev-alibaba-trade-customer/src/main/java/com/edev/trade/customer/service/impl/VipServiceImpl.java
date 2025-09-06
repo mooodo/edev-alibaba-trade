@@ -1,7 +1,6 @@
 package com.edev.trade.customer.service.impl;
 
 import com.edev.support.dao.BasicDao;
-import com.edev.support.exception.ValidException;
 import com.edev.support.utils.DateUtils;
 import com.edev.trade.customer.entity.Vip;
 import com.edev.trade.customer.service.VipService;
@@ -12,6 +11,8 @@ import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Collection;
 import java.util.List;
 
+import static com.edev.support.utils.ValidUtils.*;
+
 public class VipServiceImpl implements VipService {
     private final BasicDao dao;
     public VipServiceImpl(BasicDao dao) {
@@ -19,8 +20,8 @@ public class VipServiceImpl implements VipService {
     }
 
     private void validVip(@NonNull Vip vip) {
-        if(vip.getId()==null) throw new ValidException("The id is null");
-        if(vip.getVipType()==null) throw new ValidException("The vip type is null");
+        isNull(vip.getId(), "The vip id is null");
+        isNull(vip.getVipType(), "The vip type is null");
     }
 
     @Override

@@ -1,7 +1,7 @@
 {
   "id":2,"name":"John","gender":"male","identification":"510212199901012211","phoneNumber":"13677778888",
   "addresses":[
-    {"id":20,"countryId":1000,"provinceId":370000,"cityId":370100,"zoneId":370102,"address":"Happy street No.12","phoneNumber":"0531-88896666"},
-    {"id":21,"countryId":1000,"provinceId":370000,"cityId":370100,"zoneId":370102,"address":"The park of Gushan","phoneNumber":"0531-64128989"}
+    {"id":20,"countryId":1000,"provinceId":370000,"cityId":370100,"districtId":370102,"addressDetail":"Happy street No.12","phoneNumber":"0531-88896666"},
+    {"id":21,"countryId":1000,"provinceId":370000,"cityId":370100,"districtId":370102,"addressDetail":"The park of Gushan","phoneNumber":"0531-64128989"}
   ]
 }

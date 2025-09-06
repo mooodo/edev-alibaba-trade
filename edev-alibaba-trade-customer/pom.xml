@@ -4,14 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>edev-alibaba-trade-customer</artifactId>
-    <version>1.1.1-${maven.build.timestamp}</version>
+    <version>1.1.2-${maven.build.timestamp}</version>
     <properties>
         <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
     </properties>
     <parent>
         <artifactId>edev-alibaba-parent</artifactId>
         <groupId>com.edev.trade</groupId>
-        <version>1.1.1</version>
+        <version>1.1.2</version>
         <relativePath/>
     </parent>
     <dependencies>
@@ -20,30 +20,9 @@
             <artifactId>spring-cloud-starter-contract-verifier</artifactId>
             <scope>test</scope>
         </dependency>
-        <!-- seata -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-seata</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>io.seata</groupId>
-                    <artifactId>seata-all</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>io.seata</groupId>
-                    <artifactId>seata-spring-boot-starter</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>io.seata</groupId>
-            <artifactId>seata-all</artifactId>
-            <version>1.4.2</version>
-        </dependency>
-        <dependency>
-            <groupId>io.seata</groupId>
-            <artifactId>seata-spring-boot-starter</artifactId>
-            <version>1.4.2</version>
         </dependency>
     </dependencies>
     <build>
@@ -51,7 +30,7 @@
             <plugin>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-contract-maven-plugin</artifactId>
-                <version>2.1.4.RELEASE</version>
+                <version>3.1.6</version>
                 <extensions>true</extensions>
                 <configuration>
                     <baseClassForTests>com.edev.trade.customer.contract.ContractBase

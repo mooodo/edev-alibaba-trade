@@ -19,8 +19,8 @@
       "countryId": 1000,
       "provinceId": 420000,
       "cityId": 420100,
-      "zoneId": 420111,
-      "address": "珞瑜路726号",
+      "districtId": 420111,
+      "addressDetail": "珞瑜路726号",
       "phoneNumber": "13300224466"
     },
     "payment": null,
@@ -46,8 +46,8 @@
       "countryId": 1000,
       "provinceId": 420000,
       "cityId": 420100,
-      "zoneId": 420111,
-      "address": "珞瑜路726号",
+      "districtId": 420111,
+      "addressDetail": "珞瑜路726号",
       "phoneNumber": "13300224466"
     },
     "payment": null,

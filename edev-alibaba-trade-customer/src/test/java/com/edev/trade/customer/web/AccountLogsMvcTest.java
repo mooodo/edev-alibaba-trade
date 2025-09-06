@@ -1,12 +1,10 @@
 package com.edev.trade.customer.web;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
@@ -14,10 +12,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class JournalAccountMvcTest {
+public class AccountLogsMvcTest {
     @Autowired
     private MockMvc mvc;
 
@@ -30,11 +27,11 @@ public class JournalAccountMvcTest {
     @Test
     public void test() throws Exception {
         String json = "{\"accountId\":10001,\"amount\":10.0,\"operation\":\"TopUp\"}";
-        MvcResult result = mvc.perform(post("/orm/journalAccount/addJournalAccount")
+        MvcResult result = mvc.perform(post("/orm/accountLogs/addAccountLogs")
                 .content(json).contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isOk()).andReturn();
         String id = result.getResponse().getContentAsString();
-        mvc.perform(get("/orm/journalAccount/removeJournalAccount")
+        mvc.perform(get("/orm/accountLogs/removeAccountLogs")
                 .param("id", id)
         ).andExpect(status().isOk());
     }

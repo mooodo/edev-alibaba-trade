@@ -1,7 +1,7 @@
 {
   "id":2,"name":"Jone","gender":"female","identification":"110101200003052314","phoneNumber":"13677778888",
   "addresses":[
-    {"id":20,"countryId":1000,"provinceId":370000,"cityId":370100,"zoneId":370102,"address":"Happy street No.12","phoneNumber":"0531-88896666"},
-    {"id":22,"countryId":1000,"provinceId":500000,"cityId":null,"zoneId":500106,"address":"The ChongQing University","phoneNumber":"023-62325544"}
+    {"id":20,"countryId":1000,"provinceId":370000,"cityId":370100,"districtId":370102,"addressDetail":"Happy street No.12","phoneNumber":"0531-88896666"},
+    {"id":22,"countryId":1000,"provinceId":500000,"cityId":null,"districtId":500106,"addressDetail":"The ChongQing University","phoneNumber":"023-62325544"}
   ]
 }

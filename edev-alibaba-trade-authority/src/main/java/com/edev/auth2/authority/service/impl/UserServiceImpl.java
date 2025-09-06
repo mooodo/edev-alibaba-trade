@@ -3,73 +3,66 @@ package com.edev.auth2.authority.service.impl;
 import com.edev.auth2.authority.service.UserService;
 import com.edev.auth2.authority.entity.User;
 import com.edev.support.dao.BasicDao;
-import com.edev.support.exception.ValidException;
-import lombok.NonNull;
 
 import java.util.Collection;
-import java.util.List;
+
+import static com.edev.auth2.utils.ValidUtils.isError;
+import static com.edev.auth2.utils.ValidUtils.isNull;
 
 public class UserServiceImpl implements UserService {
     private final BasicDao dao;
     public UserServiceImpl(BasicDao dao) {
         this.dao = dao;
     }
-
-    private void validUser(@NonNull User user) {
-        if(user.getId()==null) throw new ValidException("The id is null");
-        if(user.getName()==null) throw new ValidException("The name is null");
-        if(user.getPassword()==null) throw new ValidException("The password is null");
+    private void valid(User user) {
+        isNull(user, "user");
+        isNull(user.getId(), "id");
+        isNull(user.getUsername(), "username");
     }
-
     @Override
-    public Long register(@NonNull User user) {
-        validUser(user);
+    public Long register(User user) {
+        valid(user);
+        isError(userExists(user.getUsername()), "The username exists[%s]", user.getUsername());
         return dao.insert(user);
     }
 
     @Override
-    public void modify(@NonNull User user) {
-        validUser(user);
+    public void modify(User user) {
+        valid(user);
+        User oldUser = load(user.getId());
+        isError(!user.getUsername().equals(oldUser.getUsername()),
+                "The username cannot modify[%s]", user.getUsername());
         dao.update(user);
     }
 
     @Override
-    public void deleteById(@NonNull Long userId) {
+    public void remove(Long userId) {
         dao.delete(userId, User.class);
     }
 
     @Override
-    public void delete(@NonNull User user) {
-        dao.delete(user);
-    }
-
-    @Override
-    public User load(@NonNull Long userId) {
+    public User load(Long userId) {
         return dao.load(userId, User.class);
     }
 
     @Override
-    public User loadByName(@NonNull String userName) {
-        User template = User.build();
-        template.setName(userName);
+    public void removeByName(String username) {
+        User template = new User();
+        template.setUsername(username);
+        dao.delete(template);
+    }
+
+    @Override
+    public User loadByName(String username) {
+        User template = new User();
+        template.setUsername(username);
         Collection<User> users = dao.loadAll(template);
         if(users==null||users.isEmpty()) return null;
         return users.iterator().next();
     }
 
     @Override
-    public void saveAll(@NonNull List<User> users) {
-        users.forEach(this::validUser);
-        dao.insertOrUpdateForList(users);
-    }
-
-    @Override
-    public void deleteAll(@NonNull List<Long> ids) {
-        dao.deleteForList(ids, User.class);
-    }
-
-    @Override
-    public Collection<User> loadAll(@NonNull List<Long> ids) {
-        return dao.loadForList(ids, User.class);
+    public boolean userExists(String username) {
+        return loadByName(username)!=null;
     }
 }

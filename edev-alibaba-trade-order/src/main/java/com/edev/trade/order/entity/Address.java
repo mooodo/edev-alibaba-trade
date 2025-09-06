@@ -12,12 +12,12 @@ public class Address extends Entity<Long> {
 	private Long countryId;
 	private Long provinceId;
 	private Long cityId;
-	private Long zoneId;
-	private String address;
+	private Long districtId;
+	private String addressDetail;
 	private String phoneNumber;
 	public Address() {}
-	public Address(Long id, String address) {
+	public Address(Long id, String addressDetail) {
 		this.id = id;
-		this.address = address;
+		this.addressDetail = addressDetail;
 	}
 }

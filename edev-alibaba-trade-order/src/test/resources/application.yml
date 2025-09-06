@@ -2,6 +2,8 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
+  main:
+    allow-bean-definition-overriding: true
   cloud:
     nacos:
       discovery:
@@ -11,35 +13,30 @@ spring:
         enabled: false
         refresh-enabled: false
     sentinel:
-      transport:
-        dashboard: localhost:8858
-      eager: true
+      enabled: false
+      auto-refresh: false
+      eager: false
+  autoconfigure:
+    exclude: io.seata.spring.boot.autoconfigure.SeataAutoConfiguration
   datasource:
-    url: jdbc:mysql://kubernetes:32306/edevProduct?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
-    username: product
-    password: product1234
+    url: jdbc:mysql://master:4000/edevOrder?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
+    username: trade
+    password: trade1234
     type: com.alibaba.druid.pool.DruidDataSource
   redis:
     database: 0
     host: kubernetes
     port: 31379
-    password:
+    password: redis1234
     pool:
       maxActive: 200
       maxWait: -1
       maxIdel: 10
       minIdel: 0
     timeout: 1000
-server:
-  port: 9003
 feign:
   sentinel:
     enabled: true
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
 mybatis:
   mapperLocations: classpath*:mapper/*Mapper.xml
 logging:
@@ -48,3 +45,7 @@ logging:
     com.edev.support: INFO
     com.edev.trade.query.dao: DEBUG
     com.edev.support.dao: DEBUG
+stubrunner:
+  idsToServiceIds:
+    edev-alibaba-trade-product: service-product
+    edev-alibaba-trade-customer: service-customer

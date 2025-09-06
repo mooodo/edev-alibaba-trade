@@ -28,6 +28,8 @@ spec:
                       values:
                         - sentinel
                 topologyKey: "kubernetes.io/hostname"
+      nodeSelector:
+        layer: frontend
       containers:
         - name: sentinel
           image: repository:5000/sentinel

@@ -1,7 +1,6 @@
 package com.edev.trade.customer.service.impl;
 
 import com.edev.support.dao.BasicDao;
-import com.edev.support.exception.ValidException;
 import com.edev.trade.customer.entity.Address;
 import com.edev.trade.customer.entity.Customer;
 import com.edev.trade.customer.service.CustomerService;
@@ -10,6 +9,8 @@ import lombok.NonNull;
 import java.util.Collection;
 import java.util.List;
 
+import static com.edev.support.utils.ValidUtils.*;
+
 public class CustomerServiceImpl implements CustomerService {
     private final BasicDao dao;
     public CustomerServiceImpl(BasicDao dao) {
@@ -17,8 +18,8 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     private void validCustomer(@NonNull Customer customer) {
-        if(customer.getId()==null) throw new ValidException("The id is null");
-        if(customer.getName()==null) throw new ValidException("The name is null");
+        isNull(customer.getId(), "The customer id is null");
+        isNull(customer.getName(), "The customer name is null");
     }
 
     @Override

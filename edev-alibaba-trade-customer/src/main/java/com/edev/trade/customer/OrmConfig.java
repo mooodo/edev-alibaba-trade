@@ -27,7 +27,7 @@ public class OrmConfig {
         return new AccountServiceImpl(repository);
     }
     @Bean
-    public JournalAccountService journalAccount() {
-        return new JournalAccountServiceImpl(basicDao);
+    public AccountLogsService accountLogs() {
+        return new AccountLogsServiceImpl(basicDao);
     }
 }

@@ -28,6 +28,8 @@ spec:
                       values:
                         - skywalking
                 topologyKey: "kubernetes.io/hostname"
+      nodeSelector:
+        layer: frontend
       containers:
         - name: skywalking
           image: repository:5000/skywalking-oap-server

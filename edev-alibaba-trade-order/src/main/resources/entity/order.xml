@@ -51,8 +51,8 @@
 		<property name="countryId"/>
 		<property name="provinceId"/>
 		<property name="cityId"/>
-		<property name="zoneId"/>
-		<property name="address"/>
+		<property name="districtId"/>
+		<property name="addressDetail"/>
 		<property name="phoneNumber"/>
 	</do>
 	<do class="com.edev.trade.order.entity.Product">

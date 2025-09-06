@@ -4,7 +4,7 @@
   "countryId": 1000,
   "provinceId": 510000,
   "cityId": 510100,
-  "zoneId": 510105,
+  "districtId": 510105,
   "country": {
     "id": 1000,
     "name": "中国"
@@ -19,12 +19,12 @@
     "name": "成都市",
     "provinceId": 510000
   },
-  "zone": {
+  "district": {
     "id": 510105,
     "name": "青羊区",
     "provinceId": 510000,
     "cityId": 510100
   },
-  "address": "宽窄巷子",
+  "addressDetail": "宽窄巷子",
   "phoneNumber": null
 }

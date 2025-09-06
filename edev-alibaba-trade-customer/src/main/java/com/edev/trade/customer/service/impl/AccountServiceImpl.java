@@ -1,27 +1,28 @@
 package com.edev.trade.customer.service.impl;
 
 import com.edev.support.dao.BasicDao;
-import com.edev.support.exception.ValidException;
 import com.edev.support.utils.DateUtils;
 import com.edev.trade.customer.entity.Account;
-import com.edev.trade.customer.entity.JournalAccount;
+import com.edev.trade.customer.entity.AccountLogs;
 import com.edev.trade.customer.service.AccountService;
-import com.edev.trade.customer.service.JournalAccountService;
+import com.edev.trade.customer.service.AccountLogsService;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import static com.edev.support.utils.ValidUtils.*;
+
 public class AccountServiceImpl implements AccountService {
     private final BasicDao dao;
     @Autowired
-    private JournalAccountService journalAccountService;
+    private AccountLogsService accountLogsService;
     public AccountServiceImpl(BasicDao dao) {
         this.dao = dao;
     }
 
     private void validAccount(@NonNull Account account) {
-        if(account.getId()==null) throw new ValidException("The id is null");
-        if(account.getCustomerId()==null) throw new ValidException("The customer id is null");
+        isNull(account.getId(), "The account id is null");
+        isNull(account.getCustomerId(), "The customer id is null");
     }
 
     @Override
@@ -51,15 +52,14 @@ public class AccountServiceImpl implements AccountService {
     @Transactional
     public Double topUp(@NonNull Long id, @NonNull Double amount) {
         Account account = this.get(id);
-        if(account==null)
-            throw new ValidException("The account[id:%d] isn't available", id);
+        isNull(account, "The account[id:%d] isn't available", id);
         Double balance = account.getBalance() + amount;
         account.setBalance(balance);
         this.modify(account);
 
-        JournalAccount journalAccount =
-                new JournalAccount(account.getId(), amount, "topUp");
-        journalAccountService.addJournalAccount(journalAccount);
+        AccountLogs accountLogs =
+                new AccountLogs(account.getId(), amount, "topUp");
+        accountLogsService.addAccountLogs(accountLogs);
         return balance;
     }
 
@@ -67,17 +67,16 @@ public class AccountServiceImpl implements AccountService {
     @Transactional
     public Double payoff(@NonNull Long id, @NonNull Double amount) {
         Account account = this.get(id);
-        if(account==null)
-            throw new ValidException("The account[id:%d] isn't available", id);
-        if(account.getBalance() < amount)
-            throw new ValidException("The account[id:%d] has no enough money[%d]", id, account.getBalance());
+        isNull(account, "The account[id:%d] isn't available", id);
+        isError(account.getBalance() < amount,
+                "The account[id:%d] has no enough money[%d]", id, account.getBalance());
         Double balance = account.getBalance() - amount;
         account.setBalance(balance);
         this.modify(account);
 
-        JournalAccount journalAccount =
-                new JournalAccount(account.getId(), amount, "payoff");
-        journalAccountService.addJournalAccount(journalAccount);
+        AccountLogs accountLogs =
+                new AccountLogs(account.getId(), amount, "payoff");
+        accountLogsService.addAccountLogs(accountLogs);
         return balance;
     }
 
@@ -85,15 +84,14 @@ public class AccountServiceImpl implements AccountService {
     @Transactional
     public Double refund(@NonNull Long id, @NonNull Double amount) {
         Account account = this.get(id);
-        if(account==null)
-            throw new ValidException("The account[id:%d] isn't available", id);
+        isNull(account, "The account[id:%d] isn't available", id);
         Double balance = account.getBalance() + amount;
         account.setBalance(balance);
         this.modify(account);
 
-        JournalAccount journalAccount =
-                new JournalAccount(account.getId(), amount, "refund");
-        journalAccountService.addJournalAccount(journalAccount);
+        AccountLogs accountLogs =
+                new AccountLogs(account.getId(), amount, "refund");
+        accountLogsService.addAccountLogs(accountLogs);
         return balance;
     }
 }
