@@ -1,0 +1,97 @@
+spring:
+  application:
+    name: service-gateway
+  profiles:
+    active: dev
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+---
+spring:
+  profiles: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        username: nacos
+        password: nacos
+      config:
+        enabled: false
+        refresh-enabled: false
+    sentinel:
+      transport:
+        dashboard: localhost:8858
+      eager: true
+    gateway:
+      routes:
+        - id: customer
+          uri: lb://service-customer
+          predicates:
+            - Path=/customer/**
+          filters:
+            - StripPrefix=1
+        - id: product
+          uri: lb://service-product
+          predicates:
+            - Path=/product/**
+          filters:
+            - StripPrefix=1
+        - id: order
+          uri: lb://service-order
+          predicates:
+            - Path=/order/**
+          filters:
+            - StripPrefix=1
+        - id: inventory
+          uri: lb://service-inventory
+          predicates:
+            - Path=/inventory/**
+          filters:
+            - StripPrefix=1
+        - id: authority
+          uri: lb://service-authority
+          predicates:
+            - Path=/auth/**
+          filters:
+            - StripPrefix=1
+server:
+  port: 9009
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+logging:
+  # config: classpath:logback-dev.xml
+  level:
+    com.alibaba.nacos: WARN
+---
+spring:
+  profiles: docker
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_ADDR}
+        username: ${NACOS_USR:nacos}
+        password: ${NACOS_PWD:nacos}
+      config:
+        server-addr: ${NACOS_ADDR}
+        file-extension: yaml
+server:
+  port: ${SERVICE_PORT:9009}
+---
+spring:
+  profiles: kafka
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_ADDR}
+        username: ${NACOS_USR:nacos}
+        password: ${NACOS_PWD:nacos}
+      config:
+        server-addr: ${NACOS_ADDR}
+        file-extension: yaml
+server:
+  port: ${SERVICE_PORT:9009}
+logging:
+  config: classpath:logback-docker.xml

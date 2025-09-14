@@ -1,0 +1,87 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  labels:
+    app: edev-trade-inventory
+    project: edev-alibaba-trade
+  name: edev-trade-inventory
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: edev-trade-inventory
+  template:
+    metadata:
+      name: edev-trade-inventory
+      labels:
+        app: edev-trade-inventory
+        project: edev-alibaba-trade
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 50
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: "app"
+                      operator: In
+                      values:
+                        - edev-trade-inventory
+                    - key: "project"
+                      operator: In
+                      values:
+                        - edev-alibaba-trade
+                topologyKey: "kubernetes.io/hostname"
+      nodeSelector:
+        layer: frontend
+      containers:
+      - name: edev-alibaba-inventory
+        image: repository:5000/edev-alibaba-inventory:<VERSION>
+        imagePullPolicy: Always
+        livenessProbe:
+          failureThreshold: 5       #检测失败5次表示未就绪
+          initialDelaySeconds: 70   #延迟加载时间
+          periodSeconds: 10         #重试时间间隔
+          timeoutSeconds: 5         #超时时间设置
+          httpGet:
+            scheme: HTTP
+            port: 9004
+            path: /actuator/health
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1500Mi
+          requests:
+            cpu: 100m
+            memory: 500Mi
+        env:
+          - name: NACOS_ADDR
+            value: "nacos:8848"
+---
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: edev-trade-inventory
+    project: edev-alibaba-trade
+  name: edev-trade-inventory
+  namespace: default
+spec:
+  ports:
+  - port: 9004
+    targetPort: 9004
+  selector:
+    app: edev-trade-inventory
+---
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: edev-trade-inventory-pdb
+  namespace: default
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: edev-trade-inventory
