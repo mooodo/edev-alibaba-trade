@@ -13,5 +13,3 @@ spring:
       config:
         server-addr: ${NACOS_ADDR}
         file-extension: yaml
-server:
-  port: ${SERVICE_PORT:9002}
