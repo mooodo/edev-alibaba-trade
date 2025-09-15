@@ -1,0 +1,15 @@
+spring:
+  profiles: docker
+  config:
+    import: nacos:service-customer-docker.yaml
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_ADDR}
+        username: ${NACOS_USR:nacos}
+        password: ${NACOS_PWD:nacos}
+      config:
+        server-addr: ${NACOS_ADDR}
+        file-extension: yaml
+server:
+  port: ${SERVICE_PORT:9002}
