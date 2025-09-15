@@ -90,7 +90,7 @@ seata:
 spring:
   profiles: docker
   config:
-    import: nacos:${spring.application.name}.${spring.cloud.nacos.config.file-extension}
+    import: nacos:${spring.application.name}-docker.${spring.cloud.nacos.config.file-extension}
   cloud:
     nacos:
       discovery:
