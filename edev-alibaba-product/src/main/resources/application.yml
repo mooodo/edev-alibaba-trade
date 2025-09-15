@@ -60,6 +60,8 @@ management:
 ---
 spring:
   profiles: docker
+  config:
+    import: "nacos:"
   cloud:
     nacos:
       discovery:

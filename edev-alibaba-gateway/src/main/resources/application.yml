@@ -68,6 +68,8 @@ logging:
 ---
 spring:
   profiles: docker
+  config:
+    import: "nacos:"
   cloud:
     nacos:
       discovery:
@@ -82,6 +84,8 @@ server:
 ---
 spring:
   profiles: kafka
+  config:
+    import: "nacos:"
   cloud:
     nacos:
       discovery:
