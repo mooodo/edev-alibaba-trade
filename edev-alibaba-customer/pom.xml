@@ -35,10 +35,6 @@
             <artifactId>seata-spring-boot-starter</artifactId>
             <version>1.4.2</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-autoconfigure</artifactId>
-        </dependency>
     </dependencies>
     <build>
         <plugins>

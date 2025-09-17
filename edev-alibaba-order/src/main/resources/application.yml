@@ -3,6 +3,8 @@ spring:
     name: service-order
   profiles:
     active: dev
+  config:
+    import: "optional:nacos:service-order.yaml"
   main:
     allow-bean-definition-overriding: true
   jackson:
@@ -29,15 +31,12 @@ spring:
         username: nacos
         password: nacos
       config:
-        enabled: false
-        refresh-enabled: false
+        server-addr: localhost:8848
+        file-extension: yaml
     sentinel:
       transport:
         dashboard: localhost:8858
       eager: true
-    loadbalancer:
-      retry:
-        enabled: true
   datasource:
     url: jdbc:mysql://master:4000/edevOrder?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
     username: trade
@@ -97,8 +96,6 @@ seata:
 ---
 spring:
   profiles: docker
-  config:
-    import: "nacos:"
   cloud:
     nacos:
       discovery:

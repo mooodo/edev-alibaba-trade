@@ -3,6 +3,8 @@ spring:
     name: service-inventory
   profiles:
     active: dev
+  config:
+    import: "optional:nacos:service-inventory.yaml"
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
@@ -26,8 +28,8 @@ spring:
         username: nacos
         password: nacos
       config:
-        enabled: false
-        refresh-enabled: false
+        server-addr: localhost:8848
+        file-extension: yaml
     sentinel:
       transport:
         dashboard: localhost:8858
@@ -91,8 +93,6 @@ seata:
 ---
 spring:
   profiles: docker
-  config:
-    import: "nacos:"
   cloud:
     nacos:
       discovery:

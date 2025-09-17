@@ -3,6 +3,8 @@ spring:
     name: service-gateway
   profiles:
     active: dev
+  config:
+    import: "optional:nacos:service-gateway.yaml"
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
@@ -16,8 +18,8 @@ spring:
         username: nacos
         password: nacos
       config:
-        enabled: false
-        refresh-enabled: false
+        server-addr: localhost:8848
+        file-extension: yaml
     sentinel:
       transport:
         dashboard: localhost:8858
@@ -68,8 +70,6 @@ logging:
 ---
 spring:
   profiles: docker
-  config:
-    import: "nacos:"
   cloud:
     nacos:
       discovery:
@@ -84,8 +84,6 @@ server:
 ---
 spring:
   profiles: kafka
-  config:
-    import: "nacos:"
   cloud:
     nacos:
       discovery:
