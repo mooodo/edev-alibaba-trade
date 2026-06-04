@@ -10,7 +10,9 @@ spring:
     time-zone: GMT+8
 ---
 spring:
-  profiles: dev
+  config:
+    activate:
+      on-profile: dev
   cloud:
     nacos:
       discovery:
@@ -64,12 +66,13 @@ management:
       exposure:
         include: '*'
 logging:
-  # config: classpath:logback-dev.xml
   level:
     com.alibaba.nacos: WARN
 ---
 spring:
-  profiles: docker
+  config:
+    activate:
+      on-profile: docker
   cloud:
     nacos:
       discovery:
@@ -83,17 +86,78 @@ server:
   port: ${SERVICE_PORT:9009}
 ---
 spring:
-  profiles: kafka
+  config:
+    activate:
+      on-profile: kafka
   cloud:
     nacos:
       discovery:
-        server-addr: ${NACOS_ADDR}
-        username: ${NACOS_USR:nacos}
-        password: ${NACOS_PWD:nacos}
+        enabled: false
+        register-enabled: false
       config:
-        server-addr: ${NACOS_ADDR}
-        file-extension: yaml
+        enabled: false
+        refresh-enabled: false
+    sentinel:
+      enabled: false
+      auto-refresh: false
+      eager: false
 server:
   port: ${SERVICE_PORT:9009}
 logging:
   config: classpath:logback-docker.xml
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+  cloud:
+    nacos:
+      discovery:
+        enabled: false
+        register-enabled: false
+      config:
+        enabled: false
+        refresh-enabled: false
+    sentinel:
+      enabled: false
+      auto-refresh: false
+      eager: false
+    gateway:
+      routes:
+        - id: customer
+          uri: http://localhost:9002
+          predicates:
+            - Path=/customer/**
+          filters:
+            - StripPrefix=1
+        - id: product
+          uri: http://localhost:9003
+          predicates:
+            - Path=/product/**
+          filters:
+            - StripPrefix=1
+        - id: order
+          uri: http://localhost:9005
+          predicates:
+            - Path=/order/**
+          filters:
+            - StripPrefix=1
+        - id: inventory
+          uri: http://localhost:9004
+          predicates:
+            - Path=/inventory/**
+          filters:
+            - StripPrefix=1
+        - id: authority
+          uri: http://localhost:9006
+          predicates:
+            - Path=/auth/**
+          filters:
+            - StripPrefix=1
+server:
+  port: 9009
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

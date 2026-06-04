@@ -83,7 +83,7 @@
 		<property name="endTime" column="end_time"/>
 		<property name="discount" column="discount"/>
 		<property name="discountType" column="discount_type" isDiscriminator="true"/>
-		<property name="vipType" column="vip_type"/>
+		<property name="vipLevel" column="vip_level"/>
 	</do>
 	<do class="com.edev.trade.order.entity.ProductDiscount" tableName="t_product_discount">
 		<property name="id" column="id" isPrimaryKey="true"/>
@@ -99,10 +99,10 @@
 		<property name="createTime" column="create_time"/>
 		<property name="updateTime" column="update_time"/>
 		<property name="available" column="available"/>
-		<property name="coin" column="coin"/>
+		<property name="points" column="points"/>
 		<join name="customer" joinType="oneToOne"
 			  class="com.edev.trade.order.entity.Customer"/>
-		<property name="vipType" column="vip_type" isDiscriminator="true"/>
+		<property name="vipLevel" column="vip_level" isDiscriminator="true"/>
 		<subclass class="com.edev.trade.order.entity.GoldenVip" value="golden">
 			<property name="cashback" column="cashback"/>
 		</subclass>

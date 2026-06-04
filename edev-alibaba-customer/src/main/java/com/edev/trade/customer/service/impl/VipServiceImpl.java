@@ -21,7 +21,7 @@ public class VipServiceImpl implements VipService {
 
     private void validVip(@NonNull Vip vip) {
         isNull(vip.getId(), "The vip id is null");
-        isNull(vip.getVipType(), "The vip type is null");
+        isNull(vip.getVipLevel(), "The vip level is null");
     }
 
     @Override

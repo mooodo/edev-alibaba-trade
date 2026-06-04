@@ -10,7 +10,6 @@ import java.util.Date;
 @Data
 public class Account extends Entity<Long> {
     private Long id;
-    private Long customerId;
     private Double balance;
     private Date createTime;
     private Date updateTime;

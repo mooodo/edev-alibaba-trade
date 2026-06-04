@@ -6,5 +6,5 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class VipDiscount extends Discount {
-    private String vipType;
+    private String vipLevel;
 }

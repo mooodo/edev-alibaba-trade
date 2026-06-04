@@ -1,4 +1,4 @@
 [
-  {"id":1,"available":true,"coin":200,"vipType":"silver"},
-  {"id":10001,"available":true,"coin":500,"vipType":"golden","cashback":2000}
+  {"id":1,"available":true,"points":200,"vipLevel":"silver"},
+  {"id":10001,"available":true,"points":500,"vipLevel":"golden","cashback":2000}
 ]

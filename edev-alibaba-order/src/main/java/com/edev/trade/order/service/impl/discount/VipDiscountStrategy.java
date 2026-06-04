@@ -19,7 +19,7 @@ public class VipDiscountStrategy implements DiscountStrategy {
         Vip vip = vipService.loadByCustomer(order.getCustomerId());
         if(vip==null) return;
         VipDiscount template = new VipDiscount();
-        template.setVipType(vip.getVipType());
+        template.setVipLevel(vip.getVipLevel());
         Discount discount = discountService.load(template);
         if(discount==null) return;
         List<OrderItem> orderItems = order.getOrderItems();

@@ -1,6 +1,5 @@
 {
-  "id": 1,
-  "customerId": 10001,
+  "id": 10001,
   "balance": 11000.0,
   "customer": {
     "id": 10001,

@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class QryConfig {
-    @Autowired @Qualifier("basicDaoWithCache")
+    @Autowired @Qualifier("defaultDaoWithCache")
     private BasicDao basicDaoWithCache;
     @Autowired @Qualifier("repositoryWithCache")
     private BasicDao repositoryWithCache;

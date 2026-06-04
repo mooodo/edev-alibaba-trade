@@ -1,7 +1,6 @@
 package com.edev.trade.product.service.impl;
 
 import com.edev.support.dao.BasicDao;
-import com.edev.support.exception.ValidException;
 import com.edev.trade.product.entity.Product;
 import com.edev.trade.product.service.ProductService;
 import lombok.NonNull;

@@ -538,8 +538,8 @@ CREATE TABLE `t_vip` (
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   `available` char(1) DEFAULT NULL,
-  `coin` int(20) DEFAULT NULL,
-  `vip_type` varchar(10) NOT NULL,
+  `points` int(20) DEFAULT NULL,
+  `vip_level` varchar(10) NOT NULL,
   `cashback` decimal(20,2) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

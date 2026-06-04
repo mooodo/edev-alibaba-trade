@@ -53,10 +53,10 @@
         <property name="createTime" column="create_time"/>
         <property name="updateTime" column="update_time"/>
         <property name="available" column="available"/>
-        <property name="coin" column="coin"/>
+        <property name="points" column="points"/>
         <join name="customer" joinType="oneToOne"
               class="com.edev.trade.customer.entity.Customer"/>
-        <property name="vipType" column="vip_type" isDiscriminator="true"/>
+        <property name="vipLevel" column="vip_level" isDiscriminator="true"/>
         <subclass class="com.edev.trade.customer.entity.GoldenVip" value="golden">
             <property name="cashback" column="cashback"/>
         </subclass>
@@ -64,11 +64,10 @@
     </do>
     <do class="com.edev.trade.customer.entity.Account" tableName="t_account">
         <property name="id" column="id" isPrimaryKey="true"/>
-        <property name="customerId" column="customer_id"/>
         <property name="balance" column="balance"/>
         <property name="createTime" column="create_time"/>
         <property name="updateTime" column="update_time"/>
-        <join name="customer" joinKey="customerId" joinType="manyToOne"
+        <join name="customer" joinType="oneToOne"
               class="com.edev.trade.customer.entity.Customer"/>
     </do>
     <do class="com.edev.trade.customer.entity.AccountLogs" tableName="t_account_logs">

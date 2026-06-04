@@ -22,7 +22,6 @@ public class AccountServiceImpl implements AccountService {
 
     private void validAccount(@NonNull Account account) {
         isNull(account.getId(), "The account id is null");
-        isNull(account.getCustomerId(), "The customer id is null");
     }
 
     @Override

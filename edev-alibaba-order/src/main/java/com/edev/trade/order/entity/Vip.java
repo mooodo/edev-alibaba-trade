@@ -13,8 +13,8 @@ public class Vip extends Entity<Long> {
     protected Date createTime;
     protected Date updateTime;
     protected String available;
-    protected Long coin;
-    protected String vipType;
+    protected Long points;
+    protected String vipLevel;
     protected Customer customer;
 
     public Boolean getAvailable() {

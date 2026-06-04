@@ -23,7 +23,9 @@ logging:
     io.seata: INFO
 ---
 spring:
-  profiles: dev
+  config:
+    activate:
+      on-profile: dev
   cloud:
     nacos:
       discovery:
@@ -42,17 +44,13 @@ spring:
     username: trade
     password: trade1234
     type: com.alibaba.druid.pool.DruidDataSource
-  redis:
-    database: 0
-    host: kubernetes
-    port: 31379
-    password: redis1234
-    pool:
-      maxActive: 200
-      maxWait: -1
-      maxIdel: 10
-      minIdel: 0
-    timeout: 1000
+  data:
+    redis:
+      database: 0
+      host: kubernetes
+      port: 31379
+      password: redis1234
+      timeout: 1000
 server:
   port: 9005
 feign:
@@ -95,7 +93,9 @@ seata:
       password: ${spring.cloud.nacos.discovery.password}
 ---
 spring:
-  profiles: docker
+  config:
+    activate:
+      on-profile: docker
   cloud:
     nacos:
       discovery:
@@ -107,3 +107,45 @@ spring:
         file-extension: yaml
 server:
   port: ${SERVICE_PORT:9005}
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+  cloud:
+    nacos:
+      discovery:
+        enabled: false
+        register-enabled: false
+      config:
+        enabled: false
+        refresh-enabled: false
+    sentinel:
+      enabled: false
+      auto-refresh: false
+      eager: false
+  autoconfigure:
+    exclude: io.seata.spring.boot.autoconfigure.SeataAutoConfiguration
+  datasource:
+    url: jdbc:mysql://master:4000/edevOrder?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
+    username: trade
+    password: trade1234
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  data:
+    redis:
+      database: 0
+      host: kubernetes
+      port: 31379
+      password: redis1234
+      timeout: 1000
+server:
+  port: 9005
+feign:
+  sentinel:
+    enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

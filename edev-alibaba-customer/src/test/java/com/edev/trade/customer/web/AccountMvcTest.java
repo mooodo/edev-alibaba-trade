@@ -1,10 +1,8 @@
 package com.edev.trade.customer.web;
 
 import com.edev.support.utils.JsonFile;
-import io.seata.spring.boot.autoconfigure.SeataAutoConfiguration;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -16,7 +14,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
-@EnableAutoConfiguration(exclude = SeataAutoConfiguration.class)
 @AutoConfigureMockMvc
 public class AccountMvcTest {
     @Autowired
@@ -24,7 +21,7 @@ public class AccountMvcTest {
 
     @Test
     public void testSaveAndDelete() throws Exception {
-        String id = "1";
+        String id = "10001";
         String json = JsonFile.read("json/account/account0.json");
         String excepted0 = JsonFile.read("json/account/excepted0.json");
         mvc.perform(get("/orm/account/remove")

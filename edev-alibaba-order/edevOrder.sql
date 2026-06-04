@@ -173,7 +173,7 @@ CREATE TABLE `t_vip_discount` (
   `end_time` datetime DEFAULT NULL,
   `discount` decimal(5,4) DEFAULT NULL,
   `discount_type` varchar(20) DEFAULT NULL,
-  `vip_type` varchar(10) DEFAULT NULL,
+  `vip_level` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 

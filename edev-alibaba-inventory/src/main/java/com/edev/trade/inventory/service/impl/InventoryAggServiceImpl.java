@@ -2,7 +2,6 @@ package com.edev.trade.inventory.service.impl;
 
 import com.edev.trade.inventory.service.InventoryAggService;
 import com.edev.trade.inventory.service.InventoryService;
-import io.seata.core.context.RootContext;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,6 @@ public class InventoryAggServiceImpl implements InventoryAggService {
     @Override
     @Transactional
     public void stockInForList(@NonNull List<Map<String, Object>> list) {
-        log.info("begin the trade... xid: "+ RootContext.getXID());
         list.forEach(map -> {
             Long id = Long.valueOf(map.get("id").toString());
             Long quantity = Long.valueOf(map.get("quantity").toString());
@@ -32,7 +30,6 @@ public class InventoryAggServiceImpl implements InventoryAggService {
     @Override
     @Transactional
     public void stockOutForList(@NonNull List<Map<String, Object>> list) {
-        log.info("begin the trade... xid: "+ RootContext.getXID());
         list.forEach(map -> {
             Long id = Long.valueOf(map.get("id").toString());
             Long quantity = Long.valueOf(map.get("quantity").toString());

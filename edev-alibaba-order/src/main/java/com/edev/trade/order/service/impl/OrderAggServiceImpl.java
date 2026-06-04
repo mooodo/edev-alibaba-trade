@@ -6,8 +6,8 @@ import com.edev.trade.order.entity.OrderItem;
 import com.edev.trade.order.entity.Payment;
 import com.edev.trade.order.exception.OrderException;
 import com.edev.trade.order.service.*;
-import io.seata.core.context.RootContext;
-import io.seata.spring.annotation.GlobalTransactional;
+//import io.seata.core.context.RootContext;
+//import io.seata.spring.annotation.GlobalTransactional;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,14 +30,14 @@ public class OrderAggServiceImpl implements OrderAggService {
     private InventoryService inventoryService;
     @Override
     public Long placeOrder(@NonNull Order order) {
-        log.info("begin the trade... xid: "+ RootContext.getXID());
+        //log.info("begin the trade... xid: "+ RootContext.getXID());
         Long orderId = orderService.create(order);
         log.debug(String.format("create an order: [orderId: %d]", orderId));
         return orderId;
     }
 
     @Override
-    @GlobalTransactional(name = "seata-group-trade", rollbackFor = Exception.class)
+    //@GlobalTransactional(name = "seata-group-trade", rollbackFor = Exception.class)
     @Transactional
     public void payoff(@NonNull Order order) {
         if(order.getPayment()==null||order.getPayment().getAccountId()==null)
@@ -70,10 +70,10 @@ public class OrderAggServiceImpl implements OrderAggService {
     }
 
     @Override
-    @GlobalTransactional(name = "seata-group-trade", rollbackFor = Exception.class)
+    //@GlobalTransactional(name = "seata-group-trade", rollbackFor = Exception.class)
     @Transactional
     public void cancelOrder(@NonNull Long orderId) {
-        log.info("begin the trade... xid: "+ RootContext.getXID());
+        //log.info("begin the trade... xid: "+ RootContext.getXID());
         Order order = orderService.load(orderId);
         if(order==null) throw new OrderException("no found the order[orderId:%d]", orderId);
         orderService.delete(orderId);

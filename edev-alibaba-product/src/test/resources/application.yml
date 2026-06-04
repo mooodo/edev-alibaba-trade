@@ -21,17 +21,13 @@ spring:
     username: product
     password: product1234
     type: com.alibaba.druid.pool.DruidDataSource
-  redis:
-    database: 0
-    host: kubernetes
-    port: 31379
-    password: redis1234
-    pool:
-      maxActive: 200
-      maxWait: -1
-      maxIdel: 10
-      minIdel: 0
-    timeout: 1000
+  data:
+    redis:
+      database: 0
+      host: kubernetes
+      port: 31379
+      password: redis1234
+      timeout: 1000
 mybatis:
   mapperLocations: classpath*:mapper/*Mapper.xml
 logging:

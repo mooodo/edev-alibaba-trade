@@ -3,15 +3,15 @@
     {
       "id": 1,
       "available": true,
-      "coin": 200,
-      "vipType": "silver",
+      "points": 200,
+      "vipLevel": "silver",
       "customer": null
     },
     {
       "id": 10001,
       "available": true,
-      "coin": 500,
-      "vipType": "golden",
+      "points": 500,
+      "vipLevel": "golden",
       "customer": {
         "id": 10001,
         "name": "李秋水",

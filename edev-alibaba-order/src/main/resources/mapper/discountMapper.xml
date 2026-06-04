@@ -4,12 +4,12 @@
 <mapper namespace="com.edev.trade.query.dao.DiscountMapper">
     <sql id="select0">
         select id, `name`, begin_time, end_time, discount, discount_type, product_id,
-        null vip_type from t_product_discount where 1 = 1
+        null vip_level from t_product_discount where 1 = 1
     </sql>
 
     <sql id="select1">
         select id, `name`, begin_time, end_time, discount, discount_type,
-        null product_id, vip_type from t_vip_discount where 1 = 1
+        null product_id, vip_level from t_vip_discount where 1 = 1
     </sql>
 
     <sql id="conditions">

@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class OrmConfig {
-    @Autowired @Qualifier("basicDao")
+    @Autowired @Qualifier("defaultDao")
     private BasicDao basicDao;
     @Autowired @Qualifier("repository")
     private BasicDao repository;
